@@ -163,6 +163,8 @@ export class ListQuansByAdminComponent implements OnInit {
                 this.changeDetectorRef.detectChanges();
             }
         })
+        console.log(1);
+        
         this.timkiem = "";
     }
 
