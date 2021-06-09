@@ -20,14 +20,7 @@ export class GoogleMapsSearchQuanComponent implements OnInit , OnDestroy{
     }
 
     ngOnInit() {
-        console.log(this.user);
-        
-        console.log(this.listquans);
         this.hienVitricacquan(this.listquans);
-        
-       // this.getListquans();
-        //this.checktoken()
-        
     }
     url= environment.url+"/api/v1/";
     @Input() listquans: any;
@@ -38,8 +31,6 @@ export class GoogleMapsSearchQuanComponent implements OnInit , OnDestroy{
         if (!navigator.geolocation) {
             console.log('location is not supported');
         }
-        console.log(quans);
-        
         navigator.geolocation.getCurrentPosition((position) => {
             const  coords = position.coords;
             let latLong = [coords.latitude, coords.longitude];
@@ -49,11 +40,6 @@ export class GoogleMapsSearchQuanComponent implements OnInit , OnDestroy{
             }
             let mymap = L.map('map').setView(latLong, 13);
             latLong = [coords.latitude, coords.longitude];
-            console.log(
-                `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
-            );
-        
-       
             L.tileLayer(
                 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3VicmF0MDA3IiwiYSI6ImNrYjNyMjJxYjBibnIyem55d2NhcTdzM2IifQ.-NnMzrAAlykYciP4RP9zYQ',
                 {

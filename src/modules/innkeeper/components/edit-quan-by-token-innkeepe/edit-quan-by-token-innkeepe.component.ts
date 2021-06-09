@@ -44,15 +44,12 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
     idquan:number=0;
     ngOnInit() {
         this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        console.log(this.idquan);
-        
         this.getQuanByIdAndTokenInnkeeper(this.idquan);
     }
 
     getQuanByIdAndTokenInnkeeper(id: number){
         this.checkquan=false;
         this.dashboardService.getQuanByIdAndTokenInnkeeper(id).subscribe(data=>{
-            console.log(data);
             if (data.status) {
                 this.quan=data.quan;
                 this.checkquan=true;
@@ -90,8 +87,6 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
                 formData.append('kinhdo', kinhdo);
                 formData.append('vido', vido);
                 this.dashboardService.editQuanByTokenInnkeeper(formData).subscribe(data => {
-                    console.log(data);
-
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',

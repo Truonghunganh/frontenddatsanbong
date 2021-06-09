@@ -66,15 +66,12 @@ export class AdmminComponent implements OnInit {
     getListquans(page: number) {
         this.checklistquanschuapheduyet = false;
         this.dashboardService.getListQuansChuaPheDuyetByTokenAdmin(page).subscribe(data => {
-            console.log(data);
-
             if (data.status) {
                 this.listquanschuapheduyet = data.quans;
                 this.tongpage=data.tongpage;
                 this.taomangtrang(this.page);
                 this.checklistquanschuapheduyet = true;
                 this.changeDetectorRef.detectChanges();
-
             }
             else {
                 Swal.fire({
@@ -93,7 +90,6 @@ export class AdmminComponent implements OnInit {
         }).then(result => {
             if (result.value) {
                 this.dashboardService.UpdateTrangThaiQuanTokenAdmin(quan.id,true).subscribe(data => {
-                    console.log(data);
                     if (data.status) {
                         this.getListquans(this.page);
 

@@ -29,7 +29,6 @@ export class InnkeeperEditComponent implements OnInit {
     ngOnInit() {
         this.checkInnkeeper=false;
         this.authService.checkTokenInnkeeper().subscribe(data=>{
-            console.log(data);
             if(data.status){
                 this.innkeeper=data.innkeeper;
                 this.checkInnkeeper=true;
@@ -41,12 +40,11 @@ export class InnkeeperEditComponent implements OnInit {
     Edit(name: string, gmail: string, address: string, password: string){
         Swal.fire({
             title: "bạn có muốn thay đổi thông tin này không?",
-            //showCancelButton: true,
+            showCancelButton: true,
             confirmButtonText: 'Lưu',
         }).then((result) => {
             if (result.isConfirmed) {
                 const innkeeper=new Innkeeper(name,gmail,address,password);
-                console.log(innkeeper);
                 this.dashboardService.editInnkeeperByToken(innkeeper).subscribe(
                     data=>{
                         if(data.status){
@@ -56,16 +54,14 @@ export class InnkeeperEditComponent implements OnInit {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            this.router.navigate(['/dashboard/innkeeper'])
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: data.message,
                             })
-
                         }
-
-                    })           
+                    }
+                )           
             }
         })        
     }

@@ -39,8 +39,6 @@ export class DanhThuListQuanByAdminComponent implements OnInit {
     getDoanhThuListQuanByAdmin() {
         this.checkdoanhthu = false;
         this.dashboardService.getDoanhThuListQuanByAdmin(this.month).subscribe(data => {
-            console.log(data);
-
             if (data.status) {
                 this.doanhthus = data.doanhthus;
                 let tongdoanhthuquan=0;
@@ -54,8 +52,6 @@ export class DanhThuListQuanByAdminComponent implements OnInit {
                 this.tongdoanhthuquan = tongdoanhthuquan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 this.tongdoanhthuadmin = tongdoanhthuadmin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 this.laixuat=data.laixuat;
-                console.log(this.tongdoanhthuquan,this.tongdoanhthuadmin);
-                
                 this.checkdoanhthu = true;
                 this.changeDetectorRef.detectChanges();
 

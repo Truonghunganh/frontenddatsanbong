@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
         this.checklogin=false;
         this.authService.checkToken().subscribe(
             result => {
-                console.log(result);
-                
                 if (result.status) {
                     if (result.user.role == "user"){
                         this.router.navigate(['/dashboard/quans']);
@@ -41,7 +39,7 @@ export class LoginComponent implements OnInit {
                     }
                 }else{
                     this.checklogin=true;
-                    this.appCommonService.setToken("1");
+                    this.appCommonService.setToken(1);
                     this.changeDetectorRef.detectChanges();
                 }
                 
@@ -67,7 +65,7 @@ export class LoginComponent implements OnInit {
                     text: 'số điện thoại hay mật khẩu sai !',
                 })
                 this.checklogin = true;
-                this.appCommonService.setToken("1");
+                this.appCommonService.setToken(1);
                 this.changeDetectorRef.detectChanges();
             }
         })

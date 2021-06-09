@@ -66,6 +66,5 @@ export class AddQuanByInnkeeperComponent implements OnInit {
     
     Cancel(){
         this.router.navigate(['/innkeeper/quans'])
-
     }
 }

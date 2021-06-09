@@ -68,7 +68,6 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
                 for (let i = 0; i < data.datsans.length; i++) {
                     arrMangOld[i] = data.datsans[i].datsans;
                 }
-                
                 this.mangDatsanOld = arrMangOld;
                 this.checkdatsansOld = true;
                 this.changeDetectorRef.detectChanges();
@@ -79,8 +78,6 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
     getListDatSanByInnkeeperNew(start_time: string) {
         this.checkdatsansNew = false;
         this.dashboardService.getListDatSanByInnkeeper(start_time).subscribe(data => {
-            console.log(data);
-            
             if (data.status) {
                 this.listdatsancuaquanNew = data.datsans;
                 const arrMangNew = new Array();
@@ -121,8 +118,6 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
                 if (result.isConfirmed) {
                     const thaydoidatsan = new Thaydoidatsan(this.idsanOld, this.idsanNew, this.timeOld, this.timeNew);
                     this.dashboardService.thayDoiDatSanByInnkeeper(thaydoidatsan).subscribe(data => {
-                        console.log(data);
-
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',

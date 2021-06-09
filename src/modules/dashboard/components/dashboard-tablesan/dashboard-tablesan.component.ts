@@ -44,7 +44,6 @@ export class DashboardTablesanComponent implements OnInit {
     }
     sansTT: any;
     getDatSansvaSansByUserAndIdquanAndNgay(idquan: number, ngay: any){
-        
         this.checkdatsans = false;
         this.dashboardService.getDatSansvaSansByUserAndIdquanAndNgay(idquan, ngay).subscribe(data=>{
             if (data.status){
@@ -62,10 +61,6 @@ export class DashboardTablesanComponent implements OnInit {
                 this.checkdatsans= true;
                 this.changeDetectorRef.detectChanges();
             }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
                 this.router.navigate(['/dashboard/quans']);
             }
         })
@@ -190,11 +185,9 @@ export class DashboardTablesanComponent implements OnInit {
         }else{
             Swal.fire({
                 html: '<h1 style="color: #41c04d;">thông tin sân mà bạn muốn đặt</h1><table style="width: 100%;" border="1"><tr><td>tên quán </td><td>' + this.quan.name + '</td></tr><tr><td>tên sân </td><td>' + namesan + '</td></tr><tr><td>số người </td><td>' + numberpeople + '</td></tr><tr><td>số tiền thanh toán</td><td>' + priceperhour + '</td></tr><tr><td>giờ đặt</td><td>' + this.ngayvagio + '</td></tr></table>',
-                // showCancelButton: true,
                 confirmButtonText: `thanh toán`,
             }).then(result => {
                 if (result.value) {
-
                     const ds = new Datsan(idsan, this.ngayvagio, priceperhour);
                     this.dashboardService.addDatSan(ds).subscribe(data => { 
                         if (data.status) {
@@ -234,14 +227,8 @@ export class DashboardTablesanComponent implements OnInit {
                 this.tongpage = this.comments.length / 10 + 1;
                 this.taoBLnew(this.page);
                 this.checkcomments = true;
-                
                 this.changeDetectorRef.detectChanges();
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
-            }
+            } 
         })
     }
     binhluan ="";
@@ -258,12 +245,8 @@ export class DashboardTablesanComponent implements OnInit {
                 this.taoBLnew(this.page);
                 this.checkcomments = true;
                 this.changeDetectorRef.detectChanges();
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
-            }
+            } 
+            
             this.binhluan="";
         });
         this.binhluan = "";

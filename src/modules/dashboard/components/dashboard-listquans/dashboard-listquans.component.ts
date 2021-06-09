@@ -39,11 +39,6 @@ export class DashboardListquansComponent implements OnInit {
                 this.checkquans=true;
                 this.taoquansnew(this.page);
                 this.changeDetectorRef.detectChanges();
-            }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
             }
         })
     }
@@ -54,8 +49,6 @@ export class DashboardListquansComponent implements OnInit {
         this.checkquans =false;
         this.page=1;
         this.authService.searchListQuans(this.timkiem).subscribe(data=>{
-            console.log(data);
-            
             if (data.status) {
                 this.quans = data.quans;
                 for (let i = 0; i < this.quans.length; i++) {

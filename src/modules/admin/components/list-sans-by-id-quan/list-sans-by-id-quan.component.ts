@@ -39,7 +39,6 @@ export class ListSansByIdQuanComponent implements OnInit {
     }
     chonngay(ngay: any) {
         this.ngayvagio = ngay.target.value;
-        console.log(ngay.target.value);
         this.getDatSansvaSansByAdminAndIdquanAndNgay(this.idquan, ngay.target.value);
 
     }
@@ -85,8 +84,6 @@ export class ListSansByIdQuanComponent implements OnInit {
             k = this.comments.length % 10;
 
         }
-        console.log(this.tongpage, i, k, page);
-
         for (let j = 0; j < k; j++) {
             if (j == 10) {
                 break;
@@ -160,7 +157,6 @@ export class ListSansByIdQuanComponent implements OnInit {
     }
 
     hienthongtindatsan(datsan: any, san: any) {
-        console.log(datsan);
         Swal.fire({
             html: '<h1 style="color: #41c04d;">thông tin người đặt sân của người dùng</h1><table style="width: 100%;" border="1"><tr><td>tên người đặt </td><td>' + datsan.user.name + '</td></tr><tr><td>Số điện thoại người đặt </td><td>' + datsan.user.phone + '</td></tr><tr><td>tên sân </td><td>' + san.name + '</td></tr><tr><td>số người </td><td>' + san.numberpeople + '</td></tr><tr><td>số tiền thanh toán</td><td>' + san.priceperhour + '</td></tr><tr><td>giờ đặt</td><td>' + datsan.start_time + '</td></tr></table>',
             confirmButtonText: `Ok`,

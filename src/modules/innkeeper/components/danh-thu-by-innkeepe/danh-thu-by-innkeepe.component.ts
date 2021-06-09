@@ -90,8 +90,6 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         ) {}
     ngOnInit() {
         this.idquan=Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        console.log(this.year);
-        
         this.checkTokenInnkeeperAndIdquan(this.idquan);
     }
     checkTokenInnkeeperAndIdquan(idquan: number) {
@@ -116,8 +114,6 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         })
     }
     tinhtongDanhthucuuanam (mang: any){
-        console.log(mang);
-        
         let tong=0;
         for (let i = 0; i < mang.length; i++) {
             tong+=mang[i];
@@ -137,14 +133,8 @@ export class DanhThuByInnkeepeComponent implements OnInit {
                     this.checkdoanhthustheonam = true;
                     this.changeDetectorRef.detectChanges();
                 }else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: data.message,
-                    })
-                    this.router.navigate(['/innkeeper/quans'])
-
+                    this.router.navigate(['/innkeeper/quans']);
                 }
-
             }
         )
     }
@@ -175,8 +165,6 @@ export class DanhThuByInnkeepeComponent implements OnInit {
     getDanhThuByInnkeeper(){
         this.checkdoanhthus= false;
         this.dashboardService.getDoanhThuByInnkeeper(this.idquan,this.thang).subscribe(data => {
-            console.log(data);
-            
             if (data.status) {
                 this.doanhthus=data.doanhthus;
                 this.tongDanhthu = this.tinhTongDanhThu(this.doanhthus).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

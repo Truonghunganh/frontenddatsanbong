@@ -28,7 +28,6 @@ export class ListInnkeeperComponent implements OnInit {
     }
     Edit(name: string, phone: string, gmail: string, address: string, password: string) {
         const user = new User(this.user.id, name, phone, gmail, address, password);
-        console.log(user);
         Swal.fire({
             title: "Bạn có muốn thay đổi thông tin này không?",
             showCancelButton: true,
@@ -36,8 +35,6 @@ export class ListInnkeeperComponent implements OnInit {
         }).then((result) => {
             if (result.isConfirmed) {
                 const user = new User(this.user.id, name, phone, gmail, address, password);
-                console.log(user);
-
                 this.adminService.editUserByAdmin(user).subscribe(
                     data => {
                         if (data.status) {

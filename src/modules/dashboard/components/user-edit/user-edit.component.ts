@@ -43,7 +43,6 @@ export class UserEditComponent implements OnInit {
         this.checkuser=false;
         this.authService.checkTokenUser().subscribe(
             data=>{
-                console.log(data);
                 if(data.status){
                     this.UserFormGroup.value.name = data.user.name;
                     this.UserFormGroup.value.phone=data.user.phone;
@@ -53,10 +52,6 @@ export class UserEditComponent implements OnInit {
                     this.UserFormGroup.value.confirmpassword=data.user.phone;
                     this.changeDetectorRef.detectChanges();
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: data.message,
-                    })
                     this.router.navigate(['/dashboard/quans']);
                 }
                 
@@ -77,8 +72,6 @@ export class UserEditComponent implements OnInit {
         }).then((result) => {
             if (result.isConfirmed) {
                 this.dashboardService.editUserByToken(user).subscribe(data => {
-                    console.log(data);
-                    
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',
@@ -97,8 +90,5 @@ export class UserEditComponent implements OnInit {
                 })
             }
         })
-
-        
-        
     }
 }

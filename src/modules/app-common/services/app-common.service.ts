@@ -18,13 +18,13 @@ export class AppCommonService {
     };
     getToken(){
         if (!this.storage.get('token')) {
-            this.setToken("1");
+            this.setToken(1);
             console.log(1);
             
         }
         return this.storage.get('token');
     }
-    setToken(token: string) {
+    setToken(token: number) {
         this.storage.set('token', JSON.stringify(token));
 
         this.httpOptions = {

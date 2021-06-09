@@ -33,8 +33,6 @@ export class GetQuansByInnkeeperComponent implements OnInit {
     getListquans() {
         this.checkquans= false;
         this.dashboardService.getListQuansByTokenInnkeeper().subscribe(data=>{
-            console.log(data);
-            
             if(data.status){
                 this.quans=data.quans;
                 for (let i = 0; i < this.quans.length; i++) {
@@ -76,14 +74,11 @@ export class GetQuansByInnkeeperComponent implements OnInit {
             k = this.quans.length % 3;
 
         }
-        console.log(this.tongpage, i, k, page);
-
         for (let j = 0; j < k; j++) {
             if (j == 3) {
                 break;
             }
             this.quansnew.push(this.quans[i + j]);
-
         }
         this.taomangtrang(page);
     }

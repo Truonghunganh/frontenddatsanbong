@@ -1,11 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { InnkeeperService } from "../../services/innkeeper.service";
-import { map } from 'rxjs/operators';
-import { environment } from './../../../../environments/environment';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Datsan } from '../../models/innkeeper.model'
 import { AuthService } from '../../../auth/services/auth.service';
 
 
@@ -54,14 +50,11 @@ export class ThongTinDatSansComponent implements OnInit {
         this.page=1;
         this.checkdatsans=false;
         this.dashboardService.getAllDatSanByInnkeeperAndIdquan(idquan,trangthai,time).subscribe(data=>{
-            console.log(data);
             if(data.status){
                 this.datsans=data.datsans;
                 this.taodatsansnew(this.page);
                 this.checkdatsans=true;
                 this.changeDetectorRef.detectChanges();
-                console.log(this.page);
-                
             }  
         })
     }
@@ -78,8 +71,6 @@ export class ThongTinDatSansComponent implements OnInit {
             k = 10;
         } else {
             k = this.datsans.length % 10;
-            console.log(k);
-
         }
 
         for (let j = 0; j < k; j++) {
@@ -87,10 +78,7 @@ export class ThongTinDatSansComponent implements OnInit {
                 break;
             }
             this.datsansnew.push(this.datsans[i+j]);
-            
         }
-        console.log(this.datsansnew);
-        
         this.taomangtrang(page);
     }
     taomangtrang(page: number) {
@@ -116,17 +104,12 @@ export class ThongTinDatSansComponent implements OnInit {
         }
     }
     chontrang(page: number) {
-        console.log(page);
-        
         this.page = page;
         this.taodatsansnew(this.page);
     }
 
     xacnhan(iddatsan: number){
-        console.log(iddatsan);
-        
         this.dashboardService.xacNhanDatsanByInnkeeper(iddatsan).subscribe(data=>{
-            console.log(data);
             if (data.status) {
                 Swal.fire({
                     icon: 'success',
@@ -150,7 +133,6 @@ export class ThongTinDatSansComponent implements OnInit {
         
     }
     ChangeStatus(){
-        
         this.trangthai=!this.trangthai;
         this.getAllDatSanByInnkeeperAndIdquan(this.idquan,this.trangthai,this.time)
     }

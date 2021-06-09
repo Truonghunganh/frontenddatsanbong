@@ -35,13 +35,7 @@ export class UserComponent implements OnInit {
                 this.checklistdansan = true;
                 this.changeDetectorRef.detectChanges();
             }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
-
-            } 
+             
         })
     }
     datsansnew: any;
@@ -67,8 +61,6 @@ export class UserComponent implements OnInit {
             this.datsansnew.push(this.ListDatSanByIduservaonhungngaytoi[i + j]);
 
         }
-        console.log(this.datsansnew);
-
         this.taomangtrang(page);
     }
     taomangtrang(page: number) {
@@ -117,7 +109,6 @@ export class UserComponent implements OnInit {
 
     editUser(){
         this.router.navigate(['/dashboard/edituser']);
-        console.log(5);
         
     }
     deleteDatSan(datsan:any){
@@ -142,12 +133,6 @@ export class UserComponent implements OnInit {
                             timer: 1500
                         });       
                         this.getListDatSanByUserToken();
-                    }
-                    else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: data.message,
-                        })
                     }
                 });
             }

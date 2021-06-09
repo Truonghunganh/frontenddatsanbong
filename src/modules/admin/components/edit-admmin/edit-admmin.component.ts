@@ -28,17 +28,12 @@ export class EditAdmminComponent implements OnInit {
     ngOnInit() {
         this.checkadmin = false;
         this.authService.checkTokenAdmin().subscribe(data => {
-            console.log(data);
             if (data.status) {
                 this.admin = data.admin;
                 this.checkadmin = true;
                 this.changeDetectorRef.detectChanges();
             }
             else{
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                });
                 this.router.navigate(['/auth/login'])
             }
         })
@@ -62,7 +57,7 @@ export class EditAdmminComponent implements OnInit {
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Your work has been saved',
+                                title: 'Chỉnh sửa thành công',
                                 showConfirmButton: false,
                                 timer: 1500
                             });

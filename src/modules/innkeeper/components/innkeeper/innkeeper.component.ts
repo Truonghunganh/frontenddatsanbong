@@ -46,8 +46,6 @@ export class InnkeeperComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
 
         this.dashboardService.getListQuansByTokenInnkeeperChuaPheDuyet().subscribe(data =>{
-            console.log(data);
-            
             if (data.status) {
                 this.listquanschuapheduyet=data.quans;
                 this.checklistquanschuapheduyet=true;
@@ -56,8 +54,6 @@ export class InnkeeperComponent implements OnInit {
         })
     }
     deleteQuan(quan:any){
-        const a=true
-        console.log(quan);
         Swal.fire({
             html: '<h1 style="color: #41c04d;">Bạn có muốn xóa Quán này không ?</h1><table style="width: 100%;" border="1"><tr ><td style="text-align: center;" colspan="2"><div><img style="width: 100px; " src="' + this.url + '/' + quan.image + '"></div></td></tr><tr><td>tên quán </td><td>' + quan.name + '</td></tr><tr><td>Phone </td><td>' + quan.phone + '</td></tr><tr><td>Address </td><td>' + quan.address + '</td></tr></table>',
             showCancelButton: true,
@@ -69,7 +65,7 @@ export class InnkeeperComponent implements OnInit {
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Your work has been saved',
+                                title: 'xóa quán thành công',
                                 showConfirmButton: false,
                                 timer: 1500
                             });
@@ -79,18 +75,10 @@ export class InnkeeperComponent implements OnInit {
                                 icon: 'error',
                                 title: data.message,
                             })
-
                         }
-
                     }
                 )
-  
-            } else {
-
             }
-        });
-
-                
+        });                
     }
-
 }

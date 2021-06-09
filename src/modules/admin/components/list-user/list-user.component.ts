@@ -26,8 +26,6 @@ export class ListUserComponent implements OnInit {
         this.chinhsua=true;
     }
     Edit(name: string,phone: string,gmail: string, address: string, password: string) {
-        const user = new User(this.user.id, name, phone, gmail, address, password);
-        console.log(user);
         Swal.fire({
             title: "Bạn có muốn thay đổi thông tin này không?",
             showCancelButton: true,
@@ -35,14 +33,12 @@ export class ListUserComponent implements OnInit {
         }).then((result) => {
             if (result.isConfirmed) {
                 const user = new User(this.user.id,name,phone, gmail, address, password);
-                console.log(user);
-                
                 this.adminService.editUserByAdmin(user).subscribe(
                     data => {
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Your work has been saved',
+                                title: 'Chỉnh sửa thành công',
                                 showConfirmButton: false,
                                 timer: 1500
                             });
@@ -65,7 +61,6 @@ export class ListUserComponent implements OnInit {
         this.chinhsua=true;
         this.checkusers = false;
         this.adminService.getUsersByAdmin("user",page).subscribe(data => {
-            console.log(data);
             if (data.status) {
                 this.users = data.users;
                 this.tongpage = data.tongpage;
@@ -141,13 +136,11 @@ export class ListUserComponent implements OnInit {
         this.checkusers = false;
         this.page=1;
         this.adminService.searchUsersByAdmin("user",this.timkiem).subscribe(data =>{
-            console.log(data);
             if (data.status) {
                 this.search1=false;
                 this.users = data.users;
                 this.checkusers = true;
                 this.changeDetectorRef.detectChanges();
-
             } else {
                 Swal.fire({
                     icon: 'error',

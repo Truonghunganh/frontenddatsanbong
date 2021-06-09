@@ -43,8 +43,6 @@ export class ListQuansByAdminComponent implements OnInit {
         } else {
             k = this.quans.length % this.soluongtrentrang;
         }
-        console.log(i,k,this.tongpage);
-        
         for (let j = 0; j < k; j++) {
             if (j == this.soluongtrentrang) {
                 break;
@@ -157,8 +155,6 @@ export class ListQuansByAdminComponent implements OnInit {
         this.checkquans = false;
         this.page = 1;
         this.authService.searchListQuans(this.timkiem).subscribe(data => {
-            console.log(data);
-
             if (data.status) {
                 this.quans = data.quans;
                 this.tongpage = data.tongpage;

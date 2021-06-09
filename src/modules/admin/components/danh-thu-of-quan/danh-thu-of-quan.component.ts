@@ -89,15 +89,12 @@ export class DanhThuOfQuanComponent implements OnInit {
     ) { }
     ngOnInit() {
         this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        console.log(this.idquan);
         this.getDoanhThuByAdmin();
         this.getTongDoanhCuaMotQuanThuTheoNamByAdmin(this.idquan, this.year);
     }
     tongdoanhthu="";
     getDoanhThuByAdmin() {
         this.dashboardService.getDoanhThuByAdmin(this.idquan, this.thang).subscribe(data => {
-            console.log(data);
-
             if (data.status) {
                 this.doanhthus = data.doanhthus;
                 let tongdoanhthu=0;
@@ -123,8 +120,6 @@ export class DanhThuOfQuanComponent implements OnInit {
         })
     }
     tinhtongDanhthucuuanam(mang: any) {
-        console.log(mang);
-
         let tong = 0;
         for (let i = 0; i < mang.length; i++) {
             tong += mang[i];
@@ -209,8 +204,7 @@ export class DanhThuOfQuanComponent implements OnInit {
     tongdoanhthuchitiet="";
     getChiTietDanhthuCuaMotQuanByAdmin(id: number) {
         this.checkdatsans = false;
-        this.dashboardService.getChiTietDanhthuCuaMotQuanByAdmin(id).subscribe(data => {
-            
+        this.dashboardService.getChiTietDanhthuCuaMotQuanByAdmin(id).subscribe(data => {            
             if (data.status) {
                 this.datsans = data.mangChitietDoanhthus;
                 this.taodatsansnew(this.page);
@@ -219,8 +213,6 @@ export class DanhThuOfQuanComponent implements OnInit {
                     tong+=this.datsans[i].price;
                     this.datsans[i].price = this.datsans[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
-                console.log(tong);
-                
                 this.tongdoanhthuchitiet = tong.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 this.checkdatsans = true;
                 this.changeDetectorRef.detectChanges();
@@ -258,7 +250,6 @@ export class DanhThuOfQuanComponent implements OnInit {
         var mang: Array<boolean> = [];
         for (let i = 0; i < this.tongpage; i++) {
             mang.push(false);
-
         }
         mang[page - 1] = true;
         this.mangtrang = mang;

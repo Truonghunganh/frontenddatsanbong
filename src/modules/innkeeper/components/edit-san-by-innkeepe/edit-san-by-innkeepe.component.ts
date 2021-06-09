@@ -51,11 +51,6 @@ export class EditSanByInnkeepeComponent implements OnInit {
                    this.checkquan=true;
                    this.changeDetectorRef.detectChanges();
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: data.message,
-                    })
-
                    this.router.navigate(['/innkeeper/quans']);
                 }
            }

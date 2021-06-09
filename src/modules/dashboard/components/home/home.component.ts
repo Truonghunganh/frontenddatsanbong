@@ -21,22 +21,21 @@ export class HomeComponent implements OnInit {
         private changeDetectorRef: ChangeDetectorRef,
         private appCommonService: AppCommonService
 
-    ) { }
+    ) { 
+    }
     quans: any;
     checkquans = false;
     url = environment.url;
     urlCLU = environment.urlCLU;
     isLoggedIn = false;
     ngOnInit() {
-        const a = this.appCommonService.getToken();
-        if (a != "1") {
-            this.isLoggedIn = true;
+        var a =this.appCommonService.getToken();
+        if ( a === "1") {
+            this.isLoggedIn = false;
+        } else {
+           this.isLoggedIn=true;
         }
-        console.log(this.isLoggedIn);
-
         this.getListquans();
-        
-        
     }
 
     mangreview = new Array();
@@ -102,8 +101,7 @@ export class HomeComponent implements OnInit {
             k = this.quans.length % 3;
 
         }
-        console.log(this.tongpage, i, k, page);
-
+    
         for (let j = 0; j < k; j++) {
             if (j == 3) {
                 break;

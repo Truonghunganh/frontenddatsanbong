@@ -31,19 +31,12 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     checkdatsan = false;
     ngOnInit() {
         this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-
         this.checkTokenInnkeeperAndIdquan(this.idquan);
     }
     checkTokenInnkeeperAndIdquan(idquan: number) {
         this.checkquan=false;
         this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
-            console.log(data);
-
             if (!data.status) {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                });
                 this.router.navigate(['/innkeeper/quans'])
             } else {
                 this.quan=data.quan;
@@ -55,10 +48,6 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
                 this.xembinhluan();
             }
         })
-    }
-    chon(san:any){
-        console.log(san.id);
-        
     }
     chonngay(ngay: any) {
         this.ngayvagio = ngay.target.value;
@@ -72,8 +61,6 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan: number, ngay: any) {
         this.checkdatsan = false;
         this.dashboardService.getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan, ngay).subscribe(data => {
-            console.log(data.datsans);
-            
             if (data.status) {
                 this.sansTT=data.sansTT;
                 this.mangDatsan = data.datsans;
@@ -154,14 +141,11 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     xembinhluan() {
         this.checkcomments = false;
         this.dashboardService.getAllCommentCuaMotQuanByInnkeeper(this.idquan).subscribe(data => {
-            console.log(data);
-
             if (data.status) {
                 this.comments = data.comments;
                 this.tongpage = this.comments.length / 10 + 1;
                 this.taoBLnew(this.page);
                 this.checkcomments = true;
-
                 this.changeDetectorRef.detectChanges();
 
             } else {
