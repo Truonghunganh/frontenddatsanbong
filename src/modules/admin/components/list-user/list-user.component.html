@@ -1,0 +1,138 @@
+<div *ngIf="chinhsua" >
+    <div class="header1">
+        <h3>
+            <strong>Danh sách các người dùng</strong>
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 float-right" (ngSubmit)="search()">
+                <div class="input-group ">
+                    <input class="form-control" style="color:black" name="timkiem" [(ngModel)]="timkiem" type="text"
+                        placeholder="Tìm kiếm....." aria-label="Search" aria-describedby="basic-addon2" />
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="submit">
+                            <fa-icon [icon]='["fas", "search"]'></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </h3>
+    </div>
+
+    <sb-card>
+        <div class="card-body">
+            <div *ngIf="checkusers; then display; else loading"></div>
+            <ng-template #display>
+                <table class="table table-striped " style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên</th>
+                            <th>Địa Chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>gmail</th>
+                            <th>chỉnh sữa thông tin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users ;index as i">
+                            <td>{{(page-1)*5+i+1}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.address}}</td>
+                            <td>{{user.phone}}</td>
+                            <td>{{user.gmail}}</td>
+                            <td>
+                                <button class="btn btn-success" (click)="cailai(user)">chọn</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+            <ng-template #loading>
+                <div class="text-center">
+                    <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </ng-template>
+            <nav aria-label="..." *ngIf="search1">
+                <ul class="pagination justify-content-center">
+                    <div class="row" style="color:forestgreen">
+                        <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
+    
+                        <div *ngFor="let vitri of mangtrang; index as i">
+                            <div *ngIf="page==i-2">
+                                <a class="page-link">... </a>
+                            </div>
+                            <div *ngIf="page>i-2 && page<i+4">
+                                <li *ngIf="vitri" class="page-item active">
+                                    <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                                </li>
+                                <li *ngIf="!vitri" class="page-item">
+                                    <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                                </li>
+                            </div>
+                            <div *ngIf="page==i+4">
+                                <a class="page-link">... </a>
+                            </div>
+                        </div>
+                        <input type="button" class="btn border1" (click)="Next()" value="Next">
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </sb-card>
+</div>
+<div *ngIf="!chinhsua">
+    <sb-card>
+        <div class="card-header border1">
+            <h6>Chỉnh sữa thông tin người dùng </h6>
+        </div>
+        <div class="card-body">
+            <div class="col-lg-12 order-lg-1 personal-info">
+                <form>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Họ và tên</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #name name="user.name" [(ngModel)]="user.name" required
+                                placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Số điện thoại</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #phone name="user.phone" [(ngModel)]="user.phone" required
+                                placeholder="Phone" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Gmail</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #gmail name="user.gmail" [(ngModel)]="user.gmail" required
+                                placeholder="Gmail" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Địa chỉ</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #address name="user.address" [(ngModel)]="user.address" required
+                                placeholder="Address" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Mật khẩu</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #password required
+                                placeholder="Password" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-9 ml-auto text-right">
+                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
+                            <input type="button" class="btn btn-primary"
+                                (click)="Edit(name.value,phone.value,gmail.value,address.value,password.value)" value="Lưu thông tin" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </sb-card>
+</div>
+

@@ -1,0 +1,117 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<sb-card>
+    <div class="card-header border1">
+        <h5 >THAY ĐỔI THÔNG TIN CỦA SÂN</h5>
+    </div>
+    <div class="card-body">
+        <sb-card>
+            <div class="card-header border1">
+                <h6>Thông tin của Quán
+                </h6>
+            </div>
+            <div class="card-body" style="background-color:#41c04d;color:lightcyan;">
+                <div *ngIf="checkquan; then display2; else loading2"></div>
+                <ng-template #display2>
+                    <div class="text-center">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="text-align: center;" rowspan="4">
+                                    <div *ngIf="quan.image">
+                                        <img style="width: 150px; " src="{{url+'/'+quan.image}}">
+                                    </div>
+                                    <div *ngIf="!quan.image">
+                                        <img class="profile_img" src="../../../assets/img/avatar.jpg">
+                                    </div>
+                                </td>
+                                <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <strong>{{ quan.address}}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <span *ngIf="mangreviewquan[0]" class="fa fa-star checked"></span>
+                                    <span *ngIf="!mangreviewquan[0]" class="fa fa-star nochecked"></span>
+                                    <span *ngIf="mangreviewquan[1]" class="fa fa-star checked"></span>
+                                    <span *ngIf="!mangreviewquan[1]" class="fa fa-star nochecked"></span>
+                                    <span *ngIf="mangreviewquan[2]" class="fa fa-star checked"></span>
+                                    <span *ngIf="!mangreviewquan[2]" class="fa fa-star nochecked"></span>
+                                    <span *ngIf="mangreviewquan[3]" class="fa fa-star checked"></span>
+                                    <span *ngIf="!mangreviewquan[3]" class="fa fa-star nochecked"></span>
+                                    <span *ngIf="mangreviewquan[4]" class="fa fa-star checked"></span>
+                                    <span *ngIf="!mangreviewquan[4]" class="fa fa-star nochecked"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </ng-template>
+                <ng-template #loading2>
+                    <div class="text-center">
+                        <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </sb-card>
+
+        <sb-card>
+            <div class="card-header border1">
+                <h6 >Thông tin của sân</h6>
+            </div>
+            <div class="card-body">
+                <div *ngIf="checksan; then display ; else loading"></div>
+                <ng-template #display>
+                    <div class="col-lg-12 order-lg-1 personal-info">
+                        <form>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label form-control-label">Tên Sân</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" #name name="san.name" [(ngModel)]="san.name" required
+                                        placeholder="Name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label form-control-label">Số người trong 1 đội</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" #numberpeople name="san.numberpeople" [(ngModel)]="san.numberpeople"
+                                        required placeholder="Name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label form-control-label">Số tiền trong 1 giờ</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" #priceperhour name="san.priceperhour" [(ngModel)]="san.priceperhour"
+                                        required placeholder="Name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-9 ml-auto text-right">
+                                    <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
+                                    <input type="button" class="btn btn-success"
+                                        (click)="edit(name.value,numberpeople.value,priceperhour.value)" value="Lưu thông tin" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                
+                </ng-template>
+                <ng-template #loading>
+                    <div class="text-center">
+                        <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </sb-card>
+    </div>
+</sb-card>

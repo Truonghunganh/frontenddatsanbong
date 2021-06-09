@@ -1,0 +1,29 @@
+<span [ngClass]='{"sb-nav-fixed": !false}'>
+    <nav class="sb-topnav navbar-light top">
+        <img src="../../../../assets/img/slide/3.jpg" style="width:80px; "
+            class="col-lg-3 col-form-label form-control-label">
+        <strong>ĐẶT SÂN BÓNG ĐÁ</strong>
+        <button class="bt btn">
+            <img src="../../../../assets/img/avatar.jpg" (click)="thongtin()" style="width:30px; ">
+        </button>
+        <div class=" menu">
+            <img src="../../../../assets/img/slide/2.jpg" style="width:80px; "
+                class="col-lg-3 col-form-label form-control-label">
+            <button class="btn bt1" routerLink="/dashboard/home">TRANG CHỦ</button>
+            <button class="btn bt1" routerLink="/admin/quans">DANH DÁCH CÁC QUÁN</button>
+            <button class="btn bt1" routerLink="/admin/admin">DANH SÁCH CÁC QUÁN CHƯA PHÊ DUYỆT</button>
+            <button class="btn bt1" routerLink="/admin/doanhthucuaadmintheonam">DOANH THU THEO NĂM</button>
+            <img src="../../../../assets/img/slide/4.jpg" style="width:80px; "
+                class="col-lg-3 col-form-label form-control-label">
+        </div>
+    </nav>
+    <div>
+        <div>
+            <main>
+                <div class="container-fluid">
+                    <ng-content></ng-content>
+                </div>
+            </main>
+        </div>
+    </div>
+</span>

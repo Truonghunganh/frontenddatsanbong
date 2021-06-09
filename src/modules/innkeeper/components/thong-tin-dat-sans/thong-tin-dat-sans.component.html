@@ -1,0 +1,167 @@
+<head>
+    <title>Bootstrap Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<br>
+<div class="header">
+    <h3><strong>Thông tin đặt sân</strong></h3>
+</div>
+<sb-card>
+    <div class="card-body">
+        <div class="header1">
+            <form>
+                <div class="custom-control custom-switch">
+                    <input (click)="ChangeStatus()" type="checkbox" class="custom-control-input" id="status" checked>
+                    <label class="custom-control-label" for="status">
+                        <h5><strong>Trạng thái xác nhận</strong></h5>
+                    </label>
+                </div>
+            </form>
+
+            
+        </div>
+        <sb-card>
+            <div class="card-body">
+                <div *ngIf="trangthai">
+                    <h6 class="red"><strong>Danh sách đặt sân của chủ quán đã xác nhận</strong></h6>
+                    <sb-card>
+                        <div class="card-body">
+                            <div *ngIf="checkdatsans ; then display ; else loading"></div>
+                            <ng-template #display>
+                                <div class="row">
+                
+                                    <table class="table table-striped " style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tên sân</th>
+                                                <th>Số người</th>
+                                                <th>Tiền</th>
+                                                <th>Tên Người đặt</th>
+                                                <th>Số điện thoại người đặt</th>
+                                                <th>giờ đặt sân</th>
+                                                <th>chủ quán xác nhận</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let datsan of datsansnew ; index as i">
+                                                <td>{{(page-1)*10+i+1}}</td>
+                                                <td>{{datsan.san.name}}</td>
+                                                <td>{{datsan.san.numberpeople}}</td>
+                                                <td>{{datsan.price}}</td>
+                                                <td>{{datsan.user.name}}</td>
+                                                <td>{{datsan.user.phone}}</td>
+                                                <td>{{datsan.start_time}}</td>
+                                                <td>
+                                                    <input type="button" class="btn btn-primary" value="đã xán nhận" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                
+                                </div>
+                            </ng-template>
+                
+                            <ng-template #loading>
+                                <div class="text-center">
+                                    <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </sb-card>
+                </div>
+                
+                <div *ngIf="!trangthai">
+                    <h6 style="text-align: center; color:red"><strong>Danh sách đặt sân của quán chưa xác nhận</strong></h6>
+                    <sb-card>
+                        <div class="card-body">
+                            <div *ngIf="checkdatsans ; then display1 ; else loading1"></div>
+                            <ng-template #display1>
+                                <div class="row">
+                                    <table class="table table-striped " style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tên sân</th>
+                                                <th>Số người</th>
+                                                <th>Tiền</th>
+                                                <th>Tên Người đặt</th>
+                                                <th>Số điện thoại người đặt</th>
+                                                <th>giờ đặt sân</th>
+                                                <th>chủ quán xác nhận</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let datsan of datsansnew ; index as i">
+                                                <td>{{(page-1)*10+i+1}}</td>
+                                                <td>{{datsan.san.name}}</td>
+                                                <td>{{datsan.san.numberpeople}}</td>
+                                                <td>{{datsan.price}}</td>
+                                                <td>{{datsan.user.name}}</td>
+                                                <td>{{datsan.user.phone}}</td>
+                                                <td>{{datsan.start_time}}</td>
+                                                <td>
+                                                    <input type="button" class="btn btn-primary" (click)="xacnhan(datsan.id)"
+                                                        value="xác nhận" />
+                                                </td>
+                                                <td>
+                                                    <fa-icon (click)="deleteDatSan(datsan)" [icon]='["fas","trash"]'
+                                                        class='fas fas-trash fa-2x'>
+                                                    </fa-icon>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                
+                                </div>
+                            </ng-template>
+                
+                            <ng-template #loading1>
+                                <div class="text-center">
+                                    <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                
+                        </div>
+                    </sb-card>
+                </div>
+                <h1></h1>
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center">
+                        <div class="row text-center">
+                            <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
+                    
+                            <div *ngFor="let vitri of mangtrang; index as i">
+                                <div *ngIf="page==i-2">
+                                    <a class="page-link">... </a>
+                                </div>
+                                <div *ngIf="page>i-2 && page<i+4">
+                                    <li *ngIf="vitri" class="page-item active">
+                                        <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                                    </li>
+                                    <li *ngIf="!vitri" class="page-item">
+                                        <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                                    </li>
+                                </div>
+                                <div *ngIf="page==i+4">
+                                    <a class="page-link">... </a>
+                                </div>
+                            </div>
+                            <input type="button" class="btn btn-danger" (click)="Next()" value="Next">
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </sb-card>
+    </div>
+</sb-card>

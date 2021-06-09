@@ -1,0 +1,28 @@
+@import 'styles/variables.scss';
+
+img {
+border-radius:50%;
+-moz-border-radius:50%;
+-webkit-border-radius:50%;
+}
+.bt{
+	float: right;
+	color: White;
+}
+.top{
+	height: 40px;
+	line-height: 30px;
+	background-color: #262626;
+    color: White;
+}
+.menu{
+    text-align: center;
+    background-color: white;
+    height: 40px;
+    line-height: 30px;
+	
+}   
+.bt1{
+  color:red;
+        
+}

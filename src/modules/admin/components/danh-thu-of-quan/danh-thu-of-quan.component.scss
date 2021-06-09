@@ -1,0 +1,47 @@
+@import 'styles/variables.scss';
+.btdt{
+    text-align: center;
+}
+.header{
+  background-color:green;
+  color: white;
+  height: 35px;
+	text-align: center;
+   
+}
+.header1{
+  background-color:green;
+  color: white;
+  height: 25px;
+	text-align: center;
+   
+}
+.border1{
+  text-align: center;
+	color:white;
+	background-color: forestgreen;
+}
+.border2{
+ 	background-color:green;
+  color:White;
+}
+.checked {
+  color: orange;
+}
+.nochecked{
+  color:black;
+}
+th {
+	color: lightcyan;
+	background-color:red;
+  text-align: center;
+}
+tbody{
+  background-color:#EEEEEE;
+}
+td{
+  text-align: center;
+  color: #222222;
+  font-size:14px;
+}
+

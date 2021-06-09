@@ -1,0 +1,44 @@
+@import 'styles/variables.scss';
+
+img {
+border-radius:50%;
+-moz-border-radius:50%;
+-webkit-border-radius:50%;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  
+}
+div.absolute {
+  position: absolute;
+  text-align: center;
+  right: 0;
+  width: 200px;
+  border: 3px solid #73AD21;
+}
+a{
+  text-align: center;
+}
+.bt{
+	float: right;
+	color: White;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  
+}
+.top{
+	//height: 40px;
+	line-height: 30px;
+	background-color: #262626;
+    color: White;
+}
+.menu{
+    text-align: center;
+    background-color: white;
+    height: 40px;
+    line-height: 30px;
+	
+}   
+.bt1{
+  color:red;
+        
+}

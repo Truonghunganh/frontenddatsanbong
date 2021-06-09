@@ -1,0 +1,31 @@
+<nav class="sb-topnav row navbar navbar-expand navbar-light top">
+    <a class="navbar-brand mauchu" routerLink="/dashboard/home"><strong>ĐẶT SÂN ĐÁ BÓNG</strong></a>
+    <button class="btn  btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" style="color:white" data-cy="topNavToggleSideNav"
+        (click)="toggleSideNav()">
+        <fa-icon class="fa-2x" [icon]='["fas", "bars"]'></fa-icon>
+    </button><!-- Navbar Search-->
+    <button class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 w3-dropdown-hover w3-mobile bt btn">
+    
+        <img src="../../../../assets/img/avatar.jpg" style="width:25px; ">
+        <div class="w3-bar-block w3-dropdown-content absolute" *ngIf="checkuser">
+            <div class="w3-bar-item w3-button w3-mobile">{{user.name}}</div>
+            <div class="w3-bar-item w3-button w3-mobile">{{user.phone}}</div>
+            <div class="w3-bar-item w3-button w3-mobile">{{user.gmail}}</div>
+            <div class="w3-bar-item w3-button w3-mobile">{{user.address}}</div>
+            <a href="/admin/editadmin" class="w3-bar-item w3-button w3-mobile"><strong>Chỉnh sửa thông tin </strong></a>
+            <a (click)="dangxuat()" class="w3-bar-item w3-button w3-mobile"><strong>Đăng xuất</strong></a>
+        </div>
+    </button>
+    <!-- <button class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 border1 btn">
+        <img src="../../../../assets/img/avatar.jpg" (click)="thongtin()" style="width:30px; ">
+    </button> -->
+    <!-- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <button class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 border1 btn">
+                <img src="../../../../assets/img/avatar.jpg" (click)="thongtin()" style="width:30px; ">
+            </button>
+        </div>
+    </form> -->
+
+    
+</nav>

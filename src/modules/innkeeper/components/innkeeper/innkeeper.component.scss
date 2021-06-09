@@ -1,0 +1,22 @@
+@import 'styles/variables.scss';
+
+th {
+	color: white;
+	background-color:red;
+  text-align: center;
+}
+tbody{
+  background-color:#EEEEEE;
+}
+td{
+  text-align: center;
+  color: #222222;
+  font-size:14px;
+}
+
+.border1{
+  text-align: center;
+	color:white;
+  height: 50px;
+	background-color: forestgreen;
+}

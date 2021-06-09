@@ -1,0 +1,62 @@
+@import 'styles/variables.scss';
+.a{
+  background-color:#EEEEEE;
+  color:black;
+  
+}
+
+img{
+  margin-top: 2px;
+  margin-bottom: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 8rem;
+  width: 14rem;
+}
+
+.header{
+  background-color:green;
+  color: white;
+  font-weight : bold;
+  text-align: center;
+}
+.b{
+  background-color:#FFFFFF;
+}
+.btdt{
+    text-align: center;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
+.border2{
+  text-align: center;
+	color:lightcyan;
+	background-color:forestgreen
+  ;
+}
+.checked {
+  color: orange;
+}
+.nochecked{
+  color:black;
+}
+
+.star{
+  width: 3rem;height: 3rem
+}
+td{
+  text-align: center;
+  color:black;
+}
+.star1{
+  width: 1rem;
+  height: 1rem
+}
+.border1{
+  text-align: center;
+	color:lightcyan;
+	background-color: forestgreen;
+}

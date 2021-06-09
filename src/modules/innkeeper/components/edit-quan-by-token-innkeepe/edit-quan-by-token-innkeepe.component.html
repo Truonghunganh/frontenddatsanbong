@@ -1,0 +1,90 @@
+<br>
+<div class="header">
+    <strong>Chỉnh sữa quán của chủ quán</strong>
+</div>
+<div class="card-body " style="background-color:white;color:black">
+    <div *ngIf="checkquan; then display ; else loading"></div>
+    <ng-template #display>
+        <div class="col-lg-12 order-lg-1 personal-info">
+            <form>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">Tên quán</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #name name="quan.name" [(ngModel)]="quan.name" required
+                            placeholder="Name" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">Số Điện thoại của quán</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #phone name="quan.phone" [(ngModel)]="quan.phone" required
+                            placeholder="Phone" disabled />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">Địa chỉ của quán</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #address name="quan.address" [(ngModel)]="quan.address" required
+                            placeholder="Address" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">đường link đến địa chỉ quán</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #linkaddress name="quan.linkaddress" [(ngModel)]="quan.linkaddress"
+                            required placeholder="Address link" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">kinh độ</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #kinhdo name="quan.kinhdo" [(ngModel)]="quan.kinhdo" required
+                            placeholder="Address link" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">Vĩ độ</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #vido name="quan.vido" [(ngModel)]="quan.vido" required
+                            placeholder="Address link" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">cái hình củ</label>
+                    <div class="col-lg-9">
+                        <div *ngIf="quan.image">
+                            <img style="width: 150px; height: 150px;" src="{{url+'/'+quan.image}}">
+                        </div>
+                        <div *ngIf="!quan.image">
+                            <img style="width: 150px; height: 150px;" class="profile_img"
+                                src="../../../assets/img/avatar.jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label form-control-label">chọn hình mới cần chỉnh sữa</label>
+                    <div class="col-lg-9">
+                        <file-pond #myPond (oninit)="pondHandleInit()" [options]="pondOptions"
+                            (change)="pondHandleAddFile($event)">
+                        </file-pond>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-9 ml-auto text-right">
+                        <input type="reset" class="btn btn-danger" (click)="Cancel()" value="hủy" />
+                        <input type="button" class="btn btn-success"
+                            (click)="edit(name.value,address.value,linkaddress.value,kinhdo.value,vido.value)"
+                            value="Lưu thông tin" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+    <ng-template #loading>
+        <div class="text-center">
+            <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
+</div>

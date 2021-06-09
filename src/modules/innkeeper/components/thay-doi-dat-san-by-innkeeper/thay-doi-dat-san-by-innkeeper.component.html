@@ -1,0 +1,247 @@
+<sb-card>
+    <div class="card-header border1">
+        <h4 ><strong>THAY ĐỔI THÔNG TIN ĐẶT SÂN</strong></h4>
+    </div>
+    <div class="card-body">
+        <sb-card>
+            <div class="card-header">
+                <h5 style="color:green ;text-align: center"><strong> Danh sách đặt sân muốn thay đổi</strong></h5>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label red">Tên sân cần thay đổi</label>
+                    <div class="col-lg-9">
+                        <input disabled class="form-control" [(ngModel)]="tensanOld" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label red">Thời gian cần thay đổi</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" disabled [(ngModel)]="timeOld" required />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-lg-4 col-form-label form-control-label red">Hãy chọn ngày đặt sân :</label>
+                    <div class="col-lg-7">
+                        <input class="form-control" type="date" [(ngModel)]="todayOld" (change)="chonngayOld($event);" required />
+                    </div>
+                </div>
+                <div *ngIf="checkdatsansOld then display; else loading"></div>
+                <ng-template #display>
+                    <table style="width: 100%;" border="1" *ngFor="let quan of listdatsancuaquanOld ;index as j">
+                        <tr>
+                            <td colspan="17">
+                                <label style="text-align: center;" class="col-lg-12 col-form-label form-control-label red">thông tin của quán : {{quan.name}}</label>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <th style="width: 4%;">tên sân</th>
+                            <th>5h</th>
+                            <th >6h</th>
+                            <th >7h</th>
+                            <th >8h</th>
+                            <th >9h</th>
+                            <th >10h</th>
+                            <th >11h</th>
+                            <th >12h</th>
+                            <th >13h</th>
+                            <th >14h</th>
+                            <th >15h</th>
+                            <th >16h</th>
+                            <th >17h</th>
+                            <th >18h</th>
+                            <th >19h</th>
+                            <th >20h</th>
+                        </tr>
+                        <tr *ngFor="let san of quan.sans ;index as i" class="maunenvachu">
+                            <td>
+                                {{san.name}}
+                            </td>
+                            <td>
+                                <button *ngIf="mangDatsanOld[j][i][0]" (click)="chondatsanOld(0, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][1]" (click)="chondatsanOld(1, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][2]" (click)="chondatsanOld(2, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][3]" (click)="chondatsanOld(3, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][4]" (click)="chondatsanOld(4, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][5]" (click)="chondatsanOld(5, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][6]" (click)="chondatsanOld(6, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td>
+                                <button *ngIf="mangDatsanOld[j][i][7]" (click)="chondatsanOld(7, san.id,san.name)"  class="btdt">chọn</button>
+                            </td>
+                            <td>
+                                <button *ngIf="mangDatsanOld[j][i][8]" (click)="chondatsanOld(8, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][9]" (click)="chondatsanOld(9, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][10]" (click)="chondatsanOld(10, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][11]" (click)="chondatsanOld(11, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][12]" (click)="chondatsanOld(12, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][13]" (click)="chondatsanOld(13, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][14]" (click)="chondatsanOld(14, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="mangDatsanOld[j][i][15]" (click)="chondatsanOld(15, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                        </tr>
+                    </table>
+        
+                </ng-template>
+                <ng-template #loading>
+                    <div class="text-center">
+                        <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </sb-card>
+
+        <sb-card>
+            <div class="card-header">
+                <h5 style="text-align: center;color:green"><strong>Danh sách đặt sân mới mà bạn muốn thay đổi</strong></h5>
+                <div class="form-group row">
+                    <label class="col-lg-3 red col-form-label form-control-label">Tên sân mới
+                    </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" disabled [(ngModel)]="tensanNew" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 red col-form-label form-control-label">Thời gian mới</label>
+                    <div class="col-lg-9">
+                        <input class="form-control"disabled [(ngModel)]="timeNew" required />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-lg-4 col-form-label form-control-label red">Hãy chọn ngày đặt sân :</label>
+                    <div class="col-lg-7">
+                        <input class="form-control" type="date" [(ngModel)]="todayNew" (change)="chonngayNew($event);" required />
+                    </div>
+                </div>
+                <div *ngIf="checkdatsansNew then display1; else loading1"></div>
+                <ng-template #display1>
+                    <table style="width: 100%;" border="1" *ngFor="let quan of listdatsancuaquanNew ;index as j">
+                        <tr>
+                            <td colspan="17">
+                                <label style="text-align: center;" class="col-lg-12 col-form-label red form-control-label">thông tin của quán :
+                                    {{quan.name}}</label>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <th style="width: 4%;">tên sân</th>
+                            <th>5h</th>
+                            <th>6h</th>
+                            <th>7h</th>
+                            <th>8h</th>
+                            <th>9h</th>
+                            <th>10h</th>
+                            <th>11h</th>
+                            <th>12h</th>
+                            <th>13h</th>
+                            <th>14h</th>
+                            <th>15h</th>
+                            <th>16h</th>
+                            <th>17h</th>
+                            <th>18h</th>
+                            <th>19h</th>
+                            <th>20h</th>
+                        </tr>
+                        <tr *ngFor="let san of quan.sans ;index as i" class="maunenvachu">
+                            <td>
+                                {{san.name}}
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][0]" (click)="chondatsanNew(0, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][1]" (click)="chondatsanNew(1, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][2]" (click)="chondatsanNew(2, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][3]" (click)="chondatsanNew(3, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][4]" (click)="chondatsanNew(4, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][5]" (click)="chondatsanNew(5, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][6]" (click)="chondatsanNew(6, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][7]" (click)="chondatsanNew(7, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][8]" (click)="chondatsanNew(8, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][9]" (click)="chondatsanNew(9, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][10]" (click)="chondatsanNew(10, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][11]" (click)="chondatsanNew(11, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][12]" (click)="chondatsanNew(12, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][13]" (click)="chondatsanNew(13, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][14]" (click)="chondatsanNew(14, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                            <td >
+                                <button *ngIf="!mangDatsanNew[j][i][15]" (click)="chondatsanNew(15, san.id,san.name)" class="btdt">chọn</button>
+                            </td>
+                        </tr>
+                    </table>
+        
+                </ng-template>
+                <ng-template #loading1>
+                    <div class="text-center">
+                        <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </sb-card>
+        <div class="col-lg-9 ml-auto text-right">
+            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
+            <input type="button" class="btn btn-primary" (click)="Save()" value="Lưu thông tin" />
+        </div>
+    </div>
+</sb-card>
+

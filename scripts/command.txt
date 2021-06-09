@@ -1,0 +1,4 @@
+npm run generate:module -- --path src/modules --name sample
+npm run generate:component -- --path src/modules/promotions/containers --name list
+npm run generate:component -- --path src/modules/promotions/components --name promotions-table
+npm run generate:service -- --path src/modules/sample/services --name delta

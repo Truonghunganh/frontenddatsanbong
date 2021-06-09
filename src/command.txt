@@ -1,0 +1,10 @@
+npm run generate:module -- --path src/modules --name sample
+npm run generate:component -- --path src/modules/promotions/containers --name list
+npm run generate:component -- --path src/modules/promotions/components --name promotions-table
+npm run generate:service -- --path src/modules/sample/services --name delta
+
+
+1) chú về .subscribe và .pipe
+    a) .pipe : trên html phải có biến đó nó mới chạy và phải . mãng
+    b) .subscribe : để kiểm trang có dữ liệu k ? nếu cái thì sẽ bị lỗi trong file html
+

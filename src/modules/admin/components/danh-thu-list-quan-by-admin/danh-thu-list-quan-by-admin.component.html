@@ -1,0 +1,64 @@
+
+<div class="header1">
+    <h3>
+        <strong>Doanh thu của các quán và admin theo tháng</strong>
+    </h3>
+</div>
+<sb-card>
+    <div class="card-body">
+        <div class="header2">
+            <h5><strong>Chọn tháng doanh thu :</strong><input type="month" [(ngModel)]="month" name="month" (change)="chonthang($event);"></h5>
+        </div>
+        <sb-card>
+            <div class="card-body">
+                <div *ngIf="checkdoanhthu then display; else loading"></div>
+                <ng-template #display>
+                    <table class="table table-striped" border="1">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên quán</th>
+                                <th>Địa chỉ quán</th>
+                                <th>Số điện thoại quán</th>
+                                <th>Doanh thu của quán</th>
+                                <th>Doanh thu của admin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let doanhthu of doanhthus ;index as i">
+                                <td>
+                                    {{i+1}}
+                                </td>
+                                <td>
+                                    {{doanhthu.namequan}}
+                                </td>
+                                <td>
+                                    {{doanhthu.addressquan}}
+                                </td>
+                                <td>
+                                    {{doanhthu.phonequan}}
+                                </td>
+                                <td>
+                                    {{doanhthu.doanhthuquan}}
+                                </td>
+                                <td>
+                                    {{doanhthu.doanhthuadmin}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <strong>Lãi xuất : </strong> {{laixuat}}<br>
+                    <strong>Tổng doanh thu của quán : </strong>{{tongdoanhthuquan}}<br>
+                    <strong>Tổng doanh thu của Admin : </strong>{{tongdoanhthuadmin}}
+                </ng-template>
+                <ng-template #loading>
+                    <div class="text-center">
+                        <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </sb-card>
+    </div>
+</sb-card>

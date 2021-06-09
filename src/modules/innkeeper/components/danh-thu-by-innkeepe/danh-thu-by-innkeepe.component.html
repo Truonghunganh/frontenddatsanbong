@@ -1,0 +1,226 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<br>
+<br>
+<div class=" header">
+    <h3><strong> DOANH THU CỦA QUÁN</strong></h3>
+</div>
+<sb-card>
+    <div class="card-body">
+        <div class="header1">
+            <h5><strong>Thông tin của Quán</strong></h5>
+        </div>
+
+        <sb-card>
+            <div class="card-body" style="background-color:white;color:black">
+                <div *ngIf="checkquan; then display2; else loading2"></div>
+                <ng-template #display2>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="text-align: center; width: 50%" rowspan="4">
+                                <div *ngIf="quan.image" >
+                                    <img style="height:150px;width:70%" src="{{url+'/'+quan.image}}">
+                                </div>
+                                <div *ngIf="!quan.image">
+                                    <img class="profile_img" src="../../../assets/img/avatar.jpg">
+                                </div>
+                            </td>
+                            <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <strong>{{ quan.address}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <span *ngIf="mangreviewquan[0]" class="fa fa-star checked"></span>
+                                <span *ngIf="!mangreviewquan[0]" class="fa fa-star nochecked"></span>
+                                <span *ngIf="mangreviewquan[1]" class="fa fa-star checked"></span>
+                                <span *ngIf="!mangreviewquan[1]" class="fa fa-star nochecked"></span>
+                                <span *ngIf="mangreviewquan[2]" class="fa fa-star checked"></span>
+                                <span *ngIf="!mangreviewquan[2]" class="fa fa-star nochecked"></span>
+                                <span *ngIf="mangreviewquan[3]" class="fa fa-star checked"></span>
+                                <span *ngIf="!mangreviewquan[3]" class="fa fa-star nochecked"></span>
+                                <span *ngIf="mangreviewquan[4]" class="fa fa-star checked"></span>
+                                <span *ngIf="!mangreviewquan[4]" class="fa fa-star nochecked"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </ng-template>
+                <ng-template #loading2>
+                    <div class="text-center">
+                        <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </sb-card>
+
+        <div *ngIf="checkchitiet">
+            <sb-card>
+                <div class="card-header border1">
+                    <h3 ><strong> Chọn tháng doanh thu :
+                        <input type="month" [(ngModel)]="thang" (change)="chonthang();">
+                        </strong>
+                    </h3>
+                </div>
+                <div class="card-body" style="color:red">
+                    <div *ngIf="checkdoanhthus then display; else loading"></div>
+                    <ng-template #display>
+                        <table style="width: 100%;" border="1">
+                            <tr>
+                                <th style="width: 10%;">STT</th>
+                                <th style="width: 30%;">Doanh Thu</th>
+                                <th style="width: 30%;">ngày</th>
+                                <th style="width: 30%;">Chi tiết</th>
+                            </tr>
+                            <tr *ngFor="let doanhthu of doanhthus ; index as i">
+                                <td>
+                                    {{i+1}}
+                                </td>
+                                <td>
+                                    {{doanhthu.doanhthu}}
+                                </td>
+                                <td>
+                                    {{doanhthu.time}}
+                                </td>
+                                <td>
+                                    <input type="button" class="btn btn-success " (click)="chitietdanhthu(doanhthu.id)"
+                                        value="xem chi tiết" />
+                                </td>
+                            </tr>
+                        </table>
+                        <strong>Tổng Doanh thu của tháng : </strong>{{tongDanhthu}}
+                    </ng-template>
+                    <ng-template #loading>
+                        <div class="text-center">
+                            <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </ng-template>
+        
+                </div>
+            </sb-card>
+            <sb-card>
+                <div class="card-header border2">
+                    <h3 style="text-align: center;"><strong> Doanh thu của năm : <input type='number' min="2020" [(ngModel)]="year" name="year" max="2100"
+                            (change)="chonNam();"></strong>
+                    </h3>
+                    <h5>Dạng biểu đồ : <strong>{{dangBD}}</strong>
+                        <input type="button" class="btn btn-info float-right" (click)="cot()" value="Biểu đồ Cột" />
+                        <input type="button" class="btn btn-success float-right" (click)="tron()" value="Biểu đồ tròn" />
+                        <input type="button" class="btn btn-primary float-right" (click)="duong()" value="Biểu đồ đường" />
+                    </h5>
+                </div>
+                <div class="card-body " style="color:red">
+                    <div *ngIf="checkdoanhthustheonam then display1; else loading1"></div>
+                    <ng-template #display1>
+                        <div class="chart-wrapper">
+                            <canvas baseChart [plugins]="pieChartPlugins" [options]="pieChartOptionsBD"
+                                [datasets]="lineChartDataBD" [labels]="lineChartLabelsBD" [colors]="lineChartColorsBD"
+                                [chartType]="lineChartTypeBD"></canvas>
+                        </div>
+                        <strong>Tổng Doanh thu của năm {{year}}: </strong>{{tongDanhthucuuanam }}
+                    </ng-template>
+                    <ng-template #loading1>
+                        <div class="text-center">
+                            <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </sb-card>
+        
+        </div>
+        <div *ngIf="!checkchitiet">
+            
+            <sb-card>
+                <div class="card-header border1">
+                    <h6>Chi tiết doanh thu của quán</h6>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="checkdatsans ; then display ; else loading"></div>
+                    <ng-template #display>
+                        <div class="row">
+        
+                            <table class="table table-striped " style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <td>STT</td>
+                                        <td>Tên sân</td>
+                                        <td>Số người</td>
+                                        <td>Tiền</td>
+                                        <td>Tên Người đặt</td>
+                                        <td>Số điện thoại người đặt</td>
+                                        <td>giờ đặt sân</td>
+                                        <td>chủ quán xác nhận</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let datsan of datsansnew ;index as i ">
+                                        <td>{{(page-1)*10+i+1}}</td>
+                                        <td>{{datsan.san.name}}</td>
+                                        <td>{{datsan.san.numberpeople}}</td>
+                                        <td>{{datsan.price}}</td>
+                                        <td>{{datsan.user.name}}</td>
+                                        <td>{{datsan.user.phone}}</td>
+                                        <td>{{datsan.start_time}}</td>
+                                        <td>
+                                            <input type="button" class="btn btn-primary" value="đã xán nhận" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>tổng tiền đặt sân : </strong>{{tongchitietdatsan}}
+                        </div>
+                    </ng-template>
+        
+                    <ng-template #loading>
+                        <div class="text-center">
+                            <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <nav aria-label="...">
+                        <ul class="pagination justify-content-center">
+                            <div class="row" style="color:forestgreen">
+                                <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
+                    
+                                <div *ngFor="let vitri of mangtrang; index as i">
+                                    <div *ngIf="page==i-2">
+                                        <a class="page-link">... </a>
+                                    </div>
+                                    <div *ngIf="page>i-2 && page<i+4">
+                                        <li *ngIf="vitri" class="page-item active">
+                                            <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                                        </li>
+                                        <li *ngIf="!vitri" class="page-item">
+                                            <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                                        </li>
+                                    </div>
+                                    <div *ngIf="page==i+4">
+                                        <a class="page-link">... </a>
+                                    </div>
+                                </div>
+                                <input type="button" class="btn border1" (click)="Next()" value="Next">
+                            </div>
+                        </ul>
+                    </nav>
+                    <input type="button" class="form-control btn btn-primary" style="text-align: center;" (click)="OK()" value="OK" />
+                </div>
+            </sb-card>
+        </div>
+    </div>
+</sb-card>
+
+
+    

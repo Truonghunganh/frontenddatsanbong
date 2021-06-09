@@ -1,0 +1,97 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<br><br>
+<div *ngIf="checkquans; then display; else loading"></div>
+<ng-template #display>
+    <div class="b">
+        <strong>Google Maps</strong>
+    </div>
+    <div>
+        <sb-google-maps-search-quan [user]="user" [listquans]="quans" [hienthivitricuaminh]="hienthivitricuaminh">
+        </sb-google-maps-search-quan>
+    </div>
+    <br>
+    <div>
+        <div class="b">
+            <strong>Danh sách sân bóng</strong>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4" *ngFor="let quan of quansnew; index as i;"
+                    routerLink="/innkeeper/quans/{{quan.id}}">
+                    <div class="card">
+                        <div class="card-header border1">
+                            <div *ngIf="quan.image">
+                                <img class="card-img-top" style="display: block;" src="{{url+'/'+quan.image}}"
+                                    alt="Card image cap">
+                            </div>
+                            <div *ngIf="!quan.image">
+                                <img class="card-img-top" style="display: block;" src="../../../assets/img/avatar.jpg"
+                                    alt="Card image cap">
+                            </div>
+                        </div>
+                        <div>
+                            <table class="table mauchu">
+                                <tr>
+                                    <td style="margin-top: 2px;margin-bottom: 2px;">
+                                        <div class="card-title"><strong>{{quan.name}}</strong>
+                                            <span *ngIf="mangreview[i][0]" class="fa fa-star checked"></span>
+                                            <span *ngIf="!mangreview[i][0]" class="fa fa-star nochecked"></span>
+                                            <span *ngIf="mangreview[i][1]" class="fa fa-star checked"></span>
+                                            <span *ngIf="!mangreview[i][1]" class="fa fa-star nochecked"></span>
+                                            <span *ngIf="mangreview[i][2]" class="fa fa-star checked"></span>
+                                            <span *ngIf="!mangreview[i][2]" class="fa fa-star nochecked"></span>
+                                            <span *ngIf="mangreview[i][3]" class="fa fa-star checked"></span>
+                                            <span *ngIf="!mangreview[i][3]" class="fa fa-star nochecked"></span>
+                                            <span *ngIf="mangreview[i][4]" class="fa fa-star checked"></span>
+                                            <span *ngIf="!mangreview[i][4]" class="fa fa-star nochecked"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="height: 70px;">
+                                    <div>{{ quan.address}}-{{ quan.phone}}</div>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #loading>
+    <div class="text-center">
+        <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <div class="row" style="color:forestgreen">
+            <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
+
+            <div *ngFor="let vitri of mangtrang; index as i">
+                <div *ngIf="page==i-2">
+                    <a class="page-link">... </a>
+                </div>
+                <div *ngIf="page>i-2 && page<i+4">
+                    <li *ngIf="vitri" class="page-item active">
+                        <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                    </li>
+                    <li *ngIf="!vitri" class="page-item">
+                        <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                    </li>
+                </div>
+                <div *ngIf="page==i+4">
+                    <a class="page-link">... </a>
+                </div>
+            </div>
+            <input type="button" class="btn border1" (click)="Next()" value="Next">
+        </div>
+    </ul>
+</nav>
+<br><br>

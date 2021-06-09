@@ -1,0 +1,283 @@
+
+<div class="header1">
+    <h3>
+        <strong>Thông tin của Quán</strong>
+        <input type="button" class="btn btn-success float-right" (click)="xemdoanhthu()" value="xem danh thu của quán" />
+    </h3>
+</div>
+
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="chekquanvasan; then display2; else loading2"></div>
+        <ng-template #display2>
+            <div class="text-center mauchu">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="text-align: center;" rowspan="4">
+                            <div *ngIf="quan.image">
+                                <img style="width: 150px; " src="{{url+'/'+quan.image}}">
+                            </div>
+                            <div *ngIf="!quan.image">
+                                <img class="profile_img" src="../../../assets/img/avatar.jpg">
+                            </div>
+                        </td>
+                        <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <strong>{{ quan.address}}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <span *ngIf="mangreviewquan[0]" class="fa fa-star checked"></span>
+                            <span *ngIf="!mangreviewquan[0]" class="fa fa-star nochecked"></span>
+                            <span *ngIf="mangreviewquan[1]" class="fa fa-star checked"></span>
+                            <span *ngIf="!mangreviewquan[1]" class="fa fa-star nochecked"></span>
+                            <span *ngIf="mangreviewquan[2]" class="fa fa-star checked"></span>
+                            <span *ngIf="!mangreviewquan[2]" class="fa fa-star nochecked"></span>
+                            <span *ngIf="mangreviewquan[3]" class="fa fa-star checked"></span>
+                            <span *ngIf="!mangreviewquan[3]" class="fa fa-star nochecked"></span>
+                            <span *ngIf="mangreviewquan[4]" class="fa fa-star checked"></span>
+                            <span *ngIf="!mangreviewquan[4]" class="fa fa-star nochecked"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </ng-template>
+        <ng-template #loading2>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>
+
+<div class="header2" style="text-align: center;">
+    <h3><strong>Lịch đặt sân của quán</strong></h3>
+    <div class="form-group">
+            <strong>Hãy chọn ngày đặt sân :</strong>
+            <input type="date" [(ngModel)]="today" (change)="chonngay($event);">
+    </div>
+</div>
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="checkdatsans then display; else loading"></div>
+        <ng-template #display>
+            <table class="table " border="1">
+                <thead>
+                    <tr>
+                        <td style="text-align: center;width: 4%; font-weight: bold;">tên sân</td>
+                        <td class="banglichDS">5h</td>
+                        <td class="banglichDS">6h</td>
+                        <td class="banglichDS">7h</td>
+                        <td class="banglichDS">8h</td>
+                        <td class="banglichDS">9h</td>
+                        <td class="banglichDS">10h</td>
+                        <td class="banglichDS">11h</td>
+                        <td class="banglichDS">12h</td>
+                        <td class="banglichDS">13h</td>
+                        <td class="banglichDS">14h</td>
+                        <td class="banglichDS">15h</td>
+                        <td class="banglichDS">16h</td>
+                        <td class="banglichDS">17h</td>
+                        <td class="banglichDS">18h</td>
+                        <td class="banglichDS">19h</td>
+                        <td class="banglichDS">20h</td>
+                
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let san of sansTT ;index as i">
+                        <td style="font-weight: bold;">
+                            {{san.name}}
+                        </td>
+                        <td>
+                            <button *ngIf="mangDatsan[i][0]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][0],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][1]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][1],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][2]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][2],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][3]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][3],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][4]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][4],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][5]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][5],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][6]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][6],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][7]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][7],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][8]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][8],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][9]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][9],san)">đã đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][10]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][10],san)">đã
+                                đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][11]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][11],san)">đã
+                                đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][12]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][12],san)">đã
+                                đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][13]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][13],san)">đã
+                                đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][14]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][14],san)">đã
+                                đặt</button>
+                        </td>
+                        <td >
+                            <button *ngIf="mangDatsan[i][15]" class="btdt"
+                                (click)="hienthongtindatsan(mangDatsan[i][15],san)">đã
+                                đặt</button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </ng-template>
+        <ng-template #loading>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>
+
+<div class="header1">
+    <h3 style="text-align: center;">
+        <strong>Danh sách các sân bóng</strong>
+    </h3>
+</div>
+
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="chekquanvasan; then display1; else loading1"></div>
+        <ng-template #display1>
+            <div class="row">
+                <div class="col-sm-4" *ngFor="let san of sansTT ">
+                    <div class="card">
+                        <div style="text-align: center;">
+                            <strong>{{ san.name }}</strong>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <td>Loại sân</td>
+                                <td><strong> Sân &ensp;{{ san.numberpeople}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Chi phí</td>
+                                <td><strong>{{ san.priceperhour }} vnd/giờ</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #loading1>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>
+<br>
+
+<h3 class="header">Bình Luận</h3>
+<div class="card-body">
+    <div *ngIf="checkcomments; then display3; else loading3"></div>
+    <ng-template #display3>
+        <div class="row">
+            <div class="card-body">
+                <div class="form-group row" *ngFor="let comment of mangBLNew ;index as i">
+                    <label class="col-lg-1 col-form-label form-control-label">
+                        <img class="card-img-top" style="width: 80px; height: 80px"
+                            src="../../../assets/img/avatar.jpg" alt="Card image cap">
+                    </label>
+                    <div class="col-lg-11">
+                        <h5>
+                            <strong>{{comment.tenUser}}</strong>
+                            {{comment.Create_time}}
+                        </h5>
+                        <div class="input-group">
+                            {{comment.binhluan}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <div class="row" style="color:forestgreen">
+                    <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
+
+                    <div *ngFor="let vitri of mangtrang; index as i">
+                        <div *ngIf="page==i-2">
+                            <a class="page-link">... </a>
+                        </div>
+                        <div *ngIf="page>i-2 && page<i+4">
+                            <li *ngIf="vitri" class="page-item active">
+                                <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                            </li>
+                            <li *ngIf="!vitri" class="page-item">
+                                <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                            </li>
+                        </div>
+                        <div *ngIf="page==i+4">
+                            <a class="page-link">... </a>
+                        </div>
+                    </div>
+                    <input type="button" class="btn border1" (click)="Next()" value="Next">
+                </div>
+            </ul>
+        </nav>
+    </ng-template>
+    <ng-template #loading3>
+        <div class="text-center">
+            <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
+</div>

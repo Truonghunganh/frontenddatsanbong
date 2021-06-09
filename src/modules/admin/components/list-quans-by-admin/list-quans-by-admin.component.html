@@ -1,0 +1,111 @@
+<div class="header1">
+    <h3>
+        <strong>Danh sách các quán bóng đá</strong>
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 float-right"
+            (ngSubmit)="search()">
+            <div class="input-group ">
+                <input class="form-control" style="color:lightcyan" name="timkiem" [(ngModel)]="timkiem" type="text"
+                    placeholder="Tìm kiếm....." aria-label="Search" aria-describedby="basic-addon2" />
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit">
+                        <fa-icon [icon]='["fas", "search"]'></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </h3>
+</div>
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="checkquans; then display; else loading"></div>
+        <ng-template #display>
+            <div class="header2">
+                <h5><strong>Google Maps</strong></h5>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <sb-google-maps-search-quan [user]="user" [listquans]="quans" [hienthivitricuaminh]="hienthivitricuaminh">
+                    </sb-google-maps-search-quan>
+                </div>
+            </div>
+            <div class="header2">
+                <h5><strong>Danh sách sân bóng</strong></h5>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped " style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên</th>
+                                <th>Địa Chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày giờ đăng kí</th>
+                                <th>Image</th>
+                                <th>cho vào chưa phê duyệt</th>
+                                <!-- <td>Actions</td> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let quan of quansnew ;index as i" routerLink="/admin/quans/{{quan.id}}">
+                                <td>{{(page-1)*5+i+1}}</td>
+                                <td>{{quan.name}}</td>
+                                <td><a href="{{quan.linkaddress}}">{{quan.address}}</a></td>
+                                <td>{{quan.phone}}</td>
+                                <td>{{quan.Create_time}}</td>
+                                <td>
+                                    <div *ngIf="quan.image">
+                                        <img style="width: 80px; height: 50px;" src="{{url+'/'+quan.image}}">
+                                    </div>
+                                    <div *ngIf="!quan.image">
+                                        <img style="width: 80px; height: 50px;" class="profile_img" src="../../../assets/img/avatar.jpg">
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" (click)="thaydoitrangthai(quan)">chọn</button>
+                                </td>
+                                <!-- <td>
+                                                <fa-icon (click)="deleteQuan(quan)" [icon]='["fas","trash"]' class='fas fa-trash fa-2x'>
+                                                </fa-icon>
+                                            </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #loading>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <div class="row" style="color:forestgreen">
+                    <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
+
+                    <div *ngFor="let vitri of mangtrang; index as i">
+                        <div *ngIf="page==i-2">
+                            <a class="page-link">... </a>
+                        </div>
+                        <div *ngIf="page>i-2 && page<i+4">
+                            <li *ngIf="vitri" class="page-item active">
+                                <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                            </li>
+                            <li *ngIf="!vitri" class="page-item">
+                                <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                            </li>
+                        </div>
+                        <div *ngIf="page==i+4">
+                            <a class="page-link">... </a>
+                        </div>
+                    </div>
+                    <input type="button" class="btn border1" (click)="Next()" value="Next">
+                </div>
+            </ul>
+        </nav>
+    </div>
+</sb-card>

@@ -1,0 +1,85 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="a">
+    <h3 class="header"> Thông tin của Quán</h3>
+    <div *ngIf="checkquan; then display2; else loading2"></div>
+    <ng-template #display2>
+        <table style="width: 100%;">
+            <tr>
+                <td style="text-align: center; width: 50%;" rowspan="4">
+                    <div *ngIf="quan.image">
+                        <img src="{{url+'/'+quan.image}}">
+                    </div>
+                    <div *ngIf="!quan.image">
+                        <img class="profile_img" src="../../../assets/img/avatar.jpg">
+                    </div>
+                </td>
+                <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">
+                    <strong>{{ quan.address}}</strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">
+                    <span *ngIf="mangreviewquan[0]" class="fa fa-star checked"></span>
+                    <span *ngIf="!mangreviewquan[0]" class="fa fa-star nochecked"></span>
+                    <span *ngIf="mangreviewquan[1]" class="fa fa-star checked"></span>
+                    <span *ngIf="!mangreviewquan[1]" class="fa fa-star nochecked"></span>
+                    <span *ngIf="mangreviewquan[2]" class="fa fa-star checked"></span>
+                    <span *ngIf="!mangreviewquan[2]" class="fa fa-star nochecked"></span>
+                    <span *ngIf="mangreviewquan[3]" class="fa fa-star checked"></span>
+                    <span *ngIf="!mangreviewquan[3]" class="fa fa-star nochecked"></span>
+                    <span *ngIf="mangreviewquan[4]" class="fa fa-star checked"></span>
+                    <span *ngIf="!mangreviewquan[4]" class="fa fa-star nochecked"></span>
+                </td>
+            </tr>
+        </table>
+    </ng-template>
+    <ng-template #loading2>
+        <div class="text-center">
+            <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
+</div>
+<br>
+
+<h3 class="header"> Thêm sân</h3>
+<div class="card-body" >
+    <form>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Tên Sân</label>
+            <div class="col-lg-9">
+                <input class="form-control" #name required placeholder="Tên Sân" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Số người trong 1 đội</label>
+            <div class="col-lg-9">
+                <input class="form-control" #numberpeople required placeholder="Số người trong 1 đội" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Số tiền trong 1 giờ</label>
+            <div class="col-lg-9">
+                <input class="form-control" #priceperhour required placeholder="Số tiền trong 1 giờ" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-9 ml-auto text-right ">
+                <input type="reset" class="btn btn-danger" (click)="Cancel()" value="Hủy bỏ" />
+                <input type="button" class="btn btn-success" (click)="Add(name.value,numberpeople.value,priceperhour.value)"
+                    value="Thêm vào" />
+            </div>
+        </div>
+    </form>
+</div>

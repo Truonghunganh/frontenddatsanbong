@@ -1,0 +1,43 @@
+@import 'styles/variables.scss';
+th {
+	color: lightcyan;
+	background-color:red;
+  text-align: center;
+}
+
+.header{
+  background-color:green;
+  color: white;
+  height: 35px;
+	text-align: center;
+   
+}
+.header1{
+  background-color:green;
+  color: white;
+  height: 25px;
+	text-align: center;
+   
+}
+tbody{
+  background-color:#EEEEEE;
+}
+td{
+  text-align: center;  
+  color: #222222;
+  font-size:14px;
+}
+.border1{
+    text-align: center;
+	color:lightcyan;
+	background-color: forestgreen;
+}
+.red{
+    color:red;
+    text-align: center;
+}
+.border2{
+    text-align: center;
+	color:lightcyan;
+	background-color:#41c04d;
+}

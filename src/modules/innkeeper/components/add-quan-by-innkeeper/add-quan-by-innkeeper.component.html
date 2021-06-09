@@ -1,0 +1,56 @@
+<sb-card>
+    <div class="card-header border1">
+        <h4>
+            <strong>Thêm quán vào hệ thống</strong>
+        </h4>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Tên quán</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #name required placeholder="Tên quán" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Địa chỉ quán</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #address required placeholder="Địa chỉ quán" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">đường link đến địa chỉ quán</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #linkaddress required placeholder="link địa chỉ" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Vĩ độ</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #vido required placeholder="Vĩ Đồ" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Kinh độ</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #kinhdo required placeholder="Kinh độ" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">chọn hình cho quán</label>
+                <div class="col-lg-9">
+                    <file-pond #myPond (oninit)="pondHandleInit()" [options]="pondOptions" (change)="pondHandleAddFile($event)">
+                    </file-pond>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-9 ml-auto text-right">
+                    <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
+                    <input type="button" class="btn btn-primary"
+                        (click)="Add(name.value,address.value,linkaddress.value,vido.value,kinhdo.value)"
+                        value="Lưu thông tin" />
+                </div>
+            </div>
+        </form>
+    </div>
+</sb-card>

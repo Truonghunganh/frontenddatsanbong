@@ -1,0 +1,89 @@
+<div class="header1">
+    <h3>
+        <strong>Danh sách các quán chưa được phe duyệt</strong>
+    </h3>
+</div>
+
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="checklistquanschuapheduyet ; then display1 ; else loading1"></div>
+        <ng-template #display1>
+            <div class="row">
+
+                <table class="table table-striped " style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên </th>
+                            <th>Điạ chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày giờ đăng kí</th>
+                            <th>Hình</th>
+                            <th>cho quán hoạt động</th>
+                            <!-- <td>Actions</td> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let quan of listquanschuapheduyet ;index as i">
+                            <td>{{(page-1)*10+i+1}}</td>
+                            <td>{{quan.name}}</td>
+                            <td><a href="{{quan.linkaddress}}">{{quan.address}}</a></td>
+                            <td>{{quan.phone}}</td>
+                            <td>{{quan.Create_time}}</td>
+                            <td>
+                                <div *ngIf="quan.image">
+                                    <img style="width: 80px;" src="{{url+'/'+quan.image}}">
+                                </div>
+                                <div *ngIf="!quan.image">
+                                    <img style="width: 80px;" class="profile_img"
+                                        src="../../../../assets/img/avatar.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="thaydoitrangthai(quan)">chọn</button>
+                            </td>
+                            <!-- <td>
+                                <fa-icon (click)="deleteQuan(quan)" [icon]='["fas","trash"]' class='fas fa-trash fa-2x'>
+                                </fa-icon>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </ng-template>
+
+        <ng-template #loading1>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <div class="row" style="color:forestgreen">
+                    <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
+        
+                    <div *ngFor="let vitri of mangtrang; index as i">
+                        <div *ngIf="page==i-2">
+                            <a class="page-link">... </a>
+                        </div>
+                        <div *ngIf="page>i-2 && page<i+4">
+                            <li *ngIf="vitri" class="page-item active">
+                                <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                            </li>
+                            <li *ngIf="!vitri" class="page-item">
+                                <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                            </li>
+                        </div>
+                        <div *ngIf="page==i+4">
+                            <a class="page-link">... </a>
+                        </div>
+                    </div>
+                    <input type="button" class="btn border1" (click)="Next()" value="Next">
+                </div>
+            </ul>
+        </nav>
+    </div>
+</sb-card>

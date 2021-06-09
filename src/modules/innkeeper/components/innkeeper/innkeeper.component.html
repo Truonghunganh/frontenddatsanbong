@@ -1,0 +1,63 @@
+
+
+<sb-card>
+    <div class="card-header border1">
+        <h6><strong> Các quán chưa được phe duyệt của chủ quán</strong>
+        </h6>
+    </div>
+    <div class="card-body">
+        <div *ngIf="checklistquanschuapheduyet ; then display1 ; else loading1"></div>
+        <ng-template #display1>
+            <div class="row">
+                <table  class="table-striped" border="1" style="width:100%">
+                    <thead >
+                        <tr>
+                            <th>STT</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Ngày giờ đăng kí</th>
+                            <th>kinh độ</th>
+                            <th>Vĩ độ</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let quan of listquanschuapheduyet ; index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{quan.name}}</td>
+                            <td>{{quan.address}}</td>
+                            <td>{{quan.phone}}</td>
+                            <td>{{quan.Create_time}}</td>
+                            <td>{{quan.kinhdo}}</td>
+                            <td>{{quan.vido}}</td>
+                            <td>    
+                                <div *ngIf="quan.image">
+                                    <img style="width: 80px; height: 50px;" src="{{url+'/'+quan.image}}">
+                                </div>
+                                <div *ngIf="!quan.image">
+                                    <img style="width: 50px; height: 50px;" class="profile_img" src="../../../assets/img/avatar.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                <fa-icon routerLink="/innkeeper/editQuan/{{quan.id}}" class='fas fas-trash fa-2x' [icon]='["fas","edit"]'></fa-icon>
+                                <fa-icon (click)="deleteQuan(quan)" [icon]='["fas","trash"]' class='fas fas-trash fa-2x'></fa-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </ng-template>
+
+        <ng-template #loading1>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>
+<button class="btn btn-success float-right"[routerLink]="['/innkeeper/addquan']">Thêm quán</button>
