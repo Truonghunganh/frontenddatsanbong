@@ -1,6 +1,3 @@
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
 
 <br><br>
 <div *ngIf="checkquans; then display; else loading"></div>
@@ -72,8 +69,7 @@
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
         <div class="row" style="color:forestgreen">
-            <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
-
+            <input type="button" class="btn btn-success" (click)="Previous()" value="Trước">
             <div *ngFor="let vitri of mangtrang; index as i">
                 <div *ngIf="page==i-2">
                     <a class="page-link">... </a>
@@ -90,7 +86,7 @@
                     <a class="page-link">... </a>
                 </div>
             </div>
-            <input type="button" class="btn border1" (click)="Next()" value="Next">
+            <input type="button" class="btn border1" (click)="Next()" value="Sau">
         </div>
     </ul>
 </nav>

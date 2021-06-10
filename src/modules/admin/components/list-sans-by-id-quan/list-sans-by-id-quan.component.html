@@ -250,8 +250,7 @@
         <nav aria-label="...">
             <ul class="pagination justify-content-center">
                 <div class="row" style="color:forestgreen">
-                    <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
-
+                    <input type="button" class="btn btn-success" (click)="Previous()" value="trước">
                     <div *ngFor="let vitri of mangtrang; index as i">
                         <div *ngIf="page==i-2">
                             <a class="page-link">... </a>
@@ -268,7 +267,7 @@
                             <a class="page-link">... </a>
                         </div>
                     </div>
-                    <input type="button" class="btn border1" (click)="Next()" value="Next">
+                    <input type="button" class="btn border1" (click)="Next()" value="Sau">
                 </div>
             </ul>
         </nav>

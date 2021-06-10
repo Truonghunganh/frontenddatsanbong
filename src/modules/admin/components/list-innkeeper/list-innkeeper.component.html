@@ -29,7 +29,7 @@
                             <th>Địa Chỉ</th>
                             <th>Số điện thoại</th>
                             <th>gmail</th>
-                            <th>chỉnh sữa thông tin</th>
+                            <th>chỉnh sửa thông tin</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,8 +56,7 @@
             <nav aria-label="..." *ngIf="search1">
                 <ul class="pagination justify-content-center">
                     <div class="row" style="color:forestgreen">
-                        <input type="button" class="btn btn-success" (click)="Previous()" value="Previous">
-
+                        <input type="button" class="btn btn-success" (click)="Previous()" value="Trước">
                         <div *ngFor="let vitri of mangtrang; index as i">
                             <div *ngIf="page==i-2">
                                 <a class="page-link">... </a>
@@ -74,7 +73,7 @@
                                 <a class="page-link">... </a>
                             </div>
                         </div>
-                        <input type="button" class="btn border1" (click)="Next()" value="Next">
+                        <input type="button" class="btn border1" (click)="Next()" value="Sau">
                     </div>
                 </ul>
             </nav>
@@ -84,7 +83,7 @@
 <div *ngIf="!chinhsua">
     <sb-card>
         <div class="card-header border1">
-            <h6>Chỉnh sữa thông tin người dùng </h6>
+            <h6>Chỉnh sửa thông tin người dùng </h6>
         </div>
         <div class="card-body">
             <div class="col-lg-12 order-lg-1 personal-info">
