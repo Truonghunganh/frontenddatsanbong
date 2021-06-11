@@ -8,3 +8,4 @@ npm run generate:service -- --path src/modules/sample/services --name delta
     a) .pipe : trên html phải có biến đó nó mới chạy và phải . mãng
     b) .subscribe : để kiểm trang có dữ liệu k ? nếu cái thì sẽ bị lỗi trong file html
 
+2) ssh github : https://www.youtube.com/watch?v=5ZxJfrH56mc

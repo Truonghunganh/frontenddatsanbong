@@ -9,7 +9,7 @@
                             <h3 class="text-center font-weight-light my-4">Tạo tài khoản mới</h3>
                         </div>
                         <div class="card-body border2">
-                            <form role="form">
+                            <form role="form"  #formSignin="ngForm" >
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Quyền</label>
                                     <div class="col-lg-9">
@@ -22,40 +22,58 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Họ và tên</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" #name type="text" />
+                                        <input class="form-control" minlength="5" #name type="text" ngModel name="name" required />
+                                        <div  *ngIf="formSignin.controls.name?.errors?.minlength || formSignin.controls.name?.errors?.required" style="color:red">
+                                            Họ và tên phải có ít nhất 5 kí tự
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Số điện thoại</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" #phone type="number" />
+                                        <input class="form-control" minlength="9" #phone type="number" ngModel name="phone" required placeholder="Số điện thoại" />
+                                        <div *ngIf="formSignin.controls.phone?.errors?.minlength || formSignin.controls.phone?.errors?.required" style="color:red">
+                                            Số điện thoại phải có ít nhất 9 kí tự
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Gmail</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" #gmail value="@gmail.com" />
+                                        <input class="form-control" email #gmail type="text" ngModel name="email" required placeholder="gmail"/>
+                                        <div *ngIf="(formSignin.controls.email?.errors?.email && formSignin.controls.email.touched) || formSignin.controls.email?.errors?.required" style="color:red">
+                                            email không hợp lệ
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Địa Chỉ</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="text" #address />
+                                        <input class="form-control"  #address type="text" ngModel name="address" required placeholder="Địa chỉ" />
+                                        <div *ngIf="formSignin.controls.address?.errors?.required" style="color:red">
+                                            Địa chỉ cần phải có
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Mật khẩu</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="password" #password />
+                                        <input class="form-control" minlength="9" #password type="text" ngModel name="password" required  placeholder="Mật khẩu"/>
+                                        <div *ngIf="formSignin.controls.password?.errors?.minlength || formSignin.controls.password?.errors?.required" style="color:red">
+                                            mật khẩu phải có ít nhất 9 kí tự
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-lg-9 ml-auto text-right">
                                         <input class="btn" type="reset" 
                                             style="background-color:green;color:lightcyan" (click)="Cancel()" value="Hủy" />
-                                        <input type="button" class="btn" style="background-color: darkgreen;color:lightcyan"
+                                        <button [disabled]="formSignin.invalid" type="button" class="btn" style="background-color: darkgreen;color:lightcyan"
                                             (click)="RegisterUser(role.value, name.value,phone.value,gmail.value,address.value,password.value)"
-                                            value="Lưu thông tin" />
+                                            >Lưu thông tin</button>
                                     </div>
                                 </div>
                             </form>
@@ -76,4 +94,5 @@
         </div>
     </div>
 </ng-template>
+
 

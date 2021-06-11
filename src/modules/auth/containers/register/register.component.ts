@@ -1,3 +1,4 @@
+import { AppCommonService } from '@common/services';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {User1} from '../../models/auth.model';
 import {AuthService} from '../../services/auth.service'
@@ -11,10 +12,14 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
     constructor(
+        private appCommonService: AppCommonService,
         private changeDetectorRef : ChangeDetectorRef,
         private authService: AuthService,
-        private router: Router
-        ) {}
+        private router: Router,
+        )
+    {
+    }
+    
     checkregister=false;
     ngOnInit() {
         this.checkregister=false;
@@ -26,6 +31,7 @@ export class RegisterComponent implements OnInit {
                     if (result.user.role == "innkeeper") this.router.navigate(['/innkeeper/quans']);
                     if (result.user.role == "admin") this.router.navigate(['/admin/quans']);
                 } else{
+                    this.appCommonService.setToken(1);
                     this.checkregister=true;
                     this.changeDetectorRef.detectChanges();
                 }
