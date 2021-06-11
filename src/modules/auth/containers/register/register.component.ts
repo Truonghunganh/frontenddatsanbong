@@ -48,6 +48,8 @@ export class RegisterComponent implements OnInit {
         console.log(user);
         this.checkregister=false;
         this.authService.Register(user).subscribe(data =>{
+            console.log(data);
+            
             if (data.status) {
                 Swal.fire({
                     icon: 'success',

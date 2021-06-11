@@ -61,7 +61,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Mật khẩu</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" minlength="9" #password type="text" ngModel name="password" required  placeholder="Mật khẩu"/>
+                                        <input class="form-control" minlength="9" #password type="password" ngModel name="password" required  placeholder="Mật khẩu"/>
                                         <div *ngIf="formSignin.controls.password?.errors?.minlength || formSignin.controls.password?.errors?.required" style="color:red">
                                             mật khẩu phải có ít nhất 9 kí tự
                                         </div>
