@@ -36,6 +36,8 @@ export class DashboardListquansComponent implements OnInit {
                 for (let i = 0; i < this.quans.length; i++) {
                     this.mangreview[i]=this.taomotmangreview(Math.round(this.quans[i].review))                  
                 }
+                console.log(this.quans);
+                
                 this.checkquans=true;
                 this.taoquansnew(this.page);
                 this.changeDetectorRef.detectChanges();

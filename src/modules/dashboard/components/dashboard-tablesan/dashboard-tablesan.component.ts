@@ -49,6 +49,8 @@ export class DashboardTablesanComponent implements OnInit {
             if (data.status){
                 this.sansTT= data.sansTT;
                 this.mangDatsan=data.datsans;
+                console.log(this.mangDatsan);
+                
                 this.reviewuser = Math.round(data.reviewcuauser);
                 this.mangreviewuser = this.taomotmangreview(this.reviewuser);
                 this.reviewquan = Math.round(data.quan.review);
@@ -189,6 +191,8 @@ export class DashboardTablesanComponent implements OnInit {
             }).then(result => {
                 if (result.value) {
                     const ds = new Datsan(idsan, this.ngayvagio, priceperhour);
+                    console.log(ds);
+                    
                     this.dashboardService.addDatSan(ds).subscribe(data => { 
                         if (data.status) {
                             Swal.fire({
@@ -202,7 +206,7 @@ export class DashboardTablesanComponent implements OnInit {
                         else {
                             Swal.fire({
                                 icon: 'error',
-                                text: 'Giờ này có bạn khác đặt rồi !',
+                                text: data.message,
                             })
                         }
                     });
@@ -235,7 +239,10 @@ export class DashboardTablesanComponent implements OnInit {
     binhluancuaban(){
         this.page=1;
         this.dashboardService.addComment(this.idquan, this.binhluan).subscribe(data =>{
+            console.log(data);
+            
             if (data.status) {
+
                 this.comments = data.comments;
                 for (let i = 0; i < this.comments.length; i++) {
                     this.mangreview[i] = this.taomotmangreview(Math.round(this.comments[i].review));

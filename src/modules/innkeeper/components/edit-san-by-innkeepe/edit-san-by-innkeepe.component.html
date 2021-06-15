@@ -76,27 +76,27 @@
                                 <label class="col-lg-2 col-form-label form-control-label">Tên Sân</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" #name name="san.name" [(ngModel)]="san.name" required
-                                        placeholder="Name" />
+                                        placeholder="Tên Sân" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label form-control-label">Số người trong 1 đội</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" #numberpeople name="san.numberpeople" [(ngModel)]="san.numberpeople"
-                                        required placeholder="Name" />
+                                        required placeholder="Số người trong 1 đội" type="number" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label form-control-label">Số tiền trong 1 giờ</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" #priceperhour name="san.priceperhour" [(ngModel)]="san.priceperhour"
-                                        required placeholder="Name" />
+                                        required placeholder="Số tiền trong 1 giờ" type="number" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-lg-9 ml-auto text-right">
                                     <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
-                                    <input type="button" class="btn btn-success"
+                                    <input type="button" class="btn btn-success" 
                                         (click)="edit(name.value,numberpeople.value,priceperhour.value)" value="Lưu thông tin" />
                                 </div>
                             </div>

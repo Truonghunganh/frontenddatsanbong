@@ -86,6 +86,7 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
                 formData.append('linkaddress', linkaddress);
                 formData.append('kinhdo', kinhdo);
                 formData.append('vido', vido);
+                console.log(formData.get("name"), linkaddress, address);
                 this.dashboardService.editQuanByTokenInnkeeper(formData).subscribe(data => {
                     if (data.status) {
                         Swal.fire({
@@ -103,8 +104,6 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
 
                     }
                 })
-
-            
             }
         }) 
     }

@@ -130,7 +130,30 @@ export class ThongTinDatSansComponent implements OnInit {
     }
     deleteDatSan(datsan:any){
         console.log(datsan);
-        
+        Swal.fire({
+            html: '<h1 style="color: #41c04d;">Bạn có muốn xóa không ?</h1><table style="width: 100%;" border="1"><tr><td>Tên khách hàng </td><td>' +
+                datsan.user.name + '</td></tr><tr><td>Số điện thoại khách hàng </td><td>' +
+                datsan.user.phone + '</td></tr><tr><td>Tên sân </td><td>' +
+                datsan.san.name + '</td></tr><tr><td>Số người </td><td>' +
+                datsan.san.numberpeople + '</td></tr><tr><td>Số tiền thanh toán</td><td>' +
+                datsan.san.priceperhour + '</td></tr><tr><td>Giờ đặt sân</td><td>' + datsan.start_time +
+                '</td></tr></table>',
+            confirmButtonText: `Xóa đặt sân`,
+        }).then(result => {
+            if (result.value) {
+                this.dashboardService.deleteDatsanByInnkeeper(datsan.id).subscribe(data => {
+                    if (data.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Xóa thành công',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time);
+                    }
+                });
+            }
+        });
     }
     ChangeStatus(){
         this.trangthai=!this.trangthai;

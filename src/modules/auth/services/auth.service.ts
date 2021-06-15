@@ -39,14 +39,8 @@ export class AuthService {
     }
 
     checkTokenUser(): Observable<any>{
-        console.log(this.appCommonService.getToken());
-        console.log(this.appCommonService.httpOptions);
-        
         return this.http.get<any>(environment.url + '/api/v1/checkTokenUser',this.appCommonService.httpOptions).pipe(
             tap(data => {
-                console.log(data);
-                console.log(this.appCommonService.getToken());
-                
                 of(data);
             }),
             catchError(this.appCommonService.errorHandler)

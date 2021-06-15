@@ -123,6 +123,11 @@ export class InnkeeperService {
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
     }
+    deleteDatsanByInnkeeper(iddatsan: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/deleteDatsanByInnkeeper", { "iddatsan": iddatsan }, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
 
     getTongDoanhThuTheoNamByInnkeeper(idquan: number, nam: number): Observable<any> {
         return this.http.post<any>(environment.url + "/api/v1/getTongDoanhThuTheoNamByInnkeeper", { "idquan": idquan, "nam": nam }, this.appCommonService.httpOptions).pipe(
