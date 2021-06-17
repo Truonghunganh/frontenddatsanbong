@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, ChangeDetectorRef } from '@angular/core';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { AppCommonService } from './../../app-common/services/app-common.service
 @Injectable()
 export class AuthService {
     constructor(
+        private changeDetectorRef: ChangeDetectorRef,
         private http: HttpClient,
         private appCommonService: AppCommonService,
         @Inject(LOCAL_STORAGE) private storage: WebStorageService,
@@ -49,9 +50,9 @@ export class AuthService {
     login(user : User): Observable<any>{
         return this.http.post<any>(environment.url + '/api/v1/login', user, this.appCommonService.httpOptions).pipe(
             tap(data=>{
-                console.log(data);
                 if(data.status){
                     this.appCommonService.setToken(data.user.token);   
+                    this.changeDetectorRef.detectChanges();
                 }
                 of(data);
             }),
@@ -59,7 +60,6 @@ export class AuthService {
         )
     }
     Register(user: User1): Observable<any> {
-       console.log(user);
        return this.http.post<any>(environment.url + '/api/v1/register', user).pipe(
             tap(data => {
                 of(data);

@@ -51,14 +51,12 @@ export class LoginComponent implements OnInit {
     onSubmit(phone: string, password: string){
         this.checklogin = false;
         const user = new User(phone, password);
-        console.log(user);
-        
         this.authService.login(user).subscribe(result => {
             if (result.status) {
                 if (result.user.role == "user") this.router.navigate(['/dashboard/quans']);
                 if (result.user.role == "innkeeper") this.router.navigate(['/innkeeper/quans']);
                 if (result.user.role == "admin") this.router.navigate(['/admin/quans']);
-                
+                this.changeDetectorRef.detectChanges();
             } else {
                 Swal.fire({
                     icon: 'error',

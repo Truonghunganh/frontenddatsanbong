@@ -6,7 +6,7 @@
                 <div class="col-lg-7">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header border1">
-                            <h3 class="text-center font-weight-light my-4">Tạo tài khoản mới</h3>
+                            <h3 class="text-center font-weight-light my-4">TẠO TÀI KHOẢN MỚI</h3>
                         </div>
                         <div class="card-body border2">
                             <form role="form"  #formSignin="ngForm" >
@@ -14,8 +14,8 @@
                                     <label class="col-lg-3 col-form-label form-control-label">Quyền</label>
                                     <div class="col-lg-9">
                                         <select #role class="form-select form-control" aria-label="Default select example">
-                                            <option selected value="user">người dùng</option>
-                                            <option value="innkeeper">chủ quán</option>
+                                            <option selected value="user">Người dùng</option>
+                                            <option value="innkeeper">Chủ quán</option>
                                         </select>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     <div class="col-lg-9">
                                         <input class="form-control" email #gmail type="text" ngModel name="email" required placeholder="gmail"/>
                                         <div *ngIf="(formSignin.controls.email?.errors?.email && formSignin.controls.email.touched) || formSignin.controls.email?.errors?.required" style="color:red">
-                                            email không hợp lệ
+                                            Email không hợp lệ
                                         </div>
 
                                     </div>
@@ -63,7 +63,7 @@
                                     <div class="col-lg-9">
                                         <input class="form-control" minlength="9" #password type="password" ngModel name="password" required  placeholder="Mật khẩu"/>
                                         <div *ngIf="formSignin.controls.password?.errors?.minlength || formSignin.controls.password?.errors?.required" style="color:red">
-                                            mật khẩu phải có ít nhất 9 kí tự
+                                            Mật khẩu phải có ít nhất 9 kí tự
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                             </form>
                         </div>
                         <div>
-                            <button class="form-control border1 btn" routerLink="/auth/login">đăng nhập</button>
+                            <button class="form-control border1 btn" routerLink="/auth/login">Đăng nhập</button>
                         </div>
                     </div>
                 </div>
