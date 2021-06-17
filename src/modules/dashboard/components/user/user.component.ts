@@ -125,8 +125,6 @@ export class UserComponent implements OnInit {
         }).then(result => {
             if (result.value) {
                 this.dashboardService.deleteDatSan(datsan.id).subscribe(data => {
-                    console.log(data);
-                    
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',
@@ -135,6 +133,12 @@ export class UserComponent implements OnInit {
                             timer: 1500
                         });       
                         this.getListDatSanByUserToken();
+                    }
+                    else{
+                        Swal.fire({
+                            icon: 'error',
+                            text: data.message,
+                        })
                     }
                 });
             }
