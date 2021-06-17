@@ -89,13 +89,6 @@ export class ListQuansByAdminComponent implements OnInit {
                 this.checkquans = true;
                 this.changeDetectorRef.detectChanges();
             }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
-
-            }
         })
     }
     thaydoitrangthai(quan:any){
