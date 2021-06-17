@@ -78,6 +78,7 @@ export class UserEditComponent implements OnInit {
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        this.router.navigate(['/dashboard/quans'])
                         this.changeDetectorRef.detectChanges();
                     } else {
                         Swal.fire({

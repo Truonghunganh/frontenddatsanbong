@@ -54,6 +54,7 @@ export class InnkeeperEditComponent implements OnInit {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
+                            this.router.navigate(['/innkeeper/quans'])
                         } else {
                             Swal.fire({
                                 icon: 'error',
