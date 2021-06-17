@@ -65,12 +65,8 @@ export class DashboardService {
     editUserByToken(user: User): Observable<any>{
         return this.http.put<any>(environment.url + "/api/v1/editUserByToken",user,this.appCommonService.httpOptions).pipe(
             tap(data => { 
-                console.log(data);
                 if (data.status) {
                     this.appCommonService.setToken(data.token);
-                    console.log(data.token);
-                    console.log(this.appCommonService.getToken());
-                    
                 }
                 of(data)} )
             ,catchError(this.appCommonService.errorHandler)

@@ -63,7 +63,6 @@ export class UserEditComponent implements OnInit {
         this.router.navigate(['/dashboard/user']);
     }
     Save(name: string,gmail: string,address: string,password: string){
-        console.log(name,gmail,address,password);
         const user =new User(name,gmail,address,password);
         Swal.fire({
             title: "bạn có muốn thay đổi thông tin này không?",
