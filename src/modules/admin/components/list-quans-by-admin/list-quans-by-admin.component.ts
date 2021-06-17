@@ -38,7 +38,7 @@ export class ListQuansByAdminComponent implements OnInit {
         this.tongpage = this.quans.length / this.soluongtrentrang;
         let i = (page - 1) * this.soluongtrentrang;
         let k;
-        if (page < this.tongpage) {
+        if (page <= this.tongpage) {
             k = this.soluongtrentrang;
         } else {
             k = this.quans.length % this.soluongtrentrang;
@@ -108,13 +108,14 @@ export class ListQuansByAdminComponent implements OnInit {
                 this.dashboardService.UpdateTrangThaiQuanTokenAdmin(quan.id,false).subscribe(data=>{
                     if(data.status){
                         this.page=1;
-                        this.getListquans(this.page);
                     }else{
                         Swal.fire({
                             icon: 'error',
                             title: data.message,
                         })      
                     }
+                    this.router.navigate(['/admin/quans']);
+
                 })           
             } 
         });
@@ -158,7 +159,7 @@ export class ListQuansByAdminComponent implements OnInit {
             if (data.status) {
                 this.quans = data.quans;
                 this.tongpage = data.tongpage;
-                this.taomangtrang(this.page);
+                this.taoquansnew(this.page);
                 this.checkquans = true;
                 this.changeDetectorRef.detectChanges();
             }

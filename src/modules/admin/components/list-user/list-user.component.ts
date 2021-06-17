@@ -33,8 +33,12 @@ export class ListUserComponent implements OnInit {
         }).then((result) => {
             if (result.isConfirmed) {
                 const user = new User(this.user.id,name,phone, gmail, address, password);
+                console.log(user);
+                
                 this.adminService.editUserByAdmin(user).subscribe(
                     data => {
+                        console.log(data);
+                        
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',
@@ -136,6 +140,8 @@ export class ListUserComponent implements OnInit {
         this.checkusers = false;
         this.page=1;
         this.adminService.searchUsersByAdmin("user",this.timkiem).subscribe(data =>{
+            console.log(data);
+            
             if (data.status) {
                 this.search1=false;
                 this.users = data.users;

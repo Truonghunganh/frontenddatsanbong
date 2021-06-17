@@ -125,6 +125,8 @@ export class UserComponent implements OnInit {
         }).then(result => {
             if (result.value) {
                 this.dashboardService.deleteDatSan(datsan.id).subscribe(data => {
+                    console.log(data);
+                    
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',

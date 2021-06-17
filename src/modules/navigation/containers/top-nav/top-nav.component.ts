@@ -28,13 +28,10 @@ export class TopNavComponent implements OnInit {
     ngOnInit() {
         this.checkuser=false;
         this.authService.checkTokenAdmin().subscribe(data => {
-            console.log(data);
-            
             if (data.status) {
                 this.user = data.admin;
                 this.checkuser=true;
                 this.changeDetectorRef.detectChanges();
-                console.log(this.user);
             } else {
                 Swal.fire({
                     icon: 'error',

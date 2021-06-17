@@ -70,7 +70,7 @@ export class AuthService {
 
     
     checkTokenAdmin(): Observable<any> {
-        return this.http.get<any>('http://localhost:8000/api/v1/checkTokenAdmin', this.appCommonService.httpOptions).pipe(
+        return this.http.get<any>(environment.url + '/api/v1/checkTokenAdmin', this.appCommonService.httpOptions).pipe(
             tap(data => {
                 of(data);
             }),

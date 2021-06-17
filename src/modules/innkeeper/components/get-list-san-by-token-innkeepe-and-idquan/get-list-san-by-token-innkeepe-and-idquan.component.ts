@@ -179,14 +179,12 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         this.tongpage = this.comments.length / 10;
         let i = (page - 1) * 10;
         let k;
-        if (page < this.tongpage) {
+        if (page <= this.tongpage) {
             k = 10;
         } else {
             k = this.comments.length % 10;
 
         }
-        console.log(this.tongpage, i, k, page);
-
         for (let j = 0; j < k; j++) {
             if (j == 10) {
                 break;

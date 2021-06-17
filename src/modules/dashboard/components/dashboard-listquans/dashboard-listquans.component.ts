@@ -86,7 +86,7 @@ export class DashboardListquansComponent implements OnInit {
         this.tongpage = this.quans.length / this.soluongtrentrang;
         let i = (page - 1) * this.soluongtrentrang;
         let k;
-        if (page < this.tongpage) {
+        if (page <= this.tongpage) {
             k = this.soluongtrentrang;
         } else {
             k = this.quans.length % this.soluongtrentrang;

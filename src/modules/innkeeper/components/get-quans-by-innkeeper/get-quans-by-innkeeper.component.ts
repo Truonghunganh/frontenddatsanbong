@@ -68,7 +68,7 @@ export class GetQuansByInnkeeperComponent implements OnInit {
         this.tongpage = this.quans.length / 3;
         let i = (page - 1) * 3;
         let k;
-        if (page < this.tongpage) {
+        if (page <= this.tongpage) {
             k = 3;
         } else {
             k = this.quans.length % 3;
