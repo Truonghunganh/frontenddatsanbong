@@ -46,6 +46,8 @@ export class DashboardTablesanComponent implements OnInit {
     getDatSansvaSansByUserAndIdquanAndNgay(idquan: number, ngay: any){
         this.checkdatsans = false;
         this.dashboardService.getDatSansvaSansByUserAndIdquanAndNgay(idquan, ngay).subscribe(data=>{
+            console.log(data);
+            
             if (data.status){
                 this.sansTT= data.sansTT;
                 this.mangDatsan=data.datsans;
@@ -239,10 +241,7 @@ export class DashboardTablesanComponent implements OnInit {
     binhluancuaban(){
         this.page=1;
         this.dashboardService.addComment(this.idquan, this.binhluan).subscribe(data =>{
-            console.log(data);
-            
             if (data.status) {
-
                 this.comments = data.comments;
                 for (let i = 0; i < this.comments.length; i++) {
                     this.mangreview[i] = this.taomotmangreview(Math.round(this.comments[i].review));
@@ -258,8 +257,8 @@ export class DashboardTablesanComponent implements OnInit {
         });
         this.binhluan = "";
     }
-    values = ['AM', 'PM'];
-    defaultValue = this.values[1];
+    // values = ['AM', 'PM'];
+    // defaultValue = this.values[1];
 
     // select(){
     //     select.options[0].selected = true;

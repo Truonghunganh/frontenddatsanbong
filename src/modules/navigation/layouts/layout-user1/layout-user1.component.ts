@@ -29,10 +29,6 @@ export class LayoutUser1Component implements OnInit, OnDestroy  {
                 this.checkuser=true;
                 this.changeDetectorRef.detectChanges();
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
                 this.router.navigate(['/auth/login']);
             }
         })

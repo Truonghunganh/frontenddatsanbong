@@ -25,17 +25,10 @@ export class LayoutAdmin1Component implements OnInit, OnDestroy {
     user: any;
     ngOnInit() {
         this.authService.checkTokenAdmin().subscribe(data => {
-
             if (data.status) {
                 this.user = data.admin;
                 this.changeDetectorRef.detectChanges();
-                console.log(this.user);
-
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
                 this.router.navigate(['/auth/login']);
             }
         })
