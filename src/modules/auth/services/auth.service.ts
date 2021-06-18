@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable, ChangeDetectorRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable} from '@angular/core';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import {  Observable, of,  } from 'rxjs';
+import { catchError,  tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {User,User1} from "../models/auth.model"
 import { environment } from './../../../environments/environment';
@@ -11,7 +11,6 @@ import { AppCommonService } from './../../app-common/services/app-common.service
 @Injectable()
 export class AuthService {
     constructor(
-        private changeDetectorRef: ChangeDetectorRef,
         private http: HttpClient,
         private appCommonService: AppCommonService,
         @Inject(LOCAL_STORAGE) private storage: WebStorageService,
@@ -52,7 +51,6 @@ export class AuthService {
             tap(data=>{
                 if(data.status){
                     this.appCommonService.setToken(data.user.token);   
-                    this.changeDetectorRef.detectChanges();
                 }
                 of(data);
             }),
