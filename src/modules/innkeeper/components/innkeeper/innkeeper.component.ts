@@ -22,20 +22,8 @@ export class InnkeeperComponent implements OnInit {
         private authService: AuthService
     ) { }
     ngOnInit() {
-        this.checkTokenInnkeeper();
-    }
-    checkTokenInnkeeper() {
-        this.checkinnkeeper = false;
-        this.authService.checkTokenInnkeeper().subscribe(result => {
-            if (result.status) {
-                this.innkeeper = result.innkeeper;
-                this.checkinnkeeper = true;
-                this.changeDetectorRef.detectChanges();
-                this.getListQuansByTokenInnkeeperChuaPheDuyet();
-            } else {
-                this.router.navigate(['/auth/login']);
-            }
-        })
+        this.getListQuansByTokenInnkeeperChuaPheDuyet();
+
     }
     url = environment.url;
 

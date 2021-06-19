@@ -86,15 +86,11 @@ export class EditSanByInnkeepeComponent implements OnInit {
         }).then((result) => {
             if (result.isConfirmed) {
                 const san = new San1(this.id, name, Number(numberpeople), Number(priceperhour));
-                console.log(san);
-
                 this.dashboardService.editSanByInnkeeper(san).subscribe(data => {
-                    console.log(data);
-
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your work has been saved',
+                            title: data.message,
                             showConfirmButton: false,
                             timer: 1500
                         });

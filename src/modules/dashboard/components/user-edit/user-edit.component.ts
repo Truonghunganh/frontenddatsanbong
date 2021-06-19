@@ -74,7 +74,7 @@ export class UserEditComponent implements OnInit {
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your work has been saved',
+                            title: 'bạn đã lưu thông tin thàng công',
                             showConfirmButton: false,
                             timer: 1500
                         });
