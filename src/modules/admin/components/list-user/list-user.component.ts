@@ -110,6 +110,11 @@ export class ListUserComponent implements OnInit {
     
     timkiem="";
     search1=true;
+    cailai(user: any) {
+        this.user = user;
+        this.chinhsua = false;
+    }
+
     search(){
         this.chinhsua = true;
         this.checkusers = false;
