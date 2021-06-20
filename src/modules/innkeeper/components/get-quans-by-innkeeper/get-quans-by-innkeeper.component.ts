@@ -27,8 +27,6 @@ export class GetQuansByInnkeeperComponent implements OnInit {
     getListquans() {
         this.checkquans= false;
         this.dashboardService.getListQuansByTokenInnkeeper().subscribe(data=>{
-            console.log(data);
-            
             if(data.status){
                 this.quans=data.quans;
                 for (let i = 0; i < this.quans.length; i++) {
