@@ -122,7 +122,7 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         return tong;
     }
     tongDanhthucuuanam ="";
-    getTongDoanhThuTheoNamByInnkeeper(idquan: number, nam: number,) {
+    getTongDoanhThuTheoNamByInnkeeper(idquan: number, nam: number) {
         this.checkdoanhthustheonam=false;
         this.dashboardService.getTongDoanhThuTheoNamByInnkeeper(idquan, nam).subscribe(
             data => {
@@ -200,8 +200,7 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         this.router.navigate(['dashboard/quans/'+this.idquan])
     }
     chonNam(){
-        console.log(this.year);
-        
+        this.getTongDoanhThuTheoNamByInnkeeper(this.idquan, this.year);
     }
     //'bar';//'pie';//'line';
         dangBD="Biểu đồ cột";
@@ -291,8 +290,6 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         }
     }
     chontrang(page: number) {
-        console.log(page);
-
         this.page = page;
         this.taodatsansnew(this.page);
     }

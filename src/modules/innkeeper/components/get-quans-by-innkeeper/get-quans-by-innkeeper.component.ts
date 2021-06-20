@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { InnkeeperService } from "../../services/innkeeper.service";
-import { map } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../auth/services/auth.service'
 
 @Component({
     selector: 'sb-get-quans-by-innkeeper',
@@ -15,8 +11,6 @@ import { AuthService } from '../../../auth/services/auth.service'
 export class GetQuansByInnkeeperComponent implements OnInit {
     constructor(
         private dashboardService: InnkeeperService,
-        private authService: AuthService,
-        private router: Router,
         private changeDetectorRef: ChangeDetectorRef
 
     ) { }

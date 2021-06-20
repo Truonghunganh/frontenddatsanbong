@@ -45,11 +45,8 @@ export class RegisterComponent implements OnInit {
     }
     RegisterUser(role:string,name: string,phone: string,gmail: string,address: string,password: string){
         const user = new User1(role,name,phone,gmail,address,password);
-        console.log(user);
         this.checkregister=false;
         this.authService.Register(user).subscribe(data =>{
-            console.log(data);
-            
             if (data.status) {
                 Swal.fire({
                     icon: 'success',

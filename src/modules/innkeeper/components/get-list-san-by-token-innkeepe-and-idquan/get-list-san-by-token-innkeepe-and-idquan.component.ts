@@ -75,7 +75,6 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     }
 
     thaydoi(idsan: number, trangthai:boolean){
-        console.log(idsan, trangthai);
         Swal.fire({
             title: "bạn có muốn thay đổi trạng thái sân này hay không?",
             showCancelButton: true,
@@ -120,7 +119,6 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     }
 
     hienthongtindatsan(datsan:any,san:any){
-        console.log(datsan);
         Swal.fire({
             html: '<h1 style="color: #41c04d;">thông tin người đặt sân của người dùng</h1><table style="width: 100%;" border="1"><tr><td>Tên khách hàng </td><td>' + 
             datsan.user.name + '</td></tr><tr><td>Số điện thoại khách hàng </td><td>' + 

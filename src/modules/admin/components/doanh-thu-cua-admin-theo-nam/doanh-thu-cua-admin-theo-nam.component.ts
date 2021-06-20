@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from "../../services/admin.service";
-import { AuthService } from '../../../auth/services/auth.service'
-import Swal from 'sweetalert2';
-import { Chart, ChartOptions, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Color } from 'ng2-charts';
 
 @Component({
@@ -74,8 +71,6 @@ export class DoanhThuCuaAdminTheoNamComponent implements OnInit {
     checkdoanhthustheonam = false;
     constructor(
         private dashboardService: AdminService,
-        private router: Router,
-        private authService: AuthService,
         private changeDetectorRef: ChangeDetectorRef,
     ) { }
     ngOnInit() {

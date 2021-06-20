@@ -33,12 +33,8 @@ export class ListUserComponent implements OnInit {
         }).then((result) => {
             if (result.isConfirmed) {
                 const user = new User(this.user.id,name,phone, gmail, address, password);
-                console.log(user);
-                
                 this.adminService.editUserByAdmin(user).subscribe(
                     data => {
-                        console.log(data);
-                        
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',
@@ -111,37 +107,14 @@ export class ListUserComponent implements OnInit {
         this.getUsersByAdmin(this.page);
     }
     user: any;
-    cailai(user:any){
-        this.user= user;
-        this.chinhsua=false;
-        // console.log(user);
-        // Swal.fire({
-        //     html:
-        //         '<h5>bạn có muốn cài lại mật </h5>'+
-        //         '<div><strong>' + user.name + '</strong></div>' +
-        //         '<div><strong>' + user.phone + '</strong></div>' +
-        //         '<div><strong>' + user.address + '</strong></div>' +
-        //         '<div><strong>' + user.gmail + '</strong></div>',
-        //     showCancelButton: true,
-        //     confirmButtonText: "đăng xuất",
-        // }).then((result) => {
-        //     if (result.isConfirmed) {
-            
-        //     }
-        // });
-
-        
-    }
+    
     timkiem="";
     search1=true;
     search(){
-        console.log(this.timkiem);
         this.chinhsua = true;
         this.checkusers = false;
         this.page=1;
         this.adminService.searchUsersByAdmin("user",this.timkiem).subscribe(data =>{
-            console.log(data);
-            
             if (data.status) {
                 this.search1=false;
                 this.users = data.users;

@@ -58,7 +58,7 @@ export class AuthService {
         )
     }
     Register(user: User1): Observable<any> {
-       return this.http.post<any>(environment.url + '/api/v1/register', user).pipe(
+        return this.http.post<any>(environment.url + '/api/v1/register', user, this.appCommonService.httpOptions).pipe(
             tap(data => {
                 of(data);
             }),

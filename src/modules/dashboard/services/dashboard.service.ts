@@ -41,7 +41,6 @@ export class DashboardService {
     }
     
     addDatSan(datsan: Datsan): Observable<any> {
-        console.log(datsan);
         return this.http
             .post<any>(environment.url + "/api/v1/datsans", datsan, this.appCommonService.httpOptions)
             .pipe(

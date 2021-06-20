@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, ViewChil
 import Swal from 'sweetalert2';
 import { InnkeeperService } from "../../services/innkeeper.service";
 import { Router } from '@angular/router';
-import { environment } from './../../../../environments/environment';
 import { Innkeeper } from '../../models/innkeeper.model';
 
 import { AuthService } from '../../../auth/services/auth.service'

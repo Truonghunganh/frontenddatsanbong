@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import{ AdminService } from "../../services/admin.service";
-import { map } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Datsan } from '../../models/admin.model'
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({

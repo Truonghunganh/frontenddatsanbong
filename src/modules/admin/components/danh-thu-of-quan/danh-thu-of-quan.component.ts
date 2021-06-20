@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from "../../services/admin.service";
-import { AuthService } from '../../../auth/services/auth.service'
 import Swal from 'sweetalert2';
-import { Chart, ChartOptions, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Color } from 'ng2-charts';
 import { environment } from './../../../../environments/environment';
 
@@ -84,7 +83,6 @@ export class DanhThuOfQuanComponent implements OnInit {
         private dashboardService: AdminService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private authService: AuthService,
         private changeDetectorRef: ChangeDetectorRef,
     ) { }
     ngOnInit() {
@@ -184,8 +182,7 @@ export class DanhThuOfQuanComponent implements OnInit {
         this.router.navigate(['dashboard/quans/' + this.idquan])
     }
     chonNam() {
-        console.log(this.year);
-
+        this.getTongDoanhCuaMotQuanThuTheoNamByAdmin(this.idquan, this.year);
     }
     //'bar';//'pie';//'line';
     dangBD = "Biểu đồ cột";
@@ -268,8 +265,6 @@ export class DanhThuOfQuanComponent implements OnInit {
         }
     }
     chontrang(page: number) {
-        console.log(page);
-
         this.page = page;
         this.taodatsansnew(this.page);
     }

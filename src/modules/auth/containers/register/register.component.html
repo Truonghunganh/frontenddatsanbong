@@ -22,7 +22,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Họ và tên</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" minlength="5" #name type="text" ngModel name="name" required />
+                                        <input class="form-control" minlength="5" #name type="text" ngModel name="name"  required placeholder="Họ và tên"/>
                                         <div  *ngIf="formSignin.controls.name?.errors?.minlength || formSignin.controls.name?.errors?.required" style="color:red">
                                             Họ và tên phải có ít nhất 5 kí tự
                                         </div>

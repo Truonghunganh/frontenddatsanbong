@@ -70,7 +70,6 @@ export class AddSanByInnkeeperComponent implements OnInit {
     }
     Add(name:string, numberpeople:number, priceperhour: number){
         const san=new San(this.idquan,name,numberpeople,priceperhour);
-        console.log(san);
         Swal.fire({
             title: "bạn có muốn thêm sân này không?",
             showCancelButton: true,

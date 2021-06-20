@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { InnkeeperService } from "../../services/innkeeper.service";
-import { map } from 'rxjs/operators';
-import { environment } from './../../../../environments/environment';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Thaydoidatsan } from '../../models/innkeeper.model'
 import { AuthService } from '../../../auth/services/auth.service';
@@ -33,9 +30,7 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
     tensanNew="";
     constructor(
         private dashboardService: InnkeeperService,
-        private activatedRoute: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private changeDetectorRef: ChangeDetectorRef,
         private authService: AuthService,
     ) { }
@@ -96,8 +91,6 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
         this.router.navigate(['/dashboard/quans'])
     }
     Save(){
-        console.log(this.timeOld,this.timeNew);
-        console.log(this.idsanOld,this.idsanNew);
         if(this.timeOld==""||this.timeNew==""||this.idsanNew==0||this.idsanOld==0){
             Swal.fire({
                 icon: 'error',

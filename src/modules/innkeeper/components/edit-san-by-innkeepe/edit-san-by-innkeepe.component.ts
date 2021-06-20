@@ -32,7 +32,6 @@ export class EditSanByInnkeepeComponent implements OnInit {
     url = environment.url;
     ngOnInit() {
         this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-        console.log(this.id);
         this.getSanByInnkeeper(this.id);
     }
     getSanByInnkeeper(id:number){
@@ -40,7 +39,6 @@ export class EditSanByInnkeepeComponent implements OnInit {
         this.checksan=false;
         this.dashboardService.getSanByInnkeeperVaId(id).subscribe(
             data=>{
-                console.log(data);
                 if (data.status) {
                    this.idquan=data.san.idquan;
                    this.san = data.san;

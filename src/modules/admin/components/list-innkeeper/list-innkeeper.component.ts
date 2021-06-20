@@ -27,7 +27,6 @@ export class ListInnkeeperComponent implements OnInit {
         this.chinhsua = true;
     }
     Edit(name: string, phone: string, gmail: string, address: string, password: string) {
-        const user = new User(this.user.id, name, phone, gmail, address, password);
         Swal.fire({
             title: "Bạn có muốn thay đổi thông tin này không?",
             showCancelButton: true,
@@ -40,7 +39,7 @@ export class ListInnkeeperComponent implements OnInit {
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Your work has been saved',
+                                title: 'chỉnh sửa thành công',
                                 showConfirmButton: false,
                                 timer: 1500
                             });

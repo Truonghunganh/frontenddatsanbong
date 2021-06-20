@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, ViewChil
 import Swal from 'sweetalert2';
 import { AdminService } from "../../services/admin.service";
 import { Router } from '@angular/router';
-import { environment } from './../../../../environments/environment';
 import { Admin } from '../../models/admin.model';
 
 import { AuthService } from '../../../auth/services/auth.service'
@@ -43,8 +42,6 @@ export class EditAdmminComponent implements OnInit {
 
     }
     Edit(name: string, gmail: string, address: string, password: string) {
-        console.log(password);
-        
         Swal.fire({
             title: "bạn có muốn thay đổi thông tin này không?",
             showCancelButton: true,

@@ -46,13 +46,9 @@ export class DashboardTablesanComponent implements OnInit {
     getDatSansvaSansByUserAndIdquanAndNgay(idquan: number, ngay: any){
         this.checkdatsans = false;
         this.dashboardService.getDatSansvaSansByUserAndIdquanAndNgay(idquan, ngay).subscribe(data=>{
-            console.log(data);
-            
             if (data.status){
                 this.sansTT= data.sansTT;
                 this.mangDatsan=data.datsans;
-                console.log(this.mangDatsan);
-                
                 this.reviewuser = Math.round(data.reviewcuauser);
                 this.mangreviewuser = this.taomotmangreview(this.reviewuser);
                 this.reviewquan = Math.round(data.quan.review);
@@ -193,8 +189,6 @@ export class DashboardTablesanComponent implements OnInit {
             }).then(result => {
                 if (result.value) {
                     const ds = new Datsan(idsan, this.ngayvagio, priceperhour);
-                    console.log(ds);
-                    
                     this.dashboardService.addDatSan(ds).subscribe(data => { 
                         if (data.status) {
                             Swal.fire({
@@ -299,7 +293,6 @@ export class DashboardTablesanComponent implements OnInit {
     }
     
     chinhsuaBL(vitri: number,id: number, binhluan: string){
-        console.log(id,binhluan);
         this.mangBL[vitri]=false;
         this.dashboardService.updateComment(id, binhluan).subscribe(data=>{
             if (data.status) {

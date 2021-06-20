@@ -67,7 +67,7 @@ export class ThongTinDatSansComponent implements OnInit {
         this.tongpage=this.datsans.length/10;
         let i=(page-1)*10;
         let k;
-        if (page < this.tongpage) {
+        if (page <= this.tongpage) {
             k = 10;
         } else {
             k = this.datsans.length % 10;
@@ -129,7 +129,6 @@ export class ThongTinDatSansComponent implements OnInit {
         
     }
     deleteDatSan(datsan:any){
-        console.log(datsan);
         Swal.fire({
             html: '<h1 style="color: #41c04d;">Bạn có muốn xóa không ?</h1><table style="width: 100%;" border="1"><tr><td>Tên khách hàng </td><td>' +
                 datsan.user.name + '</td></tr><tr><td>Số điện thoại khách hàng </td><td>' +
