@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
     checkregister=false;
     ngOnInit() {
         this.checkregister=false;
+        this.appCommonService.thaydoiHttpOptions();
         this.authService.checkToken().subscribe(
             result => {
                 console.log(result);

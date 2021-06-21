@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../../auth/services/auth.service'
 import { Router } from '@angular/router';
 
+import { AppCommonService } from '../../../app-common/services/app-common.service'
 
 @Component({
     selector: 'sb-layout-innkeeper1',
@@ -16,7 +17,7 @@ export class LayoutInnkeeper1Component implements OnInit, OnDestroy {
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
-
+        private appCommonService: AppCommonService,
         private authService: AuthService
     ) {
 
@@ -26,6 +27,7 @@ export class LayoutInnkeeper1Component implements OnInit, OnDestroy {
     checkuser = false;
 
     ngOnInit() {
+        this.appCommonService.thaydoiHttpOptions();
         this.authService.checkTokenInnkeeper().subscribe(data => {
             if (data.status) {
                 this.user = data.innkeeper;

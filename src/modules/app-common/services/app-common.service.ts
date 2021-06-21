@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
-import { environment } from 'environments/environment';
 import { Observable, of, throwError } from 'rxjs';
 
 @Injectable()
@@ -10,9 +9,7 @@ export class AppCommonService {
        
     }
     public httpOptions = {
-        
         headers: new HttpHeaders({
-            // 'token': this.storage.get('token')
             'token': JSON.parse(this.getToken()),
         }),
     };

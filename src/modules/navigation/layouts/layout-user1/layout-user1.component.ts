@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../auth/services/auth.service'
 import { Router } from '@angular/router';
-
+import { AppCommonService } from '../../../app-common/services/app-common.service'
 @Component({
     selector: 'sb-layout-user1',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,7 +14,7 @@ export class LayoutUser1Component implements OnInit, OnDestroy  {
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
-
+        private appCommonService: AppCommonService,
         private authService: AuthService
     ) {
         
@@ -23,6 +23,7 @@ export class LayoutUser1Component implements OnInit, OnDestroy  {
     user:any;
     checkuser=false;
     ngOnInit() {
+        this.appCommonService.thaydoiHttpOptions()
         this.authService.checkTokenUser().subscribe(data => {
             if (data.status) {
                 this.user = data.user;

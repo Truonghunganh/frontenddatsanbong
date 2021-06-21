@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
 
     ) {}
     ngOnInit() {
-        
         this.checklogin=false;
         this.appCommonService.thaydoiHttpOptions();
         this.authService.checkToken().subscribe(

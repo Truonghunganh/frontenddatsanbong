@@ -1,8 +1,7 @@
 import { NavigationService } from '@modules/navigation/services';
 import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Subscription } from 'rxjs';
-import Swal from 'sweetalert2';
 import { AuthService } from '../../../auth/services/auth.service'
+import { AppCommonService } from '../../../app-common/services/app-common.service'
 import { Router } from '@angular/router';
 @Component({
     selector: 'sb-top-nav',
@@ -15,7 +14,8 @@ export class TopNavComponent implements OnInit {
         private navigationService: NavigationService,
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
-      private authService: AuthService
+        private appCommonService: AppCommonService,
+        private authService: AuthService
     ) {
 
     }
@@ -27,6 +27,7 @@ export class TopNavComponent implements OnInit {
     checkuser=false;
     ngOnInit() {
         this.checkuser=false;
+        this.appCommonService.thaydoiHttpOptions();
         this.authService.checkTokenAdmin().subscribe(data => {
             if (data.status) {
                 this.user = data.admin;
