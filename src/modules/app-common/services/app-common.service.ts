@@ -16,12 +16,20 @@ export class AppCommonService {
             'token': JSON.parse(this.getToken()),
         }),
     };
+    thaydoiHttpOptions(){
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'token': JSON.parse(this.getToken()),
+            }),
+        };
+    }
     getToken(){
         if (!this.storage.get('token')) {
             this.setToken(1);
             console.log(1);
             
         }
+
         return this.storage.get('token');
     }
     setToken(token: number) {

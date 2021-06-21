@@ -25,18 +25,22 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         
         this.checklogin=false;
+        this.appCommonService.thaydoiHttpOptions();
         this.authService.checkToken().subscribe(
             result => {
                 if (result.status) {
                     if (result.user.role == "user"){
                         this.router.navigate(['/dashboard/quans']);
-                    } 
-                    if (result.user.role == "innkeeper"){
-                        this.router.navigate(['/innkeeper/quans']);
-                    } 
-                    if (result.user.role == "admin") {
-                        this.router.navigate(['/admin/quans']);
+                    } else{
+                        if (result.user.role == "innkeeper") {
+                            this.router.navigate(['/innkeeper/quans']);
+                        } else {
+                            if (result.user.role == "admin") {
+                                this.router.navigate(['/admin/quans']);
+                            }
+                        }
                     }
+                    
                 }else{
                     this.checklogin=true;
                     this.appCommonService.setToken(1);
