@@ -12,8 +12,9 @@
             <div class="w3-bar-item w3-button w3-mobile">{{user.phone}}</div>
             <div class="w3-bar-item w3-button w3-mobile">{{user.gmail}}</div>
             <div class="w3-bar-item w3-button w3-mobile">{{user.address}}</div>
-            <a href="/admin/editadmin" class="w3-bar-item w3-button w3-mobile"><strong>Chỉnh sửa thông tin </strong></a>
-            <a (click)="dangxuat()" class="w3-bar-item w3-button w3-mobile"><strong>Đăng xuất</strong></a>
+            <a href="/admin/editadmin" style="color:aqua" class="w3-bar-item w3-button w3-mobile"><fa-icon  class='fas' [icon]='["fas","edit"]'></fa-icon><strong>Chỉnh sửa</strong></a>
+            <a (click)="dangxuat()" style="color:red" class="w3-bar-item w3-button w3-mobile"><i class="fas fa-sign-out-alt"><strong>Đăng xuất</strong></i></a>
+                
         </div>
     </button>
     <!-- <button class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 border1 btn">
