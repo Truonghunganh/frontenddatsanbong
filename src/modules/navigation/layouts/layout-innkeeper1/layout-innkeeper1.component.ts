@@ -27,16 +27,21 @@ export class LayoutInnkeeper1Component implements OnInit, OnDestroy {
     checkuser = false;
 
     ngOnInit() {
-        this.appCommonService.thaydoiHttpOptions();
-        this.authService.checkTokenInnkeeper().subscribe(data => {
-            if (data.status) {
-                this.user = data.innkeeper;
-                this.checkuser = true;
-                this.changeDetectorRef.detectChanges();
-            } else {
-                this.router.navigate(['/auth/login']);
-            }
-        })
+        //this.appCommonService.thaydoiHttpOptions();
+        if (this.appCommonService.getToken()){
+            this.authService.checkTokenInnkeeper().subscribe(data => {
+                if (data.status) {
+                    this.user = data.innkeeper;
+                    this.checkuser = true;
+                    this.changeDetectorRef.detectChanges();
+                } else {
+                    this.router.navigate(['/auth/login']);
+                }
+            })
+        } else {
+            this.router.navigate(['/auth/login']);
+        }
+        
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();

@@ -23,22 +23,24 @@ export class RegisterComponent implements OnInit {
     checkregister=false;
     ngOnInit() {
         this.checkregister=false;
-        this.appCommonService.thaydoiHttpOptions();
-        this.authService.checkToken().subscribe(
-            result => {
-                console.log(result);
-                if (result.status) {
-                    if (result.user.role == "user") this.router.navigate(['/dashboard/quans']);
-                    if (result.user.role == "innkeeper") this.router.navigate(['/innkeeper/quans']);
-                    if (result.user.role == "admin") this.router.navigate(['/admin/quans']);
-                } else{
-                    this.appCommonService.setToken(1);
-                    this.checkregister=true;
-                    this.changeDetectorRef.detectChanges();
+        //this.appCommonService.thaydoiHttpOptions();
+        if(this.appCommonService.getToken()){
+            this.authService.checkToken().subscribe(
+                result => {
+                    if (result.status) {
+                        if (result.user.role == "user") this.router.navigate(['/dashboard/quans']);
+                        if (result.user.role == "innkeeper") this.router.navigate(['/innkeeper/quans']);
+                        if (result.user.role == "admin") this.router.navigate(['/admin/quans']);
+                    } else {
+                        this.checkregister = true;
+                        this.changeDetectorRef.detectChanges();
+                    }
                 }
-            }
-        )
-
+            )
+        } else {
+            this.checkregister = true;
+            this.changeDetectorRef.detectChanges();
+        }
     }
     Cancel(){
         this.router.navigate(['/dashboard/home']);

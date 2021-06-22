@@ -24,30 +24,37 @@ export class LoginComponent implements OnInit {
     ) {}
     ngOnInit() {
         this.checklogin=false;
-        this.appCommonService.thaydoiHttpOptions();
-        this.authService.checkToken().subscribe(
-            result => {
-                if (result.status) {
-                    if (result.user.role == "user"){
-                        this.router.navigate(['/dashboard/quans']);
-                    } else{
-                        if (result.user.role == "innkeeper") {
-                            this.router.navigate(['/innkeeper/quans']);
+        //this.appCommonService.thaydoiHttpOptions();
+        this.changeDetectorRef.detectChanges();
+        if(this.appCommonService.getToken()){
+            this.authService.checkToken().subscribe(
+                result => {
+                    if (result.status) {
+                        if (result.user.role == "user") {
+                            this.router.navigate(['/dashboard/quans']);
                         } else {
-                            if (result.user.role == "admin") {
-                                this.router.navigate(['/admin/quans']);
+                            if (result.user.role == "innkeeper") {
+                                this.router.navigate(['/innkeeper/quans']);
+                            } else {
+                                if (result.user.role == "admin") {
+                                    this.router.navigate(['/admin/quans']);
+                                }
                             }
                         }
+
+                    } else {
+                        this.checklogin = true;
+                        this.changeDetectorRef.detectChanges();
                     }
-                    
-                }else{
-                    this.checklogin=true;
-                    this.appCommonService.setToken(1);
-                    this.changeDetectorRef.detectChanges();
+
                 }
-                
-            }
-        )
+            )
+        }else{
+            this.checklogin = true;
+            this.changeDetectorRef.detectChanges();
+
+        }
+        
     }
     phone="";
     password="";
@@ -56,10 +63,11 @@ export class LoginComponent implements OnInit {
         const user = new User(phone, password);
         this.authService.login(user).subscribe(result => {
             if (result.status) {
+                this.appCommonService.setToken(result.user.token);
+                
                 if (result.user.role == "user") this.router.navigate(['/dashboard/quans']);
                 if (result.user.role == "innkeeper") this.router.navigate(['/innkeeper/quans']);
                 if (result.user.role == "admin") this.router.navigate(['/admin/quans']);
-                this.changeDetectorRef.detectChanges();
             } else {
                 Swal.fire({
                     icon: 'error',

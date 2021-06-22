@@ -27,16 +27,20 @@ export class TopNavComponent implements OnInit {
     checkuser=false;
     ngOnInit() {
         this.checkuser=false;
-        this.appCommonService.thaydoiHttpOptions();
-        this.authService.checkTokenAdmin().subscribe(data => {
-            if (data.status) {
-                this.user = data.admin;
-                this.checkuser=true;
-                this.changeDetectorRef.detectChanges();
-            } else {
-                this.router.navigate(['/auth/login']);
-            }
-        })
+        if (this.appCommonService.getToken()){
+            this.authService.checkTokenAdmin().subscribe(data => {
+                if (data.status) {
+                    this.user = data.admin;
+                    this.checkuser = true;
+                    this.changeDetectorRef.detectChanges();
+                } else {
+                    this.router.navigate(['/auth/login']);
+                }
+            })
+        } else {
+            this.router.navigate(['/auth/login']);
+        }
+        
     }
     dangxuat() {
         this.authService.logout();

@@ -29,15 +29,18 @@ export class HomeComponent implements OnInit {
     urlCLU = environment.urlCLU;
     isLoggedIn = false;
     ngOnInit() {
-        var a =this.appCommonService.getToken();
-        if ( a === "1") {
+        if(this.appCommonService.getToken()){
+            this.isLoggedIn = true;
+        }
+        else{
             this.isLoggedIn = false;
-        } else {
-           this.isLoggedIn=true;
         }
         this.getListquans();
     }
-
+    logout(){
+        console.log(1);
+        this.appCommonService.logout();
+    }
     mangreview = new Array();
     getListquans() {
         this.checkquans = false;

@@ -75,8 +75,6 @@ export class ListQuansByAdminComponent implements OnInit {
         }
     }
     chontrang(page: number) {
-        console.log(page);
-
         this.page = page;
         this.taoquansnew(this.page);
     }
