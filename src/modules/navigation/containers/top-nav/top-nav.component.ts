@@ -34,7 +34,6 @@ export class TopNavComponent implements OnInit {
                     this.checkuser = true;
                     this.changeDetectorRef.detectChanges();
                 } else {
-                    this.appCommonService.logout();
                     this.router.navigate(['/auth/login']);
                 }
             })

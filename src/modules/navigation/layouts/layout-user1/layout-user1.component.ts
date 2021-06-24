@@ -23,7 +23,6 @@ export class LayoutUser1Component implements OnInit, OnDestroy  {
     user:any;
     checkuser=false;
     ngOnInit() {
-  //      this.appCommonService.thaydoiHttpOptions()
         if (this.appCommonService.getToken()) {
             this.authService.checkTokenUser().subscribe(data => {
                 if (data.status) {
@@ -31,7 +30,6 @@ export class LayoutUser1Component implements OnInit, OnDestroy  {
                     this.checkuser = true;
                     this.changeDetectorRef.detectChanges();
                 } else {
-                    this.appCommonService.logout();
                     this.router.navigate(['/auth/login']);
                 }
             })

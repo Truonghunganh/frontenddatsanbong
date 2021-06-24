@@ -48,6 +48,9 @@ export class AuthService {
     login(user : User): Observable<any>{
         return this.http.post<any>(environment.url + '/api/v1/login', user).pipe(
             tap(data=>{
+                if(data.status){
+                    this.appCommonService.setToken(data.user.token);
+                }
                 of(data);
             }),
             catchError(this.appCommonService.errorHandler)
