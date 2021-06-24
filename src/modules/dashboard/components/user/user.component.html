@@ -3,9 +3,9 @@
 </div>
 <sb-card>
     <div class="card-body" >
-        <div *ngIf="checklistdansan; then display1 ; else loading1"></div>
+        <div *ngIf="checkdansans; then display1 ; else loading1"></div>
         <ng-template #display1>
-            <div *ngIf="ListDatSanByIduservaonhungngaytoi.length!=0">
+            <div *ngIf="datsans.length!=0">
                 <table class="table-striped" border="1" style="width:100%">
                     <thead >
                         <tr>
@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let datsan of datsansnew ; index as i">
+                        <tr *ngFor="let datsan of datsans ; index as i">
                             <td>
                                 {{(page-1)*10+i+1}}
                             </td>
@@ -68,7 +68,7 @@
                     </tbody>
                 </table>
             </div>
-            <div *ngIf="ListDatSanByIduservaonhungngaytoi.length==0" style="text-align: center;">
+            <div *ngIf="datsans.length==0" style="text-align: center;">
                 <strong>Thông báo :</strong> Bạn chưa đặt sân vào ngày tới
             </div>
         </ng-template>

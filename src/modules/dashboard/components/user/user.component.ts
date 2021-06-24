@@ -13,8 +13,7 @@ import { formatDate } from '@angular/common';
     styleUrls: ['user.component.scss'],
 })
 export class UserComponent implements OnInit {
-    ListDatSanByIduservaonhungngaytoi: any;
-    checklistdansan = false;
+    checkdansans = false;
     constructor(
         private dashboardService: DashboardService,
         private changeDetectorRef: ChangeDetectorRef,
@@ -22,89 +21,51 @@ export class UserComponent implements OnInit {
         private authService: AuthService
     ) { }
     ngOnInit() {
-        this.getListDatSanByUserToken();
+        this.page = 1;
+        this.getListDatSanByUserToken(this.page);
     }
-    
-    getListDatSanByUserToken() {
-        this.page=1;
-        this.checklistdansan = false;
-        this.dashboardService.getListDatSanByUserToken().subscribe(data => {
+    datsans: any;
+    getListDatSanByUserToken(page: number) {
+        this.checkdansans = false;
+        this.dashboardService.getListDatSanByUserToken(page).subscribe(data => {
             if (data.status) {
-                this.ListDatSanByIduservaonhungngaytoi = data.datsans;
-                this.taodatsansnew(this.page);
-                this.checklistdansan = true;
+                this.datsans = data.datsans;
+                this.tongpage=data.tongpage;
+                this.taomangtrang(page);
+                this.checkdansans = true;
                 this.changeDetectorRef.detectChanges();
             }
              
         })
     }
-    datsansnew: any;
     page = 1;
     tongpage = 0;
     mangtrang: any;
-    taodatsansnew(page: number) {
-        this.datsansnew = [];
-        this.tongpage = this.ListDatSanByIduservaonhungngaytoi.length / 10;
-        let i = (page - 1) * 10;
-        let k;
-        if (page<this.tongpage){
-            k = 10;
-        }else{
-            k = this.ListDatSanByIduservaonhungngaytoi.length %10;
-            console.log(k);
-            
-        }
-        for (let j = 0; j<k; j++) {
-            if (j == 10) {
-                break;
-            }
-            this.datsansnew.push(this.ListDatSanByIduservaonhungngaytoi[i + j]);
-
-        }
-        this.taomangtrang(page);
-    }
+    
     taomangtrang(page: number) {
         var mang: Array<boolean> = [];
         for (let i = 0; i < this.tongpage; i++) {
             mang.push(false);
-
         }
         mang[page - 1] = true;
         this.mangtrang = mang;
-
+        
     }
-
-
-    taomangtrangNew(page: number) {
-        var mang: Array<boolean> = [];
-        if(this.tongpage>3){
-            
-        }
-        var mang: Array<boolean> = [];
-        for (let i = 0; i < this.tongpage; i++) {
-            mang.push(false);
-
-        }
-        mang[page - 1] = true;
-        this.mangtrang = mang;
-
-    }
-
     Previous() {
         if (this.page > 1) {
             this.page--;
-            this.taodatsansnew(this.page);
+            this.getListDatSanByUserToken(this.page);
         }
     }
     Next() {
         if (this.page < this.tongpage) {
             this.page++;
-            this.taodatsansnew(this.page);
+            this.getListDatSanByUserToken(this.page);
         }
     }
     chontrang(page: number) {
         this.page = page;
-        this.taodatsansnew(this.page);
+        this.getListDatSanByUserToken(this.page);
     }
 
     editUser(){
@@ -132,7 +93,7 @@ export class UserComponent implements OnInit {
                             showConfirmButton: false,
                             timer: 1500
                         });       
-                        this.getListDatSanByUserToken();
+                        this.getListDatSanByUserToken(this.page);
                     }
                     else{
                         Swal.fire({

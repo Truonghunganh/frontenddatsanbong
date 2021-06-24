@@ -49,8 +49,8 @@ export class DashboardService {
             );
     }
     
-    getListDatSanByUserToken(): Observable<any> {
-        return this.http.get<any>(environment.url + "/api/v1/getListDatSanByUserToken",this.appCommonService.httpOptions).pipe(
+    getListDatSanByUserToken(page: number): Observable<any> {
+        return this.http.get<any>(environment.url + "/api/v1/getListDatSanByUserToken?page="+page,this.appCommonService.httpOptions).pipe(
             tap(data => of(data)),catchError(this.appCommonService.errorHandler)
         );
     }

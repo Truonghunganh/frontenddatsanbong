@@ -113,7 +113,7 @@ export class InnkeeperService {
     }
 
     getAllDatSanByInnkeeperAndIdquan(idquan: number, trangthai: boolean, time: string,page:number): Observable<any> {
-        return this.http.post<any>(environment.url + "/api/v1/getAllDatSanByInnkeeperAndIdquan1?page="+page, { "idquan": idquan, "trangthai": trangthai, "time": time }, this.appCommonService.httpOptions).pipe(
+        return this.http.post<any>(environment.url + "/api/v1/getAllDatSanByInnkeeperAndIdquan?page="+page, { "idquan": idquan, "trangthai": trangthai, "time": time }, this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
     }

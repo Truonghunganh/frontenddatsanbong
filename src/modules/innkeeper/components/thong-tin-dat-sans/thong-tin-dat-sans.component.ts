@@ -12,7 +12,7 @@ import { AuthService } from '../../../auth/services/auth.service';
     styleUrls: ['thong-tin-dat-sans.component.scss'],
 })
 export class ThongTinDatSansComponent implements OnInit {
-    trangthai=true;
+    trangthai=false;
     time = new Date().toISOString().slice(0, 10);
     idquan=0;
     datsans: any;
@@ -50,10 +50,7 @@ export class ThongTinDatSansComponent implements OnInit {
     getAllDatSanByInnkeeperAndIdquan(idquan: number,trangthai:boolean,time:string,page:number){
         this.checkdatsans=false;
         this.dashboardService.getAllDatSanByInnkeeperAndIdquan(idquan, trangthai, time, page).subscribe(data=>{
-            console.log(data);
-            
             if(data.status){
-                
                 this.datsans=data.datsans;
                 this.tongpage = data.tongpage;
                 this.taomangtrang(this.page);
