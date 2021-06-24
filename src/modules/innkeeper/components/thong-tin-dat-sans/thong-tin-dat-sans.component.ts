@@ -41,46 +41,32 @@ export class ThongTinDatSansComponent implements OnInit {
                 })
                 this.router.navigate(['/innkeeper/quans'])
             } else {
-                this.getAllDatSanByInnkeeperAndIdquan(this.idquan,this.trangthai,this.time);
+                this.page=1;
+                this.getAllDatSanByInnkeeperAndIdquan(this.idquan,this.trangthai,this.time,this.page);
             }
         })
     }
     
-    getAllDatSanByInnkeeperAndIdquan(idquan: number,trangthai:boolean,time:string){
-        this.page=1;
+    getAllDatSanByInnkeeperAndIdquan(idquan: number,trangthai:boolean,time:string,page:number){
         this.checkdatsans=false;
-        this.dashboardService.getAllDatSanByInnkeeperAndIdquan(idquan,trangthai,time).subscribe(data=>{
+        this.dashboardService.getAllDatSanByInnkeeperAndIdquan(idquan, trangthai, time, page).subscribe(data=>{
+            console.log(data);
+            
             if(data.status){
+                
                 this.datsans=data.datsans;
-                this.taodatsansnew(this.page);
+                this.tongpage = data.tongpage;
+                this.taomangtrang(this.page);
                 this.checkdatsans=true;
                 this.changeDetectorRef.detectChanges();
             }  
         })
     }
+
     datsansnew:any;
     page = 1;
     tongpage = 0;
     mangtrang: any;
-    taodatsansnew(page: number){
-        this.datsansnew=[];
-        this.tongpage=this.datsans.length/10;
-        let i=(page-1)*10;
-        let k;
-        if (page <= this.tongpage) {
-            k = 10;
-        } else {
-            k = this.datsans.length % 10;
-        }
-
-        for (let j = 0; j < k; j++) {
-            if (j==10) {
-                break;
-            }
-            this.datsansnew.push(this.datsans[i+j]);
-        }
-        this.taomangtrang(page);
-    }
     taomangtrang(page: number) {
         var mang: Array<boolean> = [];
         for (let i = 0; i < this.tongpage; i++) {
@@ -90,22 +76,24 @@ export class ThongTinDatSansComponent implements OnInit {
         mang[page - 1] = true;
         this.mangtrang = mang;
 
+        console.log(mang);
+        
     }
     Previous() {
         if (this.page > 1) {
             this.page--;
-            this.taodatsansnew(this.page);
+            this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time, this.page);
         }
     }
     Next() {
         if (this.page < this.tongpage) {
             this.page++;
-            this.taodatsansnew(this.page);
+            this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time, this.page);
         }
     }
     chontrang(page: number) {
         this.page = page;
-        this.taodatsansnew(this.page);
+        this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time, this.page);
     }
 
     xacnhan(iddatsan: number){
@@ -117,7 +105,7 @@ export class ThongTinDatSansComponent implements OnInit {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time);
+                this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time,this.page);
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -148,7 +136,8 @@ export class ThongTinDatSansComponent implements OnInit {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time);
+                        this.page=1;
+                        this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time,this.page);
                     }
                 });
             }
@@ -156,7 +145,8 @@ export class ThongTinDatSansComponent implements OnInit {
     }
     ChangeStatus(){
         this.trangthai=!this.trangthai;
-        this.getAllDatSanByInnkeeperAndIdquan(this.idquan,this.trangthai,this.time)
+        this.page=1;
+        this.getAllDatSanByInnkeeperAndIdquan(this.idquan,this.trangthai,this.time,this.page);
     }
 }
 

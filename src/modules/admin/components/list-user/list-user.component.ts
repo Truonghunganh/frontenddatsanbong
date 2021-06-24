@@ -130,7 +130,6 @@ export class ListUserComponent implements OnInit {
                     icon: 'error',
                     title: data.message,
                 })
-                this.router.navigate(['/admin/quans'])
             }
         })
     }

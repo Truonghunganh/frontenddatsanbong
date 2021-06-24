@@ -30,11 +30,14 @@ export class LayoutInnkeeper1Component implements OnInit, OnDestroy {
         //this.appCommonService.thaydoiHttpOptions();
         if (this.appCommonService.getToken()){
             this.authService.checkTokenInnkeeper().subscribe(data => {
+                console.log(data);
+                
                 if (data.status) {
                     this.user = data.innkeeper;
                     this.checkuser = true;
                     this.changeDetectorRef.detectChanges();
                 } else {
+                    this.appCommonService.logout();
                     this.router.navigate(['/auth/login']);
                 }
             })
