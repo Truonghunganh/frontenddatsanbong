@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Chart, ChartOptions, ChartDataSets } from 'chart.js';
 import { Color } from 'ng2-charts';
 import { environment } from './../../../../environments/environment';
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-danh-thu-by-innkeepe',
@@ -87,10 +88,14 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private authService: AuthService,
         private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService,
         ) {}
     ngOnInit() {
-        this.idquan=Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        this.checkTokenInnkeeperAndIdquan(this.idquan);
+        if (this.appCommonService.getToken()) {
+            this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
+            this.checkTokenInnkeeperAndIdquan(this.idquan);
+        }
+
     }
     checkTokenInnkeeperAndIdquan(idquan: number) {
         this.checkquan= false;

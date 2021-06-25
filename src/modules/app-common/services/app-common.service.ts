@@ -33,8 +33,6 @@ export class AppCommonService {
             headers: new HttpHeaders({
                 'token': JSON.parse(JSON.stringify(token)),
         })};
-        console.log(await this.httpOptions);
-        
         return await this.httpOptions;
     }
     // getHttpOptions() {

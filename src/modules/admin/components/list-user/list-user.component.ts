@@ -3,6 +3,7 @@ import {AdminService} from '../../services/admin.service'
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { User} from '../../models/admin.model'
+import { AppCommonService } from '@common/services';
 @Component({
     selector: 'sb-list-user',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,14 +14,17 @@ export class ListUserComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private changeDetectorRef: ChangeDetectorRef,
-        private router: Router
+        private router: Router,
+        private appCommonService: AppCommonService,
     ) {}
     checkusers=false;
     users:any;
     ngOnInit() {
-        this.page=1;
-        this.getUsersByAdmin(this.page);
-    }
+        if (this.appCommonService.getToken()) {
+            this.page = 1;
+            this.getUsersByAdmin(this.page);
+        }
+   }
     chinhsua=true;
     Cancel() {
         this.chinhsua=true;

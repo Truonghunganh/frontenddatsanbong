@@ -4,6 +4,7 @@ import { InnkeeperService } from "../../services/innkeeper.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from './../../../../environments/environment';
 import { AuthService } from '../../../auth/services/auth.service'
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-edit-quan-by-token-innkeepe',
@@ -35,6 +36,7 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private authService: AuthService,
+        private appCommonService: AppCommonService,
 
     ) {}
     url = environment.url;
@@ -43,8 +45,10 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
     quan:any;
     idquan:number=0;
     ngOnInit() {
-        this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        this.getQuanByIdAndTokenInnkeeper(this.idquan);
+        if (this.appCommonService.getToken()) {
+            this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
+            this.getQuanByIdAndTokenInnkeeper(this.idquan);
+        }
     }
 
     getQuanByIdAndTokenInnkeeper(id: number){

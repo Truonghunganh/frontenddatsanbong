@@ -4,6 +4,7 @@ import { environment } from './../../../../environments/environment';
 import { Router } from '@angular/router';
 import {AuthService} from '../../../auth/services/auth.service'
 import Swal from 'sweetalert2';
+import { AppCommonService } from '@common/services';
 @Component({
     selector: 'sb-dashboard-listquans',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,15 +16,19 @@ export class DashboardListquansComponent implements OnInit {
         private dashboardService: DashboardService,
         private authService: AuthService,
         private router: Router,
-        private changeDetectorRef: ChangeDetectorRef
-
+        private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService
         ) {}
     quans: any;
     checkquans=false;
     url = environment.url;
     urlCLU= environment.urlCLU;
     ngOnInit() {
-        this.getListquans();
+        if (this.appCommonService.getToken()) {
+            this.getListquans();
+        }
+
+        
     }
 
     mangreview=new Array();

@@ -1,3 +1,4 @@
+import { AppCommonService } from './../../../app-common/services/app-common.service';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +25,8 @@ export class UserEditComponent implements OnInit {
         private changeDetectorRef: ChangeDetectorRef,
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private appCommonService: AppCommonService,
     
     ) {}
     ngOnInit() {
@@ -37,7 +39,10 @@ export class UserEditComponent implements OnInit {
             password: ['', Validators.required],
             confirmpassword: ['', Validators.required],
         });
-        this.checkTokenUser();
+        if (this.appCommonService.getToken()) {
+            this.checkTokenUser();
+        }
+
     }
     checkTokenUser(){
         this.checkuser=false;

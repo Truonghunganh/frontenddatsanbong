@@ -21,6 +21,10 @@ export class GetQuansByInnkeeperComponent implements OnInit {
     url = environment.url;
     urlCLU = environment.urlCLU;
     ngOnInit() {
+        if (this.appCommonService.getToken()) {
+            this.getListquans();
+        }
+
         this.getListquans();
  
     }
@@ -29,8 +33,6 @@ export class GetQuansByInnkeeperComponent implements OnInit {
     getListquans() {
         this.checkquans= false;
         this.changeDetectorRef.detectChanges();
-        console.log(this.appCommonService.httpOptions);
-        
         this.dashboardService.getListQuansByTokenInnkeeper().subscribe(data=>{
             if(data.status){
                 this.quans=data.quans;

@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { San1 } from '../../models/innkeeper.model';
 
 import { AuthService } from '../../../auth/services/auth.service'
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-edit-san-by-innkeepe',
@@ -23,6 +24,7 @@ export class EditSanByInnkeepeComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private authService: AuthService,
+        private appCommonService: AppCommonService,
 
     ) {}
     id=0;
@@ -31,8 +33,11 @@ export class EditSanByInnkeepeComponent implements OnInit {
     quan:any;
     url = environment.url;
     ngOnInit() {
-        this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-        this.getSanByInnkeeper(this.id);
+        if (this.appCommonService.getToken()) {
+            this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+            this.getSanByInnkeeper(this.id);
+        }
+
     }
     getSanByInnkeeper(id:number){
         this.checkquan=false;

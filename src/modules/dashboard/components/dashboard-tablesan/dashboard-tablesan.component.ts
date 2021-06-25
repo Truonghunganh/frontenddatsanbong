@@ -1,3 +1,4 @@
+import { AppCommonService } from '@common/services';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DashboardService } from "../../services/dashboard.service";
 import { environment } from './../../../../environments/environment';
@@ -18,9 +19,9 @@ export class DashboardTablesanComponent implements OnInit {
         private dashboardService: DashboardService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private changeDetectorRef: ChangeDetectorRef,
         private authService: AuthService,
+        private appCommonService: AppCommonService,
     ) { }
     idquan=1;
     sans: any;
@@ -32,10 +33,13 @@ export class DashboardTablesanComponent implements OnInit {
     today = new Date().toISOString().slice(0, 10);
     ngayvagio:string="";
     ngOnInit() {
-        this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        this.ngayvagio = new Date().toISOString().slice(0, 10);
-        this.getDatSansvaSansByUserAndIdquanAndNgay(this.idquan, this.ngayvagio);
-        this.xembinhluan();
+        if(this.appCommonService.getToken()){
+            this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
+            this.ngayvagio = new Date().toISOString().slice(0, 10);
+            this.getDatSansvaSansByUserAndIdquanAndNgay(this.idquan, this.ngayvagio);
+            this.xembinhluan();
+        }
+        
     }
     chonngay(ngay :any){
         this.ngayvagio = ngay.target.value;
@@ -219,17 +223,19 @@ export class DashboardTablesanComponent implements OnInit {
         this.checkcomments = false;
         this.page= 1;
         this.dashboardService.getAllCommentCuaMotQuan(this.idquan).subscribe(data => {
-            if (data.status) {
-                this.comments = data.comments;
-                for (let i = 0; i < this.comments.length; i++) {
-                    this.mangreview[i] = this.taomotmangreview(Math.round(this.comments[i].review));
-                    this.mangBL[i] = false;
-                }
-                this.tongpage = this.comments.length / 10 + 1;
-                this.taoBLnew(this.page);
-                this.checkcomments = true;
-                this.changeDetectorRef.detectChanges();
-            } 
+            // console.log(data);
+            
+            // if (data.status) {
+            //     this.comments = data.comments;          
+            //     for (let i = 0; i < this.comments.length; i++) {
+            //         this.mangreview[i] = this.taomotmangreview(Math.round(this.comments[i].review));
+            //         this.mangBL[i] = false;
+            //     }
+            //     this.tongpage = this.comments.length / 10 + 1;
+            //     this.taoBLnew(this.page);
+            //     this.checkcomments = true;
+            //     this.changeDetectorRef.detectChanges();
+            // } 
         })
     }
     binhluan ="";

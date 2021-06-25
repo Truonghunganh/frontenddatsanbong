@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Thaydoidatsan } from '../../models/innkeeper.model'
 import { AuthService } from '../../../auth/services/auth.service';
+import { AppCommonService } from '@common/services';
 
 
 @Component({
@@ -33,9 +34,12 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
         private router: Router,
         private changeDetectorRef: ChangeDetectorRef,
         private authService: AuthService,
+        private appCommonService: AppCommonService,
     ) { }
    ngOnInit() {
-       this.checktoken();
+       if (this.appCommonService.getToken()) {
+           this.checktoken();
+       }
    }
     checktoken() {
         this.authService.checkTokenInnkeeper().subscribe(data => {

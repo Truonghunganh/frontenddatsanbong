@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from "../../services/admin.service";
 import { AuthService } from '../../../auth/services/auth.service'
 import Swal from 'sweetalert2';
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-danh-thu-list-quan-by-admin',
@@ -21,13 +22,13 @@ export class DanhThuListQuanByAdminComponent implements OnInit {
     constructor(
         private dashboardService: AdminService,
         private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private authService: AuthService,
         private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService,
     ) { }
     ngOnInit() {
-        this.getDoanhThuListQuanByAdmin();
-
+        if (this.appCommonService.getToken()) {
+            this.getDoanhThuListQuanByAdmin();
+        }
     }
     tinhtong(mang: any){
         let tong=0;

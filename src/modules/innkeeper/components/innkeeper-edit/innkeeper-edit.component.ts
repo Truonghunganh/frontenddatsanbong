@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Innkeeper } from '../../models/innkeeper.model';
 
 import { AuthService } from '../../../auth/services/auth.service'
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-innkeeper-edit',
@@ -19,22 +20,24 @@ export class InnkeeperEditComponent implements OnInit {
         private dashboardService: InnkeeperService,
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
-        private authService: AuthService
-
+        private authService: AuthService,
+        private appCommonService: AppCommonService,
     ) {
     }
     checkInnkeeper=false;
     innkeeper:any;
     ngOnInit() {
-        this.checkInnkeeper=false;
-        this.authService.checkTokenInnkeeper().subscribe(data=>{
-            if(data.status){
-                this.innkeeper=data.innkeeper;
-                this.checkInnkeeper=true;
-                this.changeDetectorRef.detectChanges();
-            }
-            
-        })
+        if (this.appCommonService.getToken()) {
+            this.checkInnkeeper = false;
+            this.authService.checkTokenInnkeeper().subscribe(data => {
+                if (data.status) {
+                    this.innkeeper = data.innkeeper;
+                    this.checkInnkeeper = true;
+                    this.changeDetectorRef.detectChanges();
+                }
+
+            })
+        }
     }
     Edit(name: string, gmail: string, address: string, password: string){
         Swal.fire({

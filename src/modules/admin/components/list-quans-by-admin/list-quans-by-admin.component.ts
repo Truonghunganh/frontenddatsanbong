@@ -4,6 +4,7 @@ import { environment } from './../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service'
 import Swal from 'sweetalert2';
+import { AppCommonService } from '@common/services';
 
 
 @Component({
@@ -17,12 +18,16 @@ export class ListQuansByAdminComponent implements OnInit {
         private dashboardService: AdminService,
         private authService: AuthService,
         private router: Router,
-        private changeDetectorRef: ChangeDetectorRef
+        private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService
 
     ) { }
     ngOnInit() {
-        this.page=1;
-        this.getListquans(this.page);
+        if (this.appCommonService.getToken()) {
+            this.page = 1;
+            this.getListquans(this.page);
+        }
+
     }
     url = environment.url;
 

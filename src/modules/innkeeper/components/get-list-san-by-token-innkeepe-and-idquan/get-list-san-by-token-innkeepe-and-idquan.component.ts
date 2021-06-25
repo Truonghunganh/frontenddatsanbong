@@ -4,6 +4,7 @@ import { environment } from './../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../auth/services/auth.service';
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-get-list-san-by-token-innkeepe-and-idquan',
@@ -18,6 +19,7 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         private router: Router,
         private changeDetectorRef: ChangeDetectorRef,
         private authService: AuthService,
+        private appCommonService: AppCommonService,
     ) { }
 
     idquan = 1;
@@ -30,8 +32,10 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     ngayvagio: string = "";
     checkdatsan = false;
     ngOnInit() {
-        this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        this.checkTokenInnkeeperAndIdquan(this.idquan);
+        if (this.appCommonService.getToken()) {
+            this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
+            this.checkTokenInnkeeperAndIdquan(this.idquan);
+        }
     }
     checkTokenInnkeeperAndIdquan(idquan: number) {
         this.checkquan=false;

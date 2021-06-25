@@ -6,6 +6,7 @@ import { environment } from './../../../../environments/environment';
 import { Innkeeper, San } from '../../models/innkeeper.model';
 
 import { AuthService } from '../../../auth/services/auth.service'
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-add-san-by-innkeeper',
@@ -20,12 +21,13 @@ export class AddSanByInnkeeperComponent implements OnInit {
         private activatedRoute: ActivatedRoute, 
         private authService: AuthService,
         private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService,
     ) {}
     ngOnInit() {
-        this.idquan=Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        console.log(this.idquan);
-        
-        this.checkTokenInnkeeperAndIdquan(this.idquan);
+        if (this.appCommonService.getToken()) {
+            this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
+            this.checkTokenInnkeeperAndIdquan(this.idquan);
+        }
     }
     checkquan=false;
     quan:any;
@@ -77,8 +79,6 @@ export class AddSanByInnkeeperComponent implements OnInit {
         }).then((result) => {
             if (result.isConfirmed) {
                 this.dashboardService.addSanByInnkeeper(san).subscribe(data => {
-                    console.log(data);
-
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',

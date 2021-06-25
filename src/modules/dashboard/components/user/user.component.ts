@@ -4,6 +4,7 @@ import {  Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service'
 import Swal from 'sweetalert2';
 import { formatDate } from '@angular/common';
+import { AppCommonService } from '@common/services';
 
 
 @Component({
@@ -18,11 +19,14 @@ export class UserComponent implements OnInit {
         private dashboardService: DashboardService,
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private appCommonService: AppCommonService
     ) { }
     ngOnInit() {
-        this.page = 1;
-        this.getListDatSanByUserToken(this.page);
+        if (this.appCommonService.getToken()) {
+            this.page = 1;
+            this.getListDatSanByUserToken(this.page);
+        }
     }
     datsans: any;
     getListDatSanByUserToken(page: number) {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service'
 import { environment } from './../../../../environments/environment';
 import Swal from 'sweetalert2';
+import { AppCommonService } from '@common/services';
 
 
 @Component({
@@ -18,12 +19,12 @@ export class InnkeeperComponent implements OnInit {
     constructor(
         private dashboardService: InnkeeperService,
         private changeDetectorRef: ChangeDetectorRef,
-        private router: Router,
-        private authService: AuthService
+        private appCommonService: AppCommonService,
     ) { }
     ngOnInit() {
-        this.getListQuansByTokenInnkeeperChuaPheDuyet();
-
+        if (this.appCommonService.getToken()) {
+            this.getListQuansByTokenInnkeeperChuaPheDuyet();
+        }
     }
     url = environment.url;
 

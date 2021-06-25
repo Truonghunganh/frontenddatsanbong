@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../auth/services/auth.service';
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-list-sans-by-id-quan',
@@ -20,6 +21,7 @@ export class ListSansByIdQuanComponent implements OnInit {
         private location: Location,
         private changeDetectorRef: ChangeDetectorRef,
         private authService: AuthService,
+        private appCommonService: AppCommonService,
     ) { }
     idquan = 1;
     sans: any;
@@ -31,9 +33,11 @@ export class ListSansByIdQuanComponent implements OnInit {
     ngayvagio: string = "";
     checkdatsans = false;
     ngOnInit() {
-        this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
-        this.ngayvagio = new Date().toISOString().slice(0, 10);
-        this.getDatSansvaSansByAdminAndIdquanAndNgay(this.idquan, this.ngayvagio);
+        if (this.appCommonService.getToken()) {
+            this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
+            this.ngayvagio = new Date().toISOString().slice(0, 10);
+            this.getDatSansvaSansByAdminAndIdquanAndNgay(this.idquan, this.ngayvagio);
+        }
     }
     chonngay(ngay: any) {
         this.ngayvagio = ngay.target.value;

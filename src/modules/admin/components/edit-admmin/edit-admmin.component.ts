@@ -1,3 +1,4 @@
+import { AppCommonService } from './../../../app-common/services/app-common.service';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from "../../services/admin.service";
@@ -18,24 +19,28 @@ export class EditAdmminComponent implements OnInit {
         private dashboardService: AdminService,
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private appCommonService: AppCommonService,
 
     ) {
     }
     checkadmin = false;
     admin: any;
     ngOnInit() {
-        this.checkadmin = false;
-        this.authService.checkTokenAdmin().subscribe(data => {
-            if (data.status) {
-                this.admin = data.admin;
-                this.checkadmin = true;
-                this.changeDetectorRef.detectChanges();
-            }
-            else{
-                this.router.navigate(['/auth/login'])
-            }
-        })
+        if (this.appCommonService.getToken()) {
+            this.checkadmin = false;
+            this.authService.checkTokenAdmin().subscribe(data => {
+                if (data.status) {
+                    this.admin = data.admin;
+                    this.checkadmin = true;
+                    this.changeDetectorRef.detectChanges();
+                }
+                else {
+                    this.router.navigate(['/auth/login'])
+                }
+            })
+        }
+
     }
     Cancel(){
         this.router.navigate(['/admin/admin'])

@@ -3,6 +3,7 @@ import { AdminService} from "../../services/admin.service";
 import { environment } from './../../../../environments/environment';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AppCommonService } from '@common/services';
 
 
 
@@ -16,13 +17,15 @@ export class AdmminComponent implements OnInit {
     constructor(
         private dashboardService: AdminService,
         private router: Router,
-        private changeDetectorRef: ChangeDetectorRef
+        private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService
 
     ) { }
     ngOnInit() {
-        this.page=1;
-        this.getListquans(this.page);
-
+        if (this.appCommonService.getToken()) {
+            this.page = 1;
+            this.getListquans(this.page);
+        }
     }
     url = environment.url;
     checkadmin=false;

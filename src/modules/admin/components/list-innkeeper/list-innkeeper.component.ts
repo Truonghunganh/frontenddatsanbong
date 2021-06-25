@@ -3,6 +3,7 @@ import { AdminService } from '../../services/admin.service'
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { User } from '../../models/admin.model'
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-list-innkeeper',
@@ -14,7 +15,8 @@ export class ListInnkeeperComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private changeDetectorRef: ChangeDetectorRef,
-        private router: Router
+        private router: Router,
+        private appCommonService: AppCommonService,
     ) { }
     deleteUser(user: any){
         Swal.fire({
@@ -51,8 +53,10 @@ export class ListInnkeeperComponent implements OnInit {
     checkusers = false;
     users: any;
     ngOnInit() {
-        this.page = 1;
-        this.getUsersByAdmin(this.page);
+        if (this.appCommonService.getToken()) {
+            this.page = 1;
+            this.getUsersByAdmin(this.page);
+        }
     }
     chinhsua = true;
     Cancel() {
@@ -148,12 +152,30 @@ export class ListInnkeeperComponent implements OnInit {
     timkiem = "";
     search1 = true;
     search() {
-        console.log(this.timkiem);
         this.chinhsua = true;
         this.checkusers = false;
         this.page = 1;
+        if (!this.timkiem) {
+            this.getUsersByAdmin(this.page);
+        } else {
+            this.adminService.searchUsersByAdmin("innkeeper", this.timkiem).subscribe(data => {
+                if (data.status) {
+                    this.search1 = false;
+                    this.users = data.users;
+                    this.checkusers = true;
+                    this.changeDetectorRef.detectChanges();
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    })
+                    this.router.navigate(['/admin/quans'])
+                }
+            });
+
+        }
         this.adminService.searchUsersByAdmin("innkeeper", this.timkiem).subscribe(data => {
-            console.log(data);
             if (data.status) {
                 this.search1 = false;
                 this.users = data.users;

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@
 import { AdminService } from "../../services/admin.service";
 import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Color } from 'ng2-charts';
+import { AppCommonService } from '@common/services';
 
 @Component({
     selector: 'sb-doanh-thu-cua-admin-theo-nam',
@@ -72,10 +73,14 @@ export class DoanhThuCuaAdminTheoNamComponent implements OnInit {
     constructor(
         private dashboardService: AdminService,
         private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService
     ) { }
     ngOnInit() {
-        this.getDoanhThuCuaAdminTheoNam(this.nam);
-        this.getDoanhThuListQuanCuaMotNamByAdmin(this.nam);
+        if (this.appCommonService.getToken()) {
+            this.getDoanhThuCuaAdminTheoNam(this.nam);
+            this.getDoanhThuListQuanCuaMotNamByAdmin(this.nam);
+        }
+        
     }
     checkdoanhthusListQuanCuaMotNam=false;
     doanhthusListQuanCuaMotNam: any;
