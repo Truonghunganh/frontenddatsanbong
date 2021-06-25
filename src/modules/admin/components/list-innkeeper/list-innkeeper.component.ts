@@ -98,7 +98,6 @@ export class ListInnkeeperComponent implements OnInit {
         this.chinhsua = true;
         this.checkusers = false;
         this.adminService.getUsersByAdmin("innkeeper", page).subscribe(data => {
-            console.log(data);
             if (data.status) {
                 this.users = data.users;
                 this.tongpage = data.tongpage;

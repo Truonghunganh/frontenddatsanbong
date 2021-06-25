@@ -33,7 +33,7 @@ export class ThongTinDatSansComponent implements OnInit {
             this.time = new Date().toISOString().slice(0, 10) + " 00:00:00";
             this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'))
             this.checktoken(this.idquan);
-}
+        }
     }
     checktoken(idquan: number) {
         this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {

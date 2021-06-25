@@ -223,19 +223,17 @@ export class DashboardTablesanComponent implements OnInit {
         this.checkcomments = false;
         this.page= 1;
         this.dashboardService.getAllCommentCuaMotQuan(this.idquan).subscribe(data => {
-            // console.log(data);
-            
-            // if (data.status) {
-            //     this.comments = data.comments;          
-            //     for (let i = 0; i < this.comments.length; i++) {
-            //         this.mangreview[i] = this.taomotmangreview(Math.round(this.comments[i].review));
-            //         this.mangBL[i] = false;
-            //     }
-            //     this.tongpage = this.comments.length / 10 + 1;
-            //     this.taoBLnew(this.page);
-            //     this.checkcomments = true;
-            //     this.changeDetectorRef.detectChanges();
-            // } 
+            if (data.status) {
+                this.comments = data.comments;          
+                for (let i = 0; i < this.comments.length; i++) {
+                    this.mangreview[i] = this.taomotmangreview(Math.round(this.comments[i].review));
+                    this.mangBL[i] = false;
+                }
+                this.tongpage = this.comments.length / 10 + 1;
+                this.taoBLnew(this.page);
+                this.checkcomments = true;
+                this.changeDetectorRef.detectChanges();
+            } 
         })
     }
     binhluan ="";
