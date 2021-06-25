@@ -41,7 +41,10 @@ export class LoginComponent implements OnInit {
                             }
                         }
                     } else {
-                        this.appCommonService.logout();
+                        if (this.appCommonService.getToken()) {
+                            this.appCommonService.logout();
+                        }
+                        
                         this.checklogin = true;
                         this.changeDetectorRef.detectChanges();
                     }

@@ -111,7 +111,11 @@ export class AdminService {
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
     }
-
+    xoaUsersByAdmin(id: number): Observable<any> {
+        return this.http.delete<any>(environment.url + "/api/v1/users/" + id, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
     editUserByAdmin(user: User): Observable<any> {
         return this.http.put<any>(environment.url + "/api/v1/editUserByAdmin", user, this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)

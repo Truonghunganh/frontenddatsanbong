@@ -29,11 +29,11 @@ export class AppCommonService {
     }
     async setToken(token: any) {
         await this.storage.set('token', JSON.stringify(token));
-        this.httpOptions = {
+        this.httpOptions = await {
             headers: new HttpHeaders({
-                'token': JSON.parse(this.getToken()),
+                'token': JSON.parse(JSON.stringify(token)),
         })};
-        console.log(this.httpOptions);
+        console.log(await this.httpOptions);
         
         return await this.httpOptions;
     }

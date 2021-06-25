@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { AppCommonService } from '@common/services';
 import { InnkeeperService } from "../../services/innkeeper.service";
 import { environment } from './../../../../environments/environment';
 
@@ -11,7 +12,8 @@ import { environment } from './../../../../environments/environment';
 export class GetQuansByInnkeeperComponent implements OnInit {
     constructor(
         private dashboardService: InnkeeperService,
-        private changeDetectorRef: ChangeDetectorRef
+        private changeDetectorRef: ChangeDetectorRef,
+        private appCommonService: AppCommonService
 
     ) { }
     quans: any;
@@ -26,6 +28,9 @@ export class GetQuansByInnkeeperComponent implements OnInit {
     user="innkeeper";
     getListquans() {
         this.checkquans= false;
+        this.changeDetectorRef.detectChanges();
+        console.log(this.appCommonService.httpOptions);
+        
         this.dashboardService.getListQuansByTokenInnkeeper().subscribe(data=>{
             if(data.status){
                 this.quans=data.quans;

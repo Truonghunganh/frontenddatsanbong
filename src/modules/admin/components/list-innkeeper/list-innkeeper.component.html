@@ -30,6 +30,7 @@
                             <th>Số điện thoại</th>
                             <th>gmail</th>
                             <th>chỉnh sửa thông tin</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,9 @@
                             <td>{{user.gmail}}</td>
                             <td>
                                 <button class="btn btn-success" (click)="cailai(user)">chọn</button>
+                            </td>
+                            <td>
+                                <fa-icon (click)="deleteUser(user)" [icon]='["fas","trash"]' class='fas fas-trash fa-2x'></fa-icon>
                             </td>
                         </tr>
                     </tbody>

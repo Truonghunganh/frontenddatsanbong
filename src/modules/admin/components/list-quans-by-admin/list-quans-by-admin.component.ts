@@ -80,6 +80,7 @@ export class ListQuansByAdminComponent implements OnInit {
     }
     getListquans(page:number) {
         this.checkquans = false;
+        this.changeDetectorRef.detectChanges();
         this.dashboardService.getListQuansDaPheDuyetByTokenAdmin(page).subscribe(data => {
             if (data.status) {
                 this.quans = data.quans;

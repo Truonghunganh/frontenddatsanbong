@@ -77,6 +77,39 @@ export class ListUserComponent implements OnInit {
             }
         })
     }
+    deleteUser(user: any) {
+        Swal.fire({
+            html: '<h1 style="color: #41c04d;">Bạn có muốn xóa người dùng này không</h1>' +
+                '<table style="width: 100%;" border="1">' +
+                '<tr><td>tên  </td><td>' + user.name + '</td></tr>' +
+                '<tr><td>Địa chỉ </td><td>' + user.address + '</td></tr>' +
+                '<tr><td>Số điện Thoại </td><td>' + user.phone + '</td></tr>' +
+                '<tr><td>Gmail </td><td>' + user.gmail + '</td></tr></table>',
+            showCancelButton: true,
+            confirmButtonText: `Xóa chủ sân`,
+        }).then(result => {
+            if (result.value) {
+                this.adminService.xoaUsersByAdmin(user.id).subscribe(data => {
+                    if (data.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Xóa thành công',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        this.getUsersByAdmin(this.page);
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: data.message,
+                        })
+                    }
+                });
+            }
+        });
+    }
+
     page = 1;
     tongpage = 0;
     mangtrang: any;
@@ -119,18 +152,23 @@ export class ListUserComponent implements OnInit {
         this.chinhsua = true;
         this.checkusers = false;
         this.page=1;
-        this.adminService.searchUsersByAdmin("user",this.timkiem).subscribe(data =>{
-            if (data.status) {
-                this.search1=false;
-                this.users = data.users;
-                this.checkusers = true;
-                this.changeDetectorRef.detectChanges();
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
-            }
-        })
+        if (!this.timkiem) {
+            this.getUsersByAdmin(this.page);      
+        }else{
+            this.adminService.searchUsersByAdmin("user", this.timkiem).subscribe(data => {
+                if (data.status) {
+                    this.search1 = false;
+                    this.users = data.users;
+                    this.checkusers = true;
+                    this.changeDetectorRef.detectChanges();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    })
+                }
+            })
+        }
+        
     }
 }
