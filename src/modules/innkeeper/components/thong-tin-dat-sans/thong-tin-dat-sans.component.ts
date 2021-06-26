@@ -96,7 +96,7 @@ export class ThongTinDatSansComponent implements OnInit {
         this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time, this.page);
     }
 
-    xacnhan(iddatsan: number,xacnhan:Boolean){
+    xacnhan(iddatsan: number,xacnhan:boolean){
         this.dashboardService.xacNhanDatsanByInnkeeper(iddatsan,xacnhan).subscribe(data=>{
             if (data.status) {
                 Swal.fire({
