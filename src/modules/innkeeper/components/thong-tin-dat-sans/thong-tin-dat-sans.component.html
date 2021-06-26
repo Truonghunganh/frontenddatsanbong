@@ -45,7 +45,8 @@
                                                 <th>Tên Người đặt</th>
                                                 <th>Số điện thoại người đặt</th>
                                                 <th>giờ đặt sân</th>
-                                                <th>chủ quán xác nhận</th>
+                                                <th>muốn chưa xác nhận</th>
+                                                <th>Xóa</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,7 +59,11 @@
                                                 <td>{{datsan.user.phone}}</td>
                                                 <td>{{datsan.start_time}}</td>
                                                 <td>
-                                                    <input type="button" class="btn btn-primary" value="đã xán nhận" />
+                                                    <input type="button" class="btn btn-primary" (click)="xacnhan(datsan.id,0)" value="xác nhận" />
+                                                </td>
+                                                <td>
+                                                    <fa-icon (click)="deleteDatSan(datsan)" [icon]='["fas","trash"]' class='fas fas-trash fa-2x'>
+                                                    </fa-icon>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -109,7 +114,7 @@
                                                 <td>{{datsan.user.phone}}</td>
                                                 <td>{{datsan.start_time}}</td>
                                                 <td>
-                                                    <input type="button" class="btn btn-primary" (click)="xacnhan(datsan.id)"
+                                                    <input type="button" class="btn btn-primary" (click)="xacnhan(datsan.id,1)"
                                                         value="xác nhận" />
                                                 </td>
                                                 <td>

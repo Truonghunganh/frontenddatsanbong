@@ -24,9 +24,6 @@ export class GetQuansByInnkeeperComponent implements OnInit {
         if (this.appCommonService.getToken()) {
             this.getListquans();
         }
-
-        this.getListquans();
- 
     }
     hienthivitricuaminh = true;
     user="innkeeper";
