@@ -76,8 +76,6 @@ export class ThongTinDatSansComponent implements OnInit {
         mang[page - 1] = true;
         this.mangtrang = mang;
 
-        console.log(mang);
-        
     }
     Previous() {
         if (this.page > 1) {
@@ -138,6 +136,11 @@ export class ThongTinDatSansComponent implements OnInit {
                         });
                         this.page=1;
                         this.getAllDatSanByInnkeeperAndIdquan(this.idquan, this.trangthai, this.time,this.page);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: data.message,
+                        })
                     }
                 });
             }

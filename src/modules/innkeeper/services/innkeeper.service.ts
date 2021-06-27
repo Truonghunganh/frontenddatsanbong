@@ -118,7 +118,7 @@ export class InnkeeperService {
         )
     }
 
-    xacNhanDatsanByInnkeeper(iddatsan: number,xacnhan:Boolean): Observable<any> {
+    xacNhanDatsanByInnkeeper(iddatsan: number,xacnhan:boolean): Observable<any> {
         return this.http.put<any>(environment.url + "/api/v1/xacNhanDatsanByInnkeeper", { "iddatsan": iddatsan,"xacnhan": xacnhan}, this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
