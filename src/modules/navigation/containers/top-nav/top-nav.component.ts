@@ -34,7 +34,17 @@ export class TopNavComponent implements OnInit {
                     this.checkuser = true;
                     this.changeDetectorRef.detectChanges();
                 } else {
-                    this.router.navigate(['/auth/login']);
+                    this.appCommonService.setTokenSai(true);
+                    this.appCommonService.resetHttpOptions();
+                    this.authService.checkTokenAdmin().subscribe(data => {
+                        if (data.status) {
+                            this.user = data.admin;
+                            this.checkuser = true;
+                            this.changeDetectorRef.detectChanges();
+                        } else {
+                            this.router.navigate(['/auth/login']);
+                        }
+                    });
                 }
             })
         } else {

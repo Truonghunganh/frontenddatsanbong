@@ -23,6 +23,11 @@ export class ListQuansByAdminComponent implements OnInit {
 
     ) { }
     ngOnInit() {
+        if (this.appCommonService.tokenSai != false) {
+            this.appCommonService.tokenSai = false;
+            this.appCommonService.resetHttpOptions();
+            this.changeDetectorRef.detectChanges();
+        }
         if (this.appCommonService.getToken()) {
             this.page = 1;
             this.getListquans(this.page);

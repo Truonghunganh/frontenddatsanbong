@@ -37,6 +37,12 @@ export class LoginComponent implements OnInit {
                             } else {
                                 if (result.user.role == "admin") {
                                     this.router.navigate(['/admin/quans']);
+                                } else {
+                                    if (this.appCommonService.getToken()) {
+                                        this.appCommonService.logout();
+                                    }
+                                    this.checklogin = true;
+                                    this.changeDetectorRef.detectChanges();
                                 }
                             }
                         }
@@ -44,7 +50,6 @@ export class LoginComponent implements OnInit {
                         if (this.appCommonService.getToken()) {
                             this.appCommonService.logout();
                         }
-                        
                         this.checklogin = true;
                         this.changeDetectorRef.detectChanges();
                     }
@@ -54,7 +59,8 @@ export class LoginComponent implements OnInit {
             this.checklogin = true;
             this.changeDetectorRef.detectChanges();
         }
-        
+        this.changeDetectorRef.detectChanges();
+
     }
     phone="";
     password="";
@@ -63,6 +69,7 @@ export class LoginComponent implements OnInit {
         const user = new User(phone, password);
         this.authService.login(user).subscribe(result => {
             if (result.status) {
+                this.changeDetectorRef.detectChanges();
                 if (result.user.role == "user") this.router.navigate(['/dashboard/quans']);
                 if (result.user.role == "innkeeper") this.router.navigate(['/innkeeper/quans']);
                 if (result.user.role == "admin") this.router.navigate(['/admin/quans']);

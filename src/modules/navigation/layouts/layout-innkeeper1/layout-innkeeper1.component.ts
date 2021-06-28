@@ -27,6 +27,8 @@ export class LayoutInnkeeper1Component implements OnInit, OnDestroy {
     checkuser = false;
 
     ngOnInit() {
+        console.log(7,this.appCommonService.tokenSai);
+        
          if (this.appCommonService.getToken()){
             this.authService.checkTokenInnkeeper().subscribe(data => {
                 if (data.status) {
@@ -34,9 +36,19 @@ export class LayoutInnkeeper1Component implements OnInit, OnDestroy {
                     this.checkuser = true;
                     this.changeDetectorRef.detectChanges();
                 } else {
-                    this.router.navigate(['/auth/login']);
+                    this.appCommonService.setTokenSai(true);
+                    this.appCommonService.resetHttpOptions();
+                    this.authService.checkTokenInnkeeper().subscribe(data => {
+                        if (data.status) {
+                            this.user = data.innkeeper;
+                            this.checkuser = true;
+                            this.changeDetectorRef.detectChanges();
+                        } else {
+                            this.router.navigate(['/auth/login']);
+                        }
+                    });
                 }
-            })
+            });
         } else {
             this.router.navigate(['/auth/login']);
         }

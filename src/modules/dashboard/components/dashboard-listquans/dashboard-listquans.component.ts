@@ -24,6 +24,11 @@ export class DashboardListquansComponent implements OnInit {
     url = environment.url;
     urlCLU= environment.urlCLU;
     ngOnInit() {
+        if (this.appCommonService.tokenSai != false) {
+            this.appCommonService.tokenSai = false;
+            this.appCommonService.resetHttpOptions();
+            this.changeDetectorRef.detectChanges();
+        }
         if (this.appCommonService.getToken()) {
             this.getListquans();
         }

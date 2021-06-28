@@ -30,7 +30,17 @@ export class LayoutUser1Component implements OnInit, OnDestroy  {
                     this.checkuser = true;
                     this.changeDetectorRef.detectChanges();
                 } else {
-                    this.router.navigate(['/auth/login']);
+                    this.appCommonService.setTokenSai(true);
+                    this.appCommonService.resetHttpOptions();
+                    this.authService.checkTokenUser().subscribe(data => {
+                        if (data.status) {
+                            this.user = data.user;
+                            this.checkuser = true;
+                            this.changeDetectorRef.detectChanges();
+                        } else {
+                            this.router.navigate(['/auth/login']);
+                        }
+                    })
                 }
             })
         } else {

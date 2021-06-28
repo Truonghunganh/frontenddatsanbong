@@ -13,38 +13,38 @@ export class AppCommonService {
             'token': JSON.parse(this.getToken()),
         }),
     };
-    // thaydoiHttpOptions(){
-    //     return this.httpOptions = {
-    //         headers: new HttpHeaders({
-    //             'token': JSON.parse(this.getToken()),
-    //         }),
-    //     };
-    // }
-    
+    public tokenSai=false;
+    setTokenSai(tokenSai:boolean){
+        this.tokenSai=tokenSai;
+    }
+    // public token = false;
+    // public tokenUser = false;
+
+    resetHttpOptions(){
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'token': JSON.parse(this.getToken()),
+            })
+        };
+
+    }
     getToken(){
         return this.storage.get('token');
     }
     logout(){
         this.storage.remove("token");
+        
     }
-    async setToken(token: any) {
-        await this.storage.set('token', JSON.stringify(token));
-        this.httpOptions = await {
+    setToken(token: any) {
+        this.storage.set('token', JSON.stringify(token));
+        
+        this.httpOptions ={
             headers: new HttpHeaders({
                 'token': JSON.parse(JSON.stringify(token)),
-        })};
-        return await this.httpOptions;
+            })
+        };
+        return this.httpOptions;
     }
-    // getHttpOptions() {
-    //      this.httpOptions= {
-    //         headers: new HttpHeaders({
-    //             'token': JSON.parse(this.getToken()),
-    //         })
-    //     };
-    //     console.log(this.httpOptions);
-        
-    //     return this.httpOptions;
-    // }
     getAppCommon$(): Observable<{}> {
         return of({});
     }
