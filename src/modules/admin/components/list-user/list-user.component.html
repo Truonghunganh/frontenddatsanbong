@@ -29,7 +29,7 @@
                             <th>Số điện thoại</th>
                             <th>gmail</th>
                             <th>chỉnh sữa thông tin</th>
-                            <th>Xóa</th>
+                            <th>Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,10 +42,12 @@
                             <td>
                                 <button class="btn btn-success" (click)="cailai(user)">chọn</button>
                             </td>
-                            <td>
-                                <fa-icon (click)="deleteUser(user)" [icon]='["fas","trash"]' class='fas fas-trash fa-2x'></fa-icon>
+                            <td class="custom-control custom-switch">
+                                <input [checked]="user.trangthai" type="checkbox" class="custom-control-input">
+                                <label class="custom-control-label" (click)="thaydoi(user)" for="status">
+                                </label>
                             </td>
-                        </tr>
+                      </tr>
                     </tbody>
                 </table>
             </ng-template>
@@ -82,6 +84,7 @@
             </nav>
         </div>
     </sb-card>
+    <h5 style="text-align: center;">Trang thái sáng lên là cho người dùng đặt sân còn ngược lại thì không cho đặt sân</h5>
 </div>
 <div *ngIf="!chinhsua">
     <sb-card>

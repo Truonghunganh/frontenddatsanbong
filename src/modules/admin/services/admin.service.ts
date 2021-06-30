@@ -106,6 +106,11 @@ export class AdminService {
         return this.http.get<any>(environment.url + "/api/v1/getAllCommentCuaMotQuanByAdmin?idquan=" + idquan, this.appCommonService.httpOptions).
             pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
     }
+    thayDoiTrangThaiUser(iduser: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/thayDoiTrangThaiUser",{ "iduser": iduser}, this.appCommonService.httpOptions).
+            pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
+    }
+
     getUsersByAdmin(user:string,page:number): Observable<any> {
         return this.http.get<any>(environment.url + "/api/v1/users?page=" + page+"&&user="+ user , this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
