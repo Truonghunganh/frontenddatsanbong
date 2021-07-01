@@ -5,35 +5,51 @@
         </h4>
     </div>
     <div class="card-body">
-        <form>
+        <form #formSignin="ngForm" >
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Tên quán</label>
                 <div class="col-lg-9">
-                    <input class="form-control" #name required placeholder="Tên quán" />
+                    <input class="form-control" #name ngModel name="name" required placeholder="Tên quán" />
+                    <div *ngIf="formSignin.controls.name?.errors?.required"
+                        style="color:red">
+                        Tên quán không được để trống
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Địa chỉ quán</label>
                 <div class="col-lg-9">
-                    <input class="form-control" #address required placeholder="Địa chỉ quán" />
+                    <input class="form-control" #address ngModel name="address" required placeholder="Địa chỉ quán" />
+                    <div *ngIf="formSignin.controls.address?.errors?.required" style="color:red">
+                        Địa chỉ quán không được để trống
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">đường link đến địa chỉ quán</label>
                 <div class="col-lg-9">
-                    <input class="form-control" #linkaddress required placeholder="link địa chỉ" />
+                    <input class="form-control" #linkaddress ngModel name="linkaddress" required placeholder="link địa chỉ" />
+                    <div *ngIf="formSignin.controls.linkaddress?.errors?.required" style="color:red">
+                       Line Địa chỉ quán không được để trống
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Vĩ độ</label>
                 <div class="col-lg-9">
-                    <input class="form-control" #vido required placeholder="Vĩ Đồ" />
+                    <input class="form-control" #vido ngModel name="vido" required placeholder="Vĩ Độ" />
+                    <div *ngIf="formSignin.controls.vido?.errors?.required" style="color:red">
+                        Vĩ độ quán không được để trống
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Kinh độ</label>
                 <div class="col-lg-9">
-                    <input class="form-control" #kinhdo required placeholder="Kinh độ" />
+                    <input class="form-control" #kinhdo ngModel name="kinhdo"required placeholder="Kinh độ" />
+                    <div *ngIf="formSignin.controls.kinhdo?.errors?.required" style="color:red">
+                        Kinh độ quán không được để trống
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
@@ -46,7 +62,7 @@
             <div class="form-group row">
                 <div class="col-lg-9 ml-auto text-right">
                     <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
-                    <input type="button" class="btn btn-primary"
+                    <input type="button" class="btn btn-primary" [disabled]="formSignin.invalid"
                         (click)="Add(name.value,address.value,linkaddress.value,vido.value,kinhdo.value)"
                         value="Lưu thông tin" />
                 </div>

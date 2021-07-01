@@ -37,39 +37,50 @@ export class AddQuanByInnkeeperComponent implements OnInit {
     ngOnInit() {
     }
     Add(name: string, address: string, linkaddress: string, vido: string, kinhdo: string){
-        Swal.fire({
-            title: "bạn có muốn thêm quán này không",
-            showCancelButton: true,
-            confirmButtonText: 'Thêm',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const formData = new FormData();
-                formData.append('image', this.file, this.file.name);
-                formData.append('name', name);
-                formData.append('address', address);
-                formData.append('linkaddress', linkaddress);
-                formData.append('vido', vido);
-                formData.append('kinhdo', kinhdo);
-                this.dashboardService.addQuanByInnkeeper(formData).subscribe(data => {
-                    if (data.status) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Bạn đã thêm quán thành công',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        this.router.navigate(['/innkeeper/innkeeper'])
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: data.message,
-                        })
+        if(!this.file?.name){
+            Swal.fire({
+                icon: 'error',
+                title: "bạn chưa chọn hình",
+            });
 
-                    }
-                });
+        }else{
 
-            }
-        })
+            Swal.fire({
+                title: "bạn có muốn thêm quán này không",
+                showCancelButton: true,
+                confirmButtonText: 'Thêm',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const formData = new FormData();
+                    formData.append('image', this.file, this.file.name);
+                    formData.append('name', name);
+                    formData.append('address', address);
+                    formData.append('linkaddress', linkaddress);
+                    formData.append('vido', vido);
+                    formData.append('kinhdo', kinhdo);
+                    this.dashboardService.addQuanByInnkeeper(formData).subscribe(data => {
+                        if (data.status) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Bạn đã thêm quán thành công',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            this.router.navigate(['/innkeeper/innkeeper'])
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: data.message[1],
+                            })
+                            console.log(data.message);
+
+                        }
+                    });
+
+                }
+            });
+        }
+        
                 
     }
     
