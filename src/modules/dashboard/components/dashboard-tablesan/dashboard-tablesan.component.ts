@@ -38,6 +38,8 @@ export class DashboardTablesanComponent implements OnInit {
             this.ngayvagio = new Date().toISOString().slice(0, 10);
             this.getDatSansvaSansByUserAndIdquanAndNgay(this.idquan, this.ngayvagio);
             this.xembinhluan();
+        }else{
+            this.router.navigate(['/auth/login']);
         }
         
     }

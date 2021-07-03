@@ -29,6 +29,11 @@ export class ListQuansByAdminComponent implements OnInit {
             this.changeDetectorRef.detectChanges();
         }
         if (this.appCommonService.getToken()) {
+            try {
+                this.appCommonService.httpOptions.headers.get("token");
+            } catch (error) {
+                this.appCommonService.resetHttpOptions();
+            }
             this.page = 1;
             this.getListquans(this.page);
         }

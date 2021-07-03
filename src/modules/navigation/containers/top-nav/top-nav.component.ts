@@ -28,13 +28,18 @@ export class TopNavComponent implements OnInit {
     ngOnInit() {
         this.checkuser=false;
         if (this.appCommonService.getToken()){
+            try {
+                this.appCommonService.httpOptions.headers.get("token");
+            } catch (error) {
+                this.appCommonService.resetHttpOptions();
+            }
             this.authService.checkTokenAdmin().subscribe(data => {
                 if (data.status) {
                     this.user = data.admin;
                     this.checkuser = true;
                     this.changeDetectorRef.detectChanges();
                 } else {
-                    this.appCommonService.setTokenSai(true);
+                    this.appCommonService.tokenSai = true;
                     this.appCommonService.resetHttpOptions();
                     this.authService.checkTokenAdmin().subscribe(data => {
                         if (data.status) {

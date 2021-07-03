@@ -25,7 +25,14 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.checklogin=false;
         this.changeDetectorRef.detectChanges();
+        
         if(this.appCommonService.getToken()){
+            try {
+                this.appCommonService.httpOptions.headers.get("token");
+            } catch (error) {
+                this.appCommonService.resetHttpOptions();
+            }
+
             this.authService.checkToken().subscribe(
                 result => {
                     if (result.status) {

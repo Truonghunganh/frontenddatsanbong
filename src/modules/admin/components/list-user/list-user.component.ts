@@ -148,8 +148,6 @@ export class ListUserComponent implements OnInit {
     timkiem="";
     search1=true;
     cailai(user: any) {
-        console.log(user);
-        
         this.user = user;
         this.chinhsua = false;
     }

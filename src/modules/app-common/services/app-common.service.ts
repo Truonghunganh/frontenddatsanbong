@@ -23,16 +23,24 @@ export class AppCommonService {
     resetHttpOptions(){
         this.httpOptions = {
             headers: new HttpHeaders({
-                'token': JSON.parse(this.getToken()),
+                'token': JSON.parse(this.getToken1()),
             })
         };
 
     }
-    getToken(){
+    getToken1(){
+        return this.storage.get('token');
+    }
+    getToken() {
         return this.storage.get('token');
     }
     logout(){
         this.storage.remove("token");
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'token': JSON.parse(this.getToken1()),
+            })
+        };
         
     }
     setToken(token: any) {
@@ -40,7 +48,7 @@ export class AppCommonService {
         
         this.httpOptions ={
             headers: new HttpHeaders({
-                'token': JSON.parse(JSON.stringify(token)),
+                'token': JSON.parse(this.getToken1()),
             })
         };
         return this.httpOptions;
