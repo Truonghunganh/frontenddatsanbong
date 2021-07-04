@@ -41,6 +41,10 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         this.checkquan=false;
         this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
             if (!data.status) {
+                Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                });
                 this.router.navigate(['/innkeeper/quans'])
             } else {
                 this.quan=data.quan;
@@ -149,13 +153,7 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
                 this.taoBLnew(this.page);
                 this.checkcomments = true;
                 this.changeDetectorRef.detectChanges();
-
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                })
-            }
+            } 
         })
     }
     editquan(){
