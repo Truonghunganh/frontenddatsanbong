@@ -5,7 +5,7 @@ import { environment } from './../../../../environments/environment';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Datsan} from '../../models/dashboard.model' 
+import { Datsan} from '../../models/dashboard.model'
 import {AuthService} from '../../../auth/services/auth.service';
 import { formatDate } from '@angular/common';
 @Component({
@@ -41,12 +41,12 @@ export class DashboardTablesanComponent implements OnInit {
         }else{
             this.router.navigate(['/auth/login']);
         }
-        
+
     }
     chonngay(ngay :any){
         this.ngayvagio = ngay.target.value;
         this.getDatSansvaSansByUserAndIdquanAndNgay(this.idquan, ngay.target.value);
-        
+
     }
     sansTT: any;
     getDatSansvaSansByUserAndIdquanAndNgay(idquan: number, ngay: any){
@@ -67,7 +67,7 @@ export class DashboardTablesanComponent implements OnInit {
                 this.checkdatsans= true;
                 this.changeDetectorRef.detectChanges();
             }else{
-                this.router.navigate(['/dashboard/quans']);
+                this.router.navigate(['/auth/login']);
             }
         })
     }
@@ -97,13 +97,13 @@ export class DashboardTablesanComponent implements OnInit {
                 }
             });
         }
-        
+
     }
     nutReview=false;
     strNutReview="Review";
     chonreview(review: number){
         console.log(review);
-        
+
         this.mangreviewuser=this.taomotmangreview(review);
         this.reviewuser= review;
     }
@@ -196,7 +196,7 @@ export class DashboardTablesanComponent implements OnInit {
             }).then(result => {
                 if (result.value) {
                     const ds = new Datsan(idsan, this.ngayvagio, priceperhour);
-                    this.dashboardService.addDatSan(ds).subscribe(data => { 
+                    this.dashboardService.addDatSan(ds).subscribe(data => {
                         if (data.status) {
                             Swal.fire({
                                 icon: 'success',
@@ -213,9 +213,9 @@ export class DashboardTablesanComponent implements OnInit {
                             })
                         }
                     });
-                } 
+                }
             });
-            
+
         }
 
     }
@@ -226,7 +226,7 @@ export class DashboardTablesanComponent implements OnInit {
         this.page= 1;
         this.dashboardService.getAllCommentCuaMotQuan(this.idquan).subscribe(data => {
             if (data.status) {
-                this.comments = data.comments;          
+                this.comments = data.comments;
                 for (let i = 0; i < this.comments.length; i++) {
                     this.mangreview[i] = this.taomotmangreview(Math.round(this.comments[i].review));
                     this.mangBL[i] = false;
@@ -235,7 +235,7 @@ export class DashboardTablesanComponent implements OnInit {
                 this.taoBLnew(this.page);
                 this.checkcomments = true;
                 this.changeDetectorRef.detectChanges();
-            } 
+            }
         })
     }
     binhluan ="";
@@ -252,8 +252,8 @@ export class DashboardTablesanComponent implements OnInit {
                 this.taoBLnew(this.page);
                 this.checkcomments = true;
                 this.changeDetectorRef.detectChanges();
-            } 
-            
+            }
+
             this.binhluan="";
         });
         this.binhluan = "";
@@ -294,11 +294,11 @@ export class DashboardTablesanComponent implements OnInit {
                         })
                     }
                 })
-                
+
             }
         })
     }
-    
+
     chinhsuaBL(vitri: number,id: number, binhluan: string){
         this.mangBL[vitri]=false;
         this.dashboardService.updateComment(id, binhluan).subscribe(data=>{
@@ -319,7 +319,7 @@ export class DashboardTablesanComponent implements OnInit {
     chon(i: number){
         for (let k = 0; k < this.mangBL.length; k++) {
             this.mangBL[k]=false;
-            
+
         }
         this.mangBL[i]=true;
 

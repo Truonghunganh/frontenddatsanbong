@@ -18,14 +18,14 @@ export class LoginComponent implements OnInit {
         private appCommonService: AppCommonService,
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private router: Router, 
+        private router: Router,
         private changeDetectorRef: ChangeDetectorRef
 
     ) {}
     ngOnInit() {
         this.checklogin=false;
         this.changeDetectorRef.detectChanges();
-        
+
         if(this.appCommonService.getToken()){
             try {
                 this.appCommonService.httpOptions.headers.get("token");
@@ -93,5 +93,5 @@ export class LoginComponent implements OnInit {
             }
         })
     }
-    
+
 }

@@ -95,7 +95,6 @@ export class ListQuansByAdminComponent implements OnInit {
     }
     getListquans(page:number) {
         this.checkquans = false;
-        this.changeDetectorRef.detectChanges();
         this.dashboardService.getListQuansDaPheDuyetByTokenAdmin(page).subscribe(data => {
             if (data.status) {
                 this.quans = data.quans;
@@ -119,12 +118,12 @@ export class ListQuansByAdminComponent implements OnInit {
                         Swal.fire({
                             icon: 'error',
                             title: data.message,
-                        })      
+                        })
                     }
                     this.router.navigate(['/admin/quans']);
 
-                })           
-            } 
+                })
+            }
         });
     }
     deleteQuan(quan: any) {
@@ -171,7 +170,7 @@ export class ListQuansByAdminComponent implements OnInit {
                 this.changeDetectorRef.detectChanges();
             }
         })
-        
+
         this.timkiem = "";
     }
 
