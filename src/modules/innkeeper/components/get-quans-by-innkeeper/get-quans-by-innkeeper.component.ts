@@ -39,7 +39,6 @@ export class GetQuansByInnkeeperComponent implements OnInit {
     user="innkeeper";
     getListquans() {
         this.checkquans= false;
-        this.changeDetectorRef.detectChanges();
         this.dashboardService.getListQuansByTokenInnkeeper().subscribe(data=>{
             if(data.status){
                 this.quans=data.quans;
